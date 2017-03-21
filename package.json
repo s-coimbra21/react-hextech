@@ -1,0 +1,76 @@
+{
+  "name": "react-hextech",
+  "version": "1.0.0",
+  "description": "League of Legends Hextect design components",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "jest --config jest.json",
+    "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leaguedevelopers/react-hextech.git"
+  },
+  "keywords": [
+    "league",
+    "of",
+    "legends",
+    "lol",
+    "react",
+    "hextech",
+    "webpack",
+    "javascript"
+  ],
+  "author": "S. Coimbra (me@jinx.pro)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leaguedevelopers/react-hextech/issues"
+  },
+  "homepage": "https://github.com/leaguedevelopers/react-hextech#readme",
+  "peerDependencies": {
+    "react": "15.4.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "css-loader": "^0.27.3",
+    "enzyme": "^2.7.1",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^2.1.2",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.3.3",
+    "react": "15.4.1",
+    "react-addons-test-utils": "15.4.1",
+    "react-dom": "15.4.1",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.1",
+    "stylint": "^1.5.9",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5"
+  }
+}
