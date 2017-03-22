@@ -3,28 +3,35 @@
 .checkbox {
 	display: flex;
 	align-items: center;
-	font-size: 10px;
-	cursor: pointer;
-	color: lighten(rgb(56.1%, 45.1%, 20%), 10%);
 
-	& div, span, i {
+	&, & div, span, i {
 		cursor: pointer;
 	}
 
-	&:hover {
-		.box .border {
-			backface-visibility: hidden;
-			border-color: transparent;
-			border-image: linear-gradient(to bottom, $lcu-gold-border-color 50%, lighten($lcu-gold-border-color, 15%) 100%);
-			border-image-slice: 1;
+	&:hover, &:focus {
+		outline: none;
+
+		.box {
+			.border {
+				backface-visibility: hidden;
+				border-color: transparent;
+				border-image: linear-gradient(to bottom, $lcu-gold-border-color 50%, lighten($lcu-gold-border-color, 15%) 100%);
+				border-image-slice: 1;
+			}
+		}
+
+		.label {
+			color: lighten($lcu-text-dark, 20%);
 		}
 	}
 
 	.box {
 		position: relative;
 		display: inline-block;
-		width: 12px;
-		height: 12px;
+		height: 1em;
+		width: 1em;
+		min-width: 12px;
+		min-height: 12px;
 
 		.border {
 			position: absolute;
@@ -32,34 +39,63 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			border: 2px solid transparent;
+			border: 0.15em solid transparent;
 			border-color: $lcu-gold-border-color;
 		}
 
 		.check {
 			position: absolute;
-			top: 0;
+			bottom: 0;
+			right: 0;
 			left: 0;
 			display: none;
+			color: lighten(rgb(56.1%, 45.1%, 20%), 10%);
+			font-size: 0.9em;
 		}
 	}
 
 	.label {
 		color: $lcu-text-dark;
-    font-size: 12px;
     font-weight: normal;
-    line-height: 16px;
     letter-spacing: 0.025em;
 		margin-left: 9px;
+		user-select: none;
 	}
 }
 
 .checkbox.checked {
-	&:hover {
-		color: $lcu-gold;
-	}
 	.box .check {
-			display: block;
+		display: block;
+	}
+
+	&:hover {
+		.check {
+			color: $lcu-gold;
+		}
+	}
+}
+
+.checkbox.disabled {
+	&, & div, span, i {
+		cursor: default;
+	}
+
+	&:hover, &:focus {
+		.box {
+			.border {
+				border-image: none;
+			}
+		}
+	}
+
+	.box {
+		.border {
+			border-color: $lcu-text-disabled;
+		}
+	}
+
+	.label {
+		color: $lcu-text-disabled;
 	}
 }
 
@@ -78,11 +114,8 @@
   speak: none;
   display: inline-block;
   text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
   text-align: center;
   font-variant: normal;
   text-transform: none;
-  line-height: 1em;
-  margin-left: .2em;
+  margin-left: 0.2em;
 }

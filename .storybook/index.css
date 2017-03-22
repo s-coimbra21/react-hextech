@@ -8,6 +8,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #010a13;
 }
 
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */

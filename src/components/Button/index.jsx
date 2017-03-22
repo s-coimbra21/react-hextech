@@ -43,11 +43,11 @@ export default class Button extends PureComponent {
     document.removeEventListener('mouseup', this.handleMouseUp, false);
   }
 
-  handleClick = () => {
+  handleClick = evt => {
     const { onClick, disabled } = this.props;
     if (!disabled) {
       this.playClickAnim();
-      onClick && onClick.call && onClick();
+      onClick && onClick.call && onClick(evt);
     }
   }
 

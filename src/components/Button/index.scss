@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .border {
 	position: absolute;
 	top: -2px;
@@ -127,7 +129,13 @@
 
   .borderTransition {
     opacity: 1;
-    border-image: linear-gradient(to top, #C89C3C 0%, #DCC188 50%, #E1C998 71%, #F0E6D8 100%);
+    border-image:
+			linear-gradient(to top,
+			rgb(78.4%, 61.2%, 23.5%) 0%,
+			rgb(86.3%, 75.7%, 53.3%) 50%,
+			rgb(88.2%, 78.8%, 59.6%) 71%,
+			rgb(94.1%, 90.2%, 84.7%) 100%
+			);
     border-image-slice: 1;
   }
 
@@ -191,8 +199,8 @@
 
 .button.disabled {
   cursor: default;
-  color: #5C5B57;
-  background-color: #1E2328;
+  color: $lcu-text-disabled;
+  background-color: $lcu-bg-disabled;
   border-image: initial;
 
   * {
