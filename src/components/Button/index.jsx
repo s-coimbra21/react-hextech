@@ -35,43 +35,68 @@ export default class Button extends PureComponent {
     };
   }
 
-  onClick = () => {
+  componentDidMount () {
+    document.addEventListener('mouseup', this.handleMouseUp, false);
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('mouseup', this.handleMouseUp, false);
+  }
+
+  handleClick = () => {
     const { onClick, disabled } = this.props;
     if (!disabled) {
-      this.setState({ isClick: true });
-      setTimeout(() => {
-        if (this.state.isClick) {
-          this.setState({ isClick: false });
-        }
-      }, 600);
+      this.playClickAnim();
       onClick && onClick.call && onClick();
     }
   }
 
-  onMouseDown = () => this.setState({ isMouseDown: true });
-  onMouseUp = () => this.setState({ isMouseDown: false });
+  playClickAnim = () => {
+    if (this.state.isClick) {
+      clearTimeout(this.clickEnd);
+      return this.setState({ isClick: false }, this.playClickAnim);
+    }
 
-  onMouseEnter = () => this.setState({ isHover: true });
-  onMouseLeave = () => this.setState({ isHover: false, isMouseDown: false });
+    // Don't block animation if user decides to spam
+    window.requestAnimationFrame(() =>
+      this.setState({ isClick: true }, () => {
+        this.clickEnd = setTimeout(() => {
+          this.setState({ isClick: false });
+        }, 300);
+      })
+    );
+  }
+
+  // TODO: might want to turn this into an actual state machine instead of this spaghetti
+  handleMouseDown = () => this.setState({ isMouseDown: true });
+  handleMouseUp = evt => {
+    const mouseIsOnButton = this.root && this.root.contains(evt.target);
+    this.setState({ isMouseDown: false, isHover: mouseIsOnButton });
+  }
+
+  handleMouseEnter = () => this.setState({ isHover: true });
+  handleMouseLeave = () => this.setState({ isHover: this.state.isMouseDown });
 
   render () {
     const { className, children, text, label, disabled } = this.props;
     const { isHover, isMouseDown, isClick } = this.state;
-    const hoverClass = !disabled && isHover ? style.hover : style.idle;
-    const mouseDownClass = !disabled && isMouseDown && style.down;
-    const clickClass = !disabled && isClick && style.click;
-    const disabledClass = disabled && style.disabled;
+    const classes = [
+      isHover ? style.hover : style.idle,
+      isMouseDown && style.down,
+      isClick && style.click
+    ];
     return (
       <div
+        ref={elem => { this.root = elem; }}
         role="button"
         className={cx(
-          style.button, hoverClass, mouseDownClass, clickClass, disabledClass, className
+          style.button, disabled ? style.disabled : classes, className
         )}
-        onClick={this.onClick}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
+        onClick={this.handleClick}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
       >
         <div className={style.buttonBg} />
         <div className={style.borderIdle} />
