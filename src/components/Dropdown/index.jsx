@@ -11,9 +11,24 @@ import style from './index.scss';
 export default class Dropdown extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
+    disabled: PropTypes.bool,
     value: PropTypes.any,
+    expanded: PropTypes.bool,
     onChange: PropTypes.func,
-    options: PropTypes.array.isRequired
+    onBlur: PropTypes.func,
+    onToggle: PropTypes.func,
+    options: PropTypes.array
+  }
+
+  static defaultProps = {
+    className: undefined,
+    disabled: false,
+    value: undefined,
+    expanded: undefined,
+    onChange: () => false,
+    onBlur: () => false,
+    onToggle: undefined,
+    options: []
   }
 
   constructor (props) {
@@ -33,38 +48,54 @@ export default class Dropdown extends PureComponent {
     document.removeEventListener('touchend', this.handleDocumentClick, false);
   }
 
-  onOptionClick = nextValue => {
+  handleOptionClick = nextValue => {
     const { onChange } = this.props;
     this.setState({
       isOpen: false
     });
-    onChange && onChange.call && onChange(nextValue);
-    return false;
+    onChange(nextValue);
   }
 
-  handleDocumentClick = event => {
-    if (!this.mounted && !this.domElement.contains(event.target)) {
+  handleDocumentClick = evt => {
+    const { onToggle } = this.props;
+    if (!this.mounted && !this.domElement.contains(evt.target)) {
       this.setState({ isOpen: false });
+
+      if (onToggle && onToggle.call) {
+        onToggle(false, evt);
+      }
     }
   }
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-    return false;
+  handleBlur = evt => {
+    const { onBlur, disabled } = this.props;
+    if (!disabled) {
+      onBlur(evt);
+    }
   }
 
-  renderOption = (option, selectedValue) => {
+  handleToggle = evt => {
+    const { onToggle, expanded } = this.props;
+    const isOpen = !!this.state.isOpen || !!expanded;
+    this.setState({
+      isOpen: !isOpen
+    });
+
+    if (onToggle && onToggle.call) {
+      onToggle(!isOpen, evt);
+    }
+  }
+
+  renderOption = (option, idx, selectedValue) => {
     const isSelected = option.value === selectedValue;
     const classnames = cx(style.option, { [style.selected]: isSelected });
     return (
       <div
-        key={option.value}
+        key={option.value || idx}
         role="option"
         aria-selected={isSelected}
         className={classnames}
-        onClick={() => this.onOptionClick(option.value)}
+        onClick={() => this.handleOptionClick(option.value)}
       >
         {option.label}
       </div>
@@ -72,17 +103,24 @@ export default class Dropdown extends PureComponent {
   }
 
   render () {
-    const { options, className, value } = this.props;
+    const { options: baseOptions, className, value, expanded } = this.props;
     const { isOpen: isOpenState } = this.state;
-    const isOpen = !!isOpenState;
+    const isOpen = !!isOpenState || !!expanded;
+
+    const options = baseOptions.map(option => ({
+      value: option.value || option,
+      label: option.label || option
+    }));
+
     const selected = options.find(o => o.value === value);
+
     return (
       <div
         ref={e => { this.domElement = e; }}
         role="combobox"
         aria-expanded={isOpen}
         className={cx(style.dropdown, className)}
-        onClick={this.toggle}
+        onClick={this.handleToggle}
       >
         <div className={cx(style.control, isOpen && style.active)}>
           {selected ? selected.label : 'Select...'}
@@ -93,7 +131,7 @@ export default class Dropdown extends PureComponent {
           aria-hidden={!isOpen}
           className={cx(style.options, { [style.hidden]: !isOpen })}
         >
-          {options.map(o => this.renderOption(o, value))}
+          {options.map((o, i) => this.renderOption(o, i, value))}
         </div>
       </div>
     );
