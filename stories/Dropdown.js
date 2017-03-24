@@ -29,7 +29,7 @@ storiesOf('Dropdown', module)
   .add('normal', () => (
     <Dropdown onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Hextech</Dropdown>
   ))
-  .add('with dropdown', () => (
+  .add('with scroll', () => (
     <Dropdown onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={lotsOptions}>Hextech</Dropdown>
   ))
   .add('disabled', () => (

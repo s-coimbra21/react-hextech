@@ -1,30 +1,27 @@
+@import '../../variables.scss';
+
 .dropdown {
-	display: inline-flex;
+	display: inline-block;
 	position: relative;
 	width: 100%;
 	font-family: 'LoL Body';
-	color: #A09B8C;
-	line-height: 1em;
+	color: $lcu-text-dark;
 	letter-spacing: 0.025em;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 
 	&, & div {
 		box-sizing: border-box;
+		margin: 0;
 	}
 
 	.control {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 7px 14px;
+		padding: 9px 14px;
 		background-color: rgba(30,35,40,0.5);
 		border: 1px solid transparent;
 		border-image: linear-gradient(to top,#695625 0%,#A9852D 23%,#B88D35 93%,#C8AA6E 100%) 1;
 		cursor: pointer;
 		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 
 		&:hover {
 			background: linear-gradient(to top,rgba(88,83,66,0.5),rgba(30,35,40,0.5));
@@ -49,8 +46,6 @@
 	}
 
 	.options {
-		display: flex;
-		flex-direction: column;
 		position: absolute;
 		top: 100%;
 		width: 100%;
@@ -72,16 +67,14 @@
 		}
 
 		.option {
-			display: flex;
-			align-items: center;
 			position: relative;
 			color: #CDBE91;
 			cursor: pointer;
-			margin: 0;
-			overflow: hidden;
-			min-height: 2em;
-			padding: 0 9px;
+			overflow-x: hidden;
+			padding: 9px 9px;
 			border-top: 1px solid #1F2123;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 
 			&:hover {
 				color: #f0e6d2;
