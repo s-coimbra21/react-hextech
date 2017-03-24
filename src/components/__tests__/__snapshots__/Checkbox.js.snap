@@ -4,8 +4,10 @@ exports[`<Checkbox /> should render correctly 1`] = `
 <div
   aria-checked={true}
   className="checkbox checked testClass"
+  onBlur={[Function]}
   onClick={[Function]}
   role="checkbox"
+  tabIndex="1"
 >
   <div
     className="box"
@@ -29,8 +31,10 @@ exports[`<Checkbox /> should render correctly 2`] = `
 <div
   aria-checked={false}
   className="checkbox testClass"
+  onBlur={[Function]}
   onClick={[Function]}
   role="checkbox"
+  tabIndex="1"
 >
   <div
     className="box"

@@ -51,7 +51,7 @@ class Checkbox extends PureComponent {
     if (!disabled) {
       onClick(evt);
       onChange(!this.isChecked());
-      this.test.blur(); // TODO: Investigate if this is too hacky
+      this.test && this.test.blur(); // TODO: Investigate if this is too hacky
     }
   }
 
