@@ -1,24 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Dropdown as BaseDropdown } from '../src';
-
-const stateful = Cmp => class extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      value: false
-    };
-  }
-
-  handleChange = value => {
-    this.setState({ value });
-  }
-
-  render () {
-    return <div className="dropdown-wrapper"><Cmp {...this.props} value={this.state.value} onChange={this.handleChange} /></div>;
-  }
-};
+import { Dropdown as BaseDropdown, stateful } from '../src';
 
 const Dropdown = stateful(BaseDropdown);
 
@@ -27,11 +9,11 @@ const lotsOptions = [...options, 'Anivia', 'Tristana', 'Fiora', 'Vayne', 'Trynda
 
 storiesOf('Dropdown', module)
   .add('normal', () => (
-    <Dropdown onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Hextech</Dropdown>
+    <Dropdown hocClassName="dropdown-wrapper" onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Hextech</Dropdown>
   ))
   .add('with scroll', () => (
-    <Dropdown onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={lotsOptions}>Hextech</Dropdown>
+    <Dropdown hocClassName="dropdown-wrapper" onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={lotsOptions}>Hextech</Dropdown>
   ))
   .add('disabled', () => (
-    <Dropdown disabled onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Try Me</Dropdown>
+    <Dropdown hocClassName="dropdown-wrapper" disabled onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Try Me</Dropdown>
   ));

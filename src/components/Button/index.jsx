@@ -11,7 +11,6 @@ export default class Button extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
-    text: PropTypes.string,
     label: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.node
@@ -19,7 +18,6 @@ export default class Button extends PureComponent {
 
   static defaultProps = {
     className: undefined,
-    text: undefined,
     label: undefined,
     disabled: false,
     children: undefined
@@ -78,7 +76,7 @@ export default class Button extends PureComponent {
   handleMouseLeave = () => this.setState({ isHover: this.state.isMouseDown });
 
   render () {
-    const { className, children, text, label, disabled } = this.props;
+    const { className, children, label, disabled } = this.props;
     const { isHover, isMouseDown, isClick } = this.state;
     const classes = [
       isHover ? style.hover : style.idle,
@@ -107,7 +105,7 @@ export default class Button extends PureComponent {
           <div className={style.sheen} />
         </div>
         <div className={style.content}>
-          {children || text || label}
+          {children || label}
         </div>
       </div>
     );

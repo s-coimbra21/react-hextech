@@ -1,6 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import cx from 'classnames';
 
+import normalizeOptions from '../../util/normalize-options';
+
 import style from './index.scss';
 
 /**
@@ -107,10 +109,7 @@ export default class Dropdown extends PureComponent {
     const { isOpen: isOpenState } = this.state;
     const isOpen = !!isOpenState || !!expanded;
 
-    const options = baseOptions.map(option => ({
-      value: option.value || option,
-      label: option.label || option
-    }));
+    const options = normalizeOptions(baseOptions);
 
     const selected = options.find(o => o.value === value);
 

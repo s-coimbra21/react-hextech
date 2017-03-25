@@ -5,6 +5,7 @@ import Dropdown from './components/Dropdown';
 import Frame from './components/Frame';
 import TextInput from './components/TextInput';
 import RadioInput from './components/RadioInput';
+import stateful from './components/stateful';
 
 export {
   Button,
@@ -13,5 +14,6 @@ export {
   Dropdown,
   Frame,
   TextInput,
-  RadioInput
+  RadioInput,
+  stateful
 };

@@ -12,15 +12,13 @@ import style from './index.scss';
  * onChange is called with next value
  *
  */
-class Checkbox extends PureComponent {
-
+export default class Checkbox extends PureComponent {
   static propTypes = {
     // Visual
-    className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    className: PropTypes.any,
     label: PropTypes.string,
     children: PropTypes.node,
     // State
-    checked: PropTypes.bool,
     value: PropTypes.bool,
     disabled: PropTypes.bool,
     // Events
@@ -31,8 +29,7 @@ class Checkbox extends PureComponent {
 
   static defaultProps = {
     className: undefined,
-    label: undefined,
-    checked: false,
+    label: '',
     value: false,
     disabled: false,
     onChange: () => false,
@@ -41,32 +38,32 @@ class Checkbox extends PureComponent {
     children: undefined
   };
 
-  isChecked = () => {
-    const { checked, value } = this.props;
-    return (checked === 'selected' || checked === true) || value;
-  }
-
   handleClick = evt => {
-    const { disabled, onClick, onChange } = this.props;
-    if (!disabled) {
-      onClick(evt);
-      onChange(!this.isChecked());
-      this.test && this.test.blur(); // TODO: Investigate if this is too hacky
-    }
+    const { value, onClick, onChange } = this.props;
+    onClick(evt);
+    onChange(!value);
+    this.test && this.test.blur(); // TODO: Investigate if this is too hacky
   }
 
   handleBlur = evt => {
-    const { disabled, onBlur } = this.props;
-    if (!disabled) {
-      onBlur(evt);
-    }
+    const { onBlur } = this.props;
+    onBlur(evt);
   }
 
   render () {
-    const { className, label, children } = this.props;
+    const { className, value, label, children } = this.props;
     const { disabled } = this.props;
 
-    const isChecked = this.isChecked();
+    let eventHandlers = {
+      onClick: this.handleClick,
+      onBlur: this.handleBlur
+    };
+
+    if (disabled) {
+      eventHandlers = {};
+    }
+
+    const isChecked = !!value;
     const classes = [
       isChecked && style.checked,
       disabled && style.disabled,
@@ -79,9 +76,8 @@ class Checkbox extends PureComponent {
         role="checkbox"
         aria-checked={isChecked}
         className={cx(style.checkbox, classes)}
-        onClick={this.handleClick}
-        onBlur={this.handleBlur}
         tabIndex={disabled ? undefined : '1'}
+        {...eventHandlers}
       >
         <div className={style.box}>
           <div className={style.border} />
@@ -92,5 +88,3 @@ class Checkbox extends PureComponent {
     );
   }
 }
-
-export default Checkbox;

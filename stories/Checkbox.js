@@ -1,24 +1,6 @@
 import React, { Component } from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Checkbox as BaseCheckbox } from '../src';
-
-const stateful = Cmp => class extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      value: false
-    };
-  }
-
-  handleChange = value => {
-    this.setState({ value });
-  }
-
-  render () {
-    return <div><Cmp {...this.props} value={this.state.value} onChange={this.handleChange} /></div>;
-  }
-};
+import { Checkbox as BaseCheckbox, stateful } from '../src';
 
 const Checkbox = stateful(BaseCheckbox);
 

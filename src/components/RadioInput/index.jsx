@@ -1,4 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
+
+import normalizeOptions from '../../util/normalize-options';
+
 import Option from '../RadioOption';
 
 import style from './index.scss';
@@ -15,7 +18,6 @@ export default class RadioInput extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
-    initialValue: PropTypes.any,
     value: PropTypes.any,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
@@ -30,14 +32,6 @@ export default class RadioInput extends PureComponent {
     onClick: () => false,
     onChange: () => false,
     children: undefined
-  }
-
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      value: props.initialValue
-    };
   }
 
   /**
@@ -63,11 +57,11 @@ export default class RadioInput extends PureComponent {
     const shouldRenderOptions = options.map && options.map.call;
     return (
       <div role="radiogroup" className={style.radioInput}>
-        {shouldRenderOptions && options.map(o =>
+        {shouldRenderOptions && normalizeOptions(options).map(o =>
           <Option
             key={o.label}
             checked={o.value === value}
-            disabled={disabled || o.disabled || false}
+            disabled={disabled || o.disabled}
             onClick={() => this.handleSelect(o.value)}
             label={o.label}
             value={o.value}
