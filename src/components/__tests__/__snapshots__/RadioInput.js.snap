@@ -7,28 +7,33 @@ exports[`<RadioInput /> should render correctly 1`] = `
 >
   <RadioOption
     checked={false}
-    disabled={false}
+    disabled={undefined}
     label="test0"
     onClick={[Function]}
-    value={0}
+    value={
+      Object {
+        "label": "test0",
+        "value": 0,
+      }
+    }
   />
   <RadioOption
     checked={true}
-    disabled={false}
+    disabled={undefined}
     label="test1"
     onClick={[Function]}
     value={1}
   />
   <RadioOption
     checked={false}
-    disabled={false}
+    disabled={undefined}
     label="test2"
     onClick={[Function]}
     value={2}
   />
   <RadioOption
     checked={false}
-    disabled={false}
+    disabled={undefined}
     label="test3"
     onClick={[Function]}
     value={5}
