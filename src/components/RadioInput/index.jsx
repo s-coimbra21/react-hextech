@@ -16,22 +16,21 @@ import style from './index.scss';
 export default class RadioInput extends PureComponent {
 
   static propTypes = {
-    children: PropTypes.node,
     disabled: PropTypes.bool,
     value: PropTypes.any,
+    options: PropTypes.array,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
-    options: PropTypes.array
+    onBlur: PropTypes.func
   }
 
   static defaultProps = {
     disabled: false,
-    initialValue: undefined,
     value: undefined,
     options: [],
     onClick: () => false,
     onChange: () => false,
-    children: undefined
+    onBlur: () => false
   }
 
   /**
@@ -44,16 +43,23 @@ export default class RadioInput extends PureComponent {
    * @memberOf RadioInput
    * @param {Object} option the which was clicked
    */
-  handleSelect = nextValue => {
+  handleSelect = (nextValue, evt) => {
     const { value, onChange, onClick } = this.props;
-    onClick(nextValue);
+    onClick(evt);
     if (nextValue !== value) {
       onChange(nextValue);
     }
   }
 
+  handleBlur = evt => {
+    const { disabled, onBlur } = this.props;
+    if (!disabled) {
+      onBlur(evt);
+    }
+  }
+
   render () {
-    const { children, options, disabled, value } = this.props;
+    const { options, disabled, value } = this.props;
     const shouldRenderOptions = options.map && options.map.call;
     return (
       <div role="radiogroup" className={style.radioInput}>
@@ -62,11 +68,11 @@ export default class RadioInput extends PureComponent {
             key={o.label}
             checked={o.value === value}
             disabled={disabled || o.disabled}
-            onClick={() => this.handleSelect(o.value)}
+            onClick={evt => this.handleSelect(o.value, evt)}
+            onBlur={this.handleBlur}
             label={o.label}
             value={o.value}
           />)}
-        {children}
       </div>
     );
   }

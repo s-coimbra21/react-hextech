@@ -4,7 +4,8 @@ import { Frame, RadioInput as BaseRadioInput, stateful } from '../src';
 
 const RadioInput = stateful(BaseRadioInput);
 
-const buttonClick = action('button-click');
+const acceptClick = action('button-accept');
+const rejectClick = action('button-reject');
 
 storiesOf('Frame', module)
   .add('with title and body', () => (
@@ -17,7 +18,7 @@ storiesOf('Frame', module)
     </Frame>
   ))
   .add('with buttons', () => (
-    <Frame options={[{ label: 'Yes', value: 'Lie', onClick: buttonClick }, { label: 'No', value: 'Truth', onClick: buttonClick }]}>
+    <Frame options={[{ label: 'Yes', value: 'Lie', onClick: acceptClick }, { label: 'No', value: 'Truth', onClick: rejectClick }]}>
       <h2>Are you Challenger?</h2>
       <p>This is a question of utmost importance, please answer honestly</p>
     </Frame>

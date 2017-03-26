@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   "parser": "babel-eslint",
   "extends": "airbnb",
@@ -38,15 +36,7 @@ module.exports = {
     "jsx-a11y/no-static-element-interactions": 0
   },
   "plugins": [
-    "import",
     "promise",
     "react"
-  ],
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": path.join(__dirname, "webpack.config.js")
-      }
-    }
-  }
+  ]
 }

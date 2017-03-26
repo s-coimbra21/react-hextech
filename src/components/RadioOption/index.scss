@@ -13,15 +13,13 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	color: $lcu-gold-medium;
 	cursor: pointer;
 	padding: 0.5em 0;
-	padding-left: 2.5px;
 
 	.checkbox {
 		transform: rotateZ(45deg);
 		position: relative;
-		margin-right: 12px;
-		width: 12px;
-		height: 12px;
-		border: 2px solid transparent;
+		width: 0.6em;
+		height: 0.6em;
+		border: 0.15em solid transparent;
 		border-image: $radio-border;
 		border-image-slice: 1;
 
@@ -32,24 +30,15 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 			bottom: 0;
 			left: 0;
 			right: 0;
+			margin: 0.1em;
 
-			&::after {
-				content: '';
-				position: absolute;
-				top: 25%;
-				left: 25%;
-				height: 4px;
-				width: 4px;
-				background: none;
-			}
 		}
 	}
 
-	.text {
-    font-size: 12px;
+	.label {
     font-weight: normal;
-    line-height: 16px;
-    letter-spacing: .1em;
+    letter-spacing: .05em;
+		margin-left: 0.8em;
 	}
 
 	&:hover {
@@ -70,10 +59,9 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 
 .radioOption.checked {
 	.square {
-		&::after {
-			background: $lcu-gold-medium;
-		}
+		background: $lcu-gold-medium;
 	}
+
 	.text {
 		color: $lcu-gold;
 	}
@@ -81,27 +69,21 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	&:active {
 		.checkbox {
 			.square {
-				&::after {
-					background: $radio-border-pressed;
-				}
+				background: $radio-border-pressed;
 			}
 		}
 	}
 }
 
 .radioOption.disabled {
+	cursor: default;
+
 	.checkbox {
 		border: 2px solid $radio-border-disabled;
 		border-image: none;
 	}
 
-	&:active {
-		.checkbox {
-			.square {
-				&::after {
-					background: $radio-border-disabled;
-				}
-			}
-		}
+	&:hover {
+		color: $lcu-gold-medium;
 	}
 }
