@@ -17,9 +17,9 @@ import style from './index.scss';
 export default class RadioInput extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
-    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
     disabled: PropTypes.bool,
     value: PropTypes.any,
+    label: PropTypes.string,
     options: PropTypes.array,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
@@ -28,9 +28,9 @@ export default class RadioInput extends PureComponent {
 
   static defaultProps = {
     className: undefined,
-    tabIndex: '0',
     disabled: false,
     value: undefined,
+    label: '',
     options: [],
     onClick: () => false,
     onChange: () => false,
@@ -63,19 +63,20 @@ export default class RadioInput extends PureComponent {
   }
 
   render () {
-    const { options, className, tabIndex, disabled, value } = this.props;
+    const { options, className, disabled, value, label } = this.props;
     const shouldRenderOptions = options.map && options.map.call;
     return (
-      <div role="radiogroup" className={cx(style.radioInput, className)} tabIndex={tabIndex}>
-        {shouldRenderOptions && normalizeOptions(options).map(o =>
+      <div role="radiogroup" aria-labelledby={label} className={cx(style.radioInput, className)}>
+        {shouldRenderOptions && normalizeOptions(options).map((o, i) =>
           <Option
             key={o.label}
             checked={o.value === value}
             disabled={disabled || o.disabled}
-            onClick={evt => this.handleSelect(o.value, evt)}
+            onChange={evt => this.handleSelect(o.value, evt)}
             onBlur={this.handleBlur}
             label={o.label}
             value={o.value}
+            tabIndex={i > 0 ? -1 : 0}
           />)}
       </div>
     );
