@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import RadioInput from '../RadioInput';
 
@@ -13,8 +13,8 @@ const options = [
 describe.only('<RadioInput />', () => {
   it('should render correctly', () => {
     const props = {
-      handleChange: jest.fn(),
-      handleClick: jest.fn(),
+      onChange: jest.fn(),
+      onBlur: jest.fn(),
       selectedOption: options[1],
       value: options[1].value,
     };
@@ -68,16 +68,16 @@ describe.only('<RadioInput />', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
 
-    const wrapper = shallow(<RadioInput options={options} value={value} onChange={handleChange} />);
+    const wrapper = mount(<RadioInput options={options} value={value} onChange={handleChange} />);
 
     handleChange.mockImplementation(v => wrapper.setProps({ value: v }));
 
-    const nextSelect = wrapper.childAt(3);
+    const nextSelect = wrapper.childAt(3).find('input');
 
-    nextSelect.simulate('click');
-    expect(handleChange).toHaveBeenCalledWith(nextSelect.props().value);
+    nextSelect.simulate('change');
+    expect(handleChange).toHaveBeenCalledWith(options[3].value);
 
-    nextSelect.simulate('click');
+    nextSelect.simulate('change');
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
@@ -86,36 +86,14 @@ describe.only('<RadioInput />', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
 
-    const wrapper = shallow(<RadioInput options={options} value={value} onChange={handleChange} />);
+    const wrapper = mount(<RadioInput options={options} value={value} onChange={handleChange} />);
 
     handleChange.mockImplementation(v => wrapper.setProps({ value: v }));
 
-    const nextSelect = wrapper.childAt(1);
+    const nextSelect = wrapper.childAt(1).find('input');
 
-    nextSelect.simulate('click');
+    nextSelect.simulate('change');
     expect(handleChange).not.toHaveBeenCalled();
-  });
-
-  it('should call onClick even if the selection does not change', () => {
-    const handleClick = jest.fn();
-    const selectedOption = options[1];
-    const value = selectedOption.value;
-
-    const wrapper = shallow(<RadioInput options={options} value={value} onClick={handleClick} />);
-
-    handleClick.mockImplementation(v => wrapper.setProps({ value: v }));
-
-    const initialSelected = wrapper.childAt(1);
-    expect(initialSelected.props().checked).toBe(true);
-
-    const nextSelect = wrapper.childAt(3);
-
-    nextSelect.simulate('click');
-    expect(handleClick).toHaveBeenCalledWith(nextSelect.props().value);
-
-    nextSelect.simulate('click');
-    expect(handleClick).toHaveBeenCalledWith(nextSelect.props().value);
-    expect(handleClick).toHaveBeenCalledTimes(2);
   });
 
   it('should fail gracefully if neither onClick or onChange are defined', () => {

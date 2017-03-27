@@ -5,7 +5,7 @@ import RadioOption from '../RadioOption';
 
 describe('<RadioOption />', () => {
   it('should render two children', () => {
-    const wrapper = mount(<RadioOption checked />);
+    const wrapper = mount(<RadioOption checked value />);
     expect(wrapper.children().length).toBe(2);
   });
 
@@ -14,45 +14,38 @@ describe('<RadioOption />', () => {
     const wrapper = mount(<RadioOption
       checked
       disabled={false}
-      onClick={() => false}
-      label={o.label}
+      onChange={() => false}
+      {...o}
     />);
-    expect(wrapper.find('.text').text()).toBe(o.label);
+    expect(wrapper.find('.labelText').text()).toBe(o.label);
   });
 
   it('should render its label using props.children', () => {
     const child = 'testchild';
-    const o = { label: 'testlabel', value: 'testvalue' };
+    const o = { value: 'testvalue' };
     const wrapper = mount(<RadioOption
       checked
       disabled={false}
-      onClick={() => false}
-      label={o.label}
+      onChange={() => false}
+      {...o}
     >
       {child}
     </RadioOption>);
-    expect(wrapper.find('.text').text()).toBe('testchild');
+    expect(wrapper.find('.label').text()).toBe('testchild');
   });
 
   it('should have the class "checked" if it is checked', () => {
-    const wrapper = mount(<RadioOption checked />);
+    const wrapper = mount(<RadioOption checked value="1" label="1" />);
     expect(wrapper.hasClass('checked')).toBe(true);
   });
 
   it('should not have the class "checked" if it isn\'t checked', () => {
-    const wrapper = shallow(<RadioOption checked={false} />);
+    const wrapper = shallow(<RadioOption checked={false} value="1" label="1" />);
     expect(wrapper.hasClass('checked')).toBe(false);
   });
 
   it('should have the class "disabled" if it is disabled', () => {
-    const wrapper = mount(<RadioOption checked={false} disabled />);
+    const wrapper = mount(<RadioOption checked={false} disabled value="1" label="1" />);
     expect(wrapper.hasClass('disabled')).toBe(true);
-  });
-
-  it('should call onClick when it\'s clicked', () => {
-    const handleClick = jest.fn();
-    const wrapper = shallow(<RadioOption checked={false} onClick={handleClick} />);
-    wrapper.simulate('click');
-    expect(handleClick).toHaveBeenCalled();
   });
 });

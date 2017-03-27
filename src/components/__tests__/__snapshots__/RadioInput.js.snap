@@ -2,14 +2,17 @@
 
 exports[`<RadioInput /> should render correctly 1`] = `
 <div
+  aria-labelledby=""
   className="radioInput"
   role="radiogroup"
 >
   <RadioOption
     checked={false}
-    disabled={undefined}
+    disabled={false}
     label="test0"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    tabIndex={0}
     value={
       Object {
         "label": "test0",
@@ -19,25 +22,30 @@ exports[`<RadioInput /> should render correctly 1`] = `
   />
   <RadioOption
     checked={true}
-    disabled={undefined}
+    disabled={false}
     label="test1"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    tabIndex={-1}
     value={1}
   />
   <RadioOption
     checked={false}
-    disabled={undefined}
+    disabled={false}
     label="test2"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    tabIndex={-1}
     value={2}
   />
   <RadioOption
     checked={false}
-    disabled={undefined}
+    disabled={false}
     label="test3"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    tabIndex={-1}
     value={5}
   />
-  Hello
 </div>
 `;

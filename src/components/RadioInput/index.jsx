@@ -21,7 +21,6 @@ export default class RadioInput extends PureComponent {
     value: PropTypes.any,
     label: PropTypes.string,
     options: PropTypes.array,
-    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }
@@ -32,24 +31,17 @@ export default class RadioInput extends PureComponent {
     value: undefined,
     label: '',
     options: [],
-    onClick: () => false,
     onChange: () => false,
     onBlur: () => false
   }
 
-  /**
-   * Called when an option is selected. If the option
-   * is different from what is currently selected,
-   * onChange is called.
-   * If the onClick prop was provided to the component,
-   * it is called every time an option is clicked.
-   *
-   * @memberOf RadioInput
-   * @param {Object} option the which was clicked
-   */
+  componentDidMount () {
+    this.uid = Math.round(Math.random() * 100);
+  }
+
   handleSelect = (nextValue, evt) => {
-    const { value, onChange, onClick } = this.props;
-    onClick(evt);
+    evt.preventDefault();
+    const { value, onChange } = this.props;
     if (nextValue !== value) {
       onChange(nextValue);
     }
@@ -69,7 +61,7 @@ export default class RadioInput extends PureComponent {
       <div role="radiogroup" aria-labelledby={label} className={cx(style.radioInput, className)}>
         {shouldRenderOptions && normalizeOptions(options).map((o, i) =>
           <Option
-            key={o.label}
+            key={`${this.uid}${o.label}`}
             checked={o.value === value}
             disabled={disabled || o.disabled}
             onChange={evt => this.handleSelect(o.value, evt)}

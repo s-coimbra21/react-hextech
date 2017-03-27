@@ -7,7 +7,7 @@ export default class TextInput extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     inputClassName: PropTypes.string,
-    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.string,
     type: PropTypes.string,
     disabled: PropTypes.bool,

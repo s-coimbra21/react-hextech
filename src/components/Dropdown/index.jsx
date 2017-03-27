@@ -13,7 +13,7 @@ import style from './index.scss';
 export default class Dropdown extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
-    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     disabled: PropTypes.bool,
     value: PropTypes.any,
     expanded: PropTypes.bool,

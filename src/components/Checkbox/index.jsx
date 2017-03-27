@@ -25,7 +25,7 @@ export default class Checkbox extends PureComponent {
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onBlur: PropTypes.func,
-    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number)
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   static defaultProps = {

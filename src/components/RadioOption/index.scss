@@ -9,7 +9,7 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	font-family: 'LoL Body';
 	color: $lcu-gold-medium;
 	cursor: pointer;
-	padding: 0.5rem 0;
+	margin: 0.5rem 0;
 	outline: none;
 
 	input[type="radio"] {
@@ -29,6 +29,7 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	.label {
 		display: inline-block;
 		outline: none;
+		cursor: pointer;
 
 		.labelText {
 			font-weight: normal;

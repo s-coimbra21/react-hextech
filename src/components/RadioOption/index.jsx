@@ -14,6 +14,7 @@ function RadioOption ({ children, value, label, checked, disabled, onChange, onB
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        checked={checked}
       />
       <label htmlFor={`opt__${value}`} className={style.label}>
         <div className={style.checkbox}>
@@ -29,15 +30,20 @@ function RadioOption ({ children, value, label, checked, disabled, onChange, onB
 RadioOption.propTypes = {
   children: PropTypes.node,
   value: PropTypes.any.isRequired,
-  label: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  checked: PropTypes.bool.isRequired,
+  label: PropTypes.string,
+  disabled: PropTypes.bool,
+  checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired
+  onBlur: PropTypes.func
 };
 
 RadioOption.defaultProps = {
-  children: undefined
+  children: undefined,
+  onBlur: undefined,
+  onChange: () => false,
+  label: undefined,
+  checked: false,
+  disabled: false
 };
 
 export default RadioOption;

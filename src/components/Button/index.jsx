@@ -10,7 +10,7 @@ import style from './index.scss';
 export default class Button extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
-    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     label: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.node,
