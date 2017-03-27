@@ -1,4 +1,5 @@
 import React, { PropTypes, PureComponent } from 'react';
+import cx from 'classnames';
 
 import normalizeOptions from '../../util/normalize-options';
 
@@ -14,8 +15,9 @@ import style from './index.scss';
  * @extends {PureComponent}
  */
 export default class RadioInput extends PureComponent {
-
   static propTypes = {
+    className: PropTypes.any,
+    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
     disabled: PropTypes.bool,
     value: PropTypes.any,
     options: PropTypes.array,
@@ -25,6 +27,8 @@ export default class RadioInput extends PureComponent {
   }
 
   static defaultProps = {
+    className: undefined,
+    tabIndex: '0',
     disabled: false,
     value: undefined,
     options: [],
@@ -59,10 +63,10 @@ export default class RadioInput extends PureComponent {
   }
 
   render () {
-    const { options, disabled, value } = this.props;
+    const { options, className, tabIndex, disabled, value } = this.props;
     const shouldRenderOptions = options.map && options.map.call;
     return (
-      <div role="radiogroup" className={style.radioInput}>
+      <div role="radiogroup" className={cx(style.radioInput, className)} tabIndex={tabIndex}>
         {shouldRenderOptions && normalizeOptions(options).map(o =>
           <Option
             key={o.label}

@@ -13,6 +13,7 @@ import style from './index.scss';
 export default class Dropdown extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
+    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
     disabled: PropTypes.bool,
     value: PropTypes.any,
     expanded: PropTypes.bool,
@@ -24,6 +25,7 @@ export default class Dropdown extends PureComponent {
 
   static defaultProps = {
     className: undefined,
+    tabIndex: '0',
     disabled: false,
     value: undefined,
     expanded: undefined,
@@ -105,7 +107,7 @@ export default class Dropdown extends PureComponent {
   }
 
   render () {
-    const { options: baseOptions, className, value, expanded } = this.props;
+    const { options: baseOptions, className, tabIndex, value, expanded } = this.props;
     const { isOpen: isOpenState } = this.state;
     const isOpen = !!isOpenState || !!expanded;
 
@@ -116,6 +118,7 @@ export default class Dropdown extends PureComponent {
     return (
       <div
         ref={e => { this.domElement = e; }}
+        tabIndex={tabIndex}
         role="combobox"
         aria-expanded={isOpen}
         className={cx(style.dropdown, className)}

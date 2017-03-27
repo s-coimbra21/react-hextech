@@ -1,25 +1,25 @@
 @import '../../variables.scss';
 
 .input {
-  display: flex;
+  display: inline-block;
   width: 100%;
-  height: 32px;
-  font-size: 14px;
   position: relative;
-  align-items: center;
+  font-family: 'LoL Body';
 
   .clear {
     position: absolute;
+		top: 0;
     right: 7px;
-    font-size: 1.3em;
+		bottom: 0;
+		margin: auto;
+    font-size: 1.3rem;
     transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
     background-color: darken($lcu-text-light, 10%);
     cursor: pointer;
-    -webkit-transform: translate3d(0,0,0);
+    mask-image: url('./close.svg');
+    height: 0.8rem;
+    width: 0.8rem;
     z-index: 10;
-    -webkit-mask-image: url('./close.svg');
-    height: 12px;
-    width: 12px;
     opacity: 0;
     visibility: hidden;
 
@@ -39,29 +39,43 @@
 
   input[type='search'] {
     background-image: url('./search-icon.png');
-    background-size: 16px;
+    background-size: 1.3rem;
     background-position: 5px center;
     background-repeat: no-repeat;
-    padding-left: 27px;
+    padding-left: 1.8rem;
+
+		&:focus {
+			background: 5px center/1.3rem url("./search-icon.png"), linear-gradient(to bottom, rgba(7, 16, 25, 0.7), rgba(32, 39, 44, 0.7));
+  		background-repeat: no-repeat
+		}
   }
 
   .inputElement {
-    width: 100%;
-    height: 100%;
-    padding: 0 20px 0 11px;
+    padding: 9px 21px;
     color: $lcu-text-dark;
-    font-weight: normal;
-    font-family: 'LoL Body';
     display: block;
     box-sizing: border-box;
     border: 1px solid #785A28;
     background-color: rgba(0,0,0,0.7);
-    -webkit-appearance: none;
+    appearance: none;
     outline: none;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.25) inset,0 0 0 1px rgba(0,0,0,0.25);
 
+		&:focus {
+		  background: linear-gradient(to bottom, rgba(7, 16, 25, 0.7), rgba(32, 39, 44, 0.7));
+      border-image: linear-gradient(to bottom, #785a28, #c8aa6e) 1 stretch;
+		}
+
     &:placeholder-shown {
-      font-size: 1em;
+      font-size: 1rem;
     }
   }
+}
+
+.input.disabled {
+	.inputElement, .inputElement:focus {
+		background: #1e2328;
+		border-image: none;
+  	border-color: #3c3c41;
+	}
 }

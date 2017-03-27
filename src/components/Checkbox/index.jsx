@@ -24,7 +24,8 @@ export default class Checkbox extends PureComponent {
     // Events
     onChange: PropTypes.func,
     onClick: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number)
   };
 
   static defaultProps = {
@@ -35,6 +36,7 @@ export default class Checkbox extends PureComponent {
     onChange: () => false,
     onClick: () => false,
     onBlur: () => false,
+    tabIndex: '0',
     children: undefined
   };
 
@@ -51,7 +53,7 @@ export default class Checkbox extends PureComponent {
   }
 
   render () {
-    const { className, value, label, children } = this.props;
+    const { className, tabIndex, value, label, children } = this.props;
     const { disabled } = this.props;
 
     let eventHandlers = {
@@ -76,7 +78,7 @@ export default class Checkbox extends PureComponent {
         role="checkbox"
         aria-checked={isChecked}
         className={cx(style.checkbox, classes)}
-        tabIndex={disabled ? undefined : '1'}
+        tabIndex={tabIndex}
         {...eventHandlers}
       >
         <div className={style.box}>

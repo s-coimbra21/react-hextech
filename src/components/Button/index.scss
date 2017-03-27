@@ -23,10 +23,11 @@
   background: #1E2328;
   border: 2px solid transparent;
 
-  & > div {
+  &, & > div {
     cursor: pointer;
 		user-select: none;
-  }
+		outline: none;
+	}
 
   .content {
     position: relative;

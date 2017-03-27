@@ -24,6 +24,16 @@ module.exports = {
               minimize: true
             }
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins () {
+                return [
+                  require('autoprefixer') // eslint-disable-line
+                ];
+              }
+            }
+          },
           { loader: 'sass-loader' }
         ]
       },

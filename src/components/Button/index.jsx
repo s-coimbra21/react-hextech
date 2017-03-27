@@ -9,15 +9,17 @@ import style from './index.scss';
  */
 export default class Button extends PureComponent {
   static propTypes = {
-    onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
+    tabIndex: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
     label: PropTypes.string,
     disabled: PropTypes.bool,
-    children: PropTypes.node
+    children: PropTypes.node,
+    onClick: PropTypes.func.isRequired
   }
 
   static defaultProps = {
     className: undefined,
+    tabIndex: '0',
     label: undefined,
     disabled: false,
     children: undefined
@@ -76,16 +78,18 @@ export default class Button extends PureComponent {
   handleMouseLeave = () => this.setState({ isHover: this.state.isMouseDown });
 
   render () {
-    const { className, children, label, disabled } = this.props;
+    const { className, tabIndex, children, label, disabled } = this.props;
     const { isHover, isMouseDown, isClick } = this.state;
     const classes = [
       isHover ? style.hover : style.idle,
       isMouseDown && style.down,
       isClick && style.click
     ];
+
     return (
       <div
         ref={elem => { this.root = elem; }}
+        tabIndex={tabIndex}
         role="button"
         className={cx(
           style.button, disabled ? style.disabled : classes, className
