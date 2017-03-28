@@ -15,6 +15,7 @@ function RadioOption ({ children, value, label, checked, disabled, onChange, onB
         onChange={onChange}
         onBlur={onBlur}
         checked={checked}
+        disabled={disabled}
       />
       <label htmlFor={`opt__${value}`} className={style.label}>
         <div className={style.checkbox}>

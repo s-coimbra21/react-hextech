@@ -27,7 +27,8 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	}
 
 	.label {
-		display: inline-block;
+		display: flex;
+		align-items: center;
 		outline: none;
 		cursor: pointer;
 
