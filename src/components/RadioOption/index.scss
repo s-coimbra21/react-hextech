@@ -17,9 +17,9 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 		position: absolute;
 
 		&:focus + label, label:hover, label:focus {
-			color: $lcu-gold;
+			fill: $lcu-gold;
 
-			.checkbox {
+			.control {
 				border-image: $radio-border-hover;
 				border-image-slice: 1;
 			}
@@ -38,29 +38,20 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 			margin-left: 0.8rem;
 		}
 
-		.checkbox {
+		.control {
 			display: inline-block;
 			transform: rotateZ(45deg);
-			position: relative;
+			backface-visibility: hidden;
 			width: 0.6rem;
 			height: 0.6rem;
 			border: 0.15rem solid transparent;
 			border-image: $radio-border;
 			border-image-slice: 1;
-
-			.square {
-				backface-visibility: hidden;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				margin: 0.1rem;
-			}
+			fill: transparent;
 		}
 
 		&:active {
-			.checkbox {
+			.control {
 				border-image: $radio-border-pressed;
 				border-image-slice: 1;
 			}
@@ -74,15 +65,13 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	.label {
 		color: $lcu-gold;
 
-		.square {
-			background: $lcu-gold-medium;
+		.control {
+			fill: $lcu-gold-medium;
 		}
 
 		&:active {
-			.checkbox {
-				.square {
-					background: $radio-border-pressed;
-				}
+			.control {
+				fill: $radio-border-pressed;
 			}
 		}
 	}
@@ -91,7 +80,7 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 .radioOption.disabled {
 	cursor: default;
 
-	.checkbox {
+	.control {
 		border: 2px solid $radio-border-disabled;
 		border-image: none;
 	}

@@ -18,9 +18,13 @@ function RadioOption ({ children, value, label, checked, disabled, onChange, onB
         disabled={disabled}
       />
       <label htmlFor={`opt__${value}`} className={style.label}>
-        <div className={style.checkbox}>
-          <div className={style.square} />
-        </div>
+        <svg
+          className={style.control}
+          viewBox="0 0 6 6"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="1" y="1" width="4" height="4" />
+        </svg>
         {children && children}
         {label && <span className={style.labelText}>{label}</span>}
       </label>
