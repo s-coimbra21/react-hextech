@@ -8,6 +8,7 @@ function loadStories() {
   require('../stories/Dropdown.js');
   require('../stories/TextInput.js');
   require('../stories/RadioInput.js');
+  require('../stories/SliderInput.js');
   require('../stories/Frame.js');
   // You can require as many stories as you need.
 }

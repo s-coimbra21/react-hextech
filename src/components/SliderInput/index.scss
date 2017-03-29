@@ -1,0 +1,20 @@
+.control {
+	width: 2em;
+	height: 2em;
+
+	& > polygon {
+		fill: url('#hextech-slider-idle');
+	}
+
+	&:hover > polygon {
+		fill: url('#hextech-slider-hover');
+	}
+
+	&:active > polygon {
+		fill: url('#hextech-slider-active');
+	}
+
+	&.disabled > polygon {
+		fill: #3c3732;
+	}
+}
