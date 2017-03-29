@@ -5,6 +5,8 @@ $radio-border-hover: linear-gradient(-45deg, rgb(78.8%, 61.6%, 24.7%) 0%, rgb(92
 $radio-border-pressed: linear-gradient(-45deg, #684e23 0%, #493915 80%);
 $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 
+$radio: input[type="radio"];
+
 .radioOption {
 	font-family: 'LoL Body';
 	color: $lcu-gold-medium;
@@ -16,11 +18,16 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 		opacity: 0;
 		position: absolute;
 
-		&:focus + label, label:hover, label:focus {
-			fill: $lcu-gold;
-
+		&:focus + .label, & + .label:hover, .label:focus {
 			.control {
 				border-image: $radio-border-hover;
+				border-image-slice: 1;
+			}
+		}
+
+    & + .label:active {
+			.control {
+				border-image: $radio-border-pressed;
 				border-image-slice: 1;
 			}
 		}
@@ -68,13 +75,13 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 		.control {
 			fill: $lcu-gold-medium;
 		}
-
-		&:active {
-			.control {
-				fill: $radio-border-pressed;
-			}
-		}
 	}
+
+  input[type="radio"] + .label:active {
+    .control {
+      fill: url('#hextech-option-pressed');
+    }
+  }
 }
 
 .radioOption.disabled {
@@ -83,9 +90,5 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 	.control {
 		border: 2px solid $radio-border-disabled;
 		border-image: none;
-	}
-
-	&:hover {
-		color: $lcu-gold-medium;
 	}
 }
