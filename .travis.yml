@@ -1,8 +1,0 @@
-sudo: false
-language: node_js
-dist: trusty
-node_js:
-  - 7
-script:
-  - yarn lint
-  - yarn test

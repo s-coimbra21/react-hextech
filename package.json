@@ -1,11 +1,10 @@
 {
   "name": "react-hextech",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "League of Legends Hextect design components",
   "main": "lib/index.js",
   "module": "src/index.js",
   "scripts": {
-    "prepublish": "npm run test && npm run build",
     "build": "webpack",
     "test": "jest --config jest.json",
     "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src/**/*.js",
