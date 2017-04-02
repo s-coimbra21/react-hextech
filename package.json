@@ -10,7 +10,7 @@
     "test": "jest --config jest.json",
     "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src/**/*.js",
     "dev": "start-storybook -p 9001 -c .storybook",
-    "export": "build-storybook -c .storybook -o .out"
+    "export": "build-storybook -c .storybook -o docs"
   },
   "repository": {
     "type": "git",
