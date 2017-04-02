@@ -29,7 +29,8 @@ module.exports = {
             options: {
               plugins () {
                 return [
-                  require('autoprefixer') // eslint-disable-line
+                  require('autoprefixer'), // eslint-disable-line
+                  require('postcss-input-style') // eslint-disable-line
                 ];
               }
             }

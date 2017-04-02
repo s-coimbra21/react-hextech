@@ -10,6 +10,7 @@ function loadStories() {
   require('../stories/RadioInput.js');
   require('../stories/SliderInput.js');
   require('../stories/Frame.js');
+  require('../stories/Todo.js');
   // You can require as many stories as you need.
 }
 

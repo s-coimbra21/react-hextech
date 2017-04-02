@@ -9,8 +9,11 @@ import style from './index.scss';
 export default class Frame extends PureComponent {
 
   static propTypes = {
+    // Visual
     className: PropTypes.string,
     contentClassName: PropTypes.string,
+    borders: PropTypes.object,
+    // State
     options: PropTypes.array,
     title: PropTypes.string,
     message: PropTypes.string,
@@ -20,6 +23,12 @@ export default class Frame extends PureComponent {
   static defaultProps = {
     className: undefined,
     contentClassName: undefined,
+    borders: {
+      top: true,
+      bottom: true,
+      left: false,
+      right: false
+    },
     options: undefined,
     title: undefined,
     message: undefined,
@@ -27,7 +36,7 @@ export default class Frame extends PureComponent {
   };
 
   render () {
-    const { className, contentClassName, options, title, message, children } = this.props;
+    const { className, contentClassName, borders, options, title, message, children } = this.props;
     return (
       <div className={cx(style.frame, className)}>
         <div className={style.contentWrapper}>
@@ -40,7 +49,12 @@ export default class Frame extends PureComponent {
             {options.map(o => <Button key={`button_${o.label}`} {...o} />)}
           </ButtonGroup>}
         </div>
-        <div className={style.border} />
+        <div
+          className={
+            cx(style.border,
+          ...Object.entries(borders).map(([s, v]) => v && style[s]))
+          }
+        />
       </div>
     );
   }

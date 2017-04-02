@@ -1,29 +1,16 @@
-import React from 'react';
-
-function Slider ({ className }) {
-  return (
-    <svg
-      className={className}
+<svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       x="0px" y="0px"
       viewBox="0 0 95.7 95.8"
     >
       <defs>
-        <linearGradient id="hextech-slider-idle" gradientUnits="userSpaceOnUse" x1="47.8707" y1="0" x2="47.8707" y2="95.7529">
-          <stop offset="0" stopColor="#A07B2E" />
-          <stop offset="0.8" stopColor="#6F5325" />
-        </linearGradient>
-        <linearGradient id="hextech-slider-hover" gradientUnits="userSpaceOnUse" x1="47.8707" y1="0" x2="47.8707" y2="95.7529">
-          <stop stopColor="#ecdfc6" />
-          <stop offset="0.8" stopColor="#c89d3e" />
-        </linearGradient>
-        <linearGradient id="hextech-slider-active" gradientUnits="userSpaceOnUse" x1="47.8707" y1="0" x2="47.8707" y2="95.7529">
-          <stop stopColor="#493915" />
-          <stop offset="0.8" stopColor="#684e22" />
+        <linearGradient id="hextech-handle-idle" gradientUnits="userSpaceOnUse" x1="47.8707" y1="0" x2="47.8707" y2="95.7529">
+          <stop offset="0" stop-color="#A07B2E" />
+          <stop offset="0.8" stop-color="#6F5325" />
         </linearGradient>
       </defs>
-      <polygon points="47.7,95.8 0,48.1 47.6,0 95.7,47.8 47.7,95.8 " />
+      <polygon fill="url(#hextech-handle-idle)" points="47.7,95.8 0,48.1 47.6,0 95.7,47.8 47.7,95.8 " />
       <g>
         <polygon fill="#1E2328" points="15.9,47.8 36.2,27.4 41,32.2 25.5,47.8 40.9,63.5 36.3,68.1" />
         <path
@@ -56,8 +43,3 @@ function Slider ({ className }) {
         />
       </g>
     </svg>
-
-  );
-}
-
-export default Slider;
