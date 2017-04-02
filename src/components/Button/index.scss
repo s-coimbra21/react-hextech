@@ -11,7 +11,7 @@
 .button {
   display: inline-block;
   position: relative;
-  font-family: 'Beaufort', TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;;
+  font-family: 'Beaufort', 'Times New Roman', serif;
   text-transform: uppercase;
   color: #CDBE91;
   font-weight: bold;
@@ -209,7 +209,7 @@
     animation: none;
   }
 
-  .flare, .glow, .sheen-wrapper, .buttonBg {
+  .flare, .glow, .sheenWrapper, .buttonBg {
     display: none;
   }
 

@@ -8,7 +8,10 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #010a13;
+  background: url('./backdrop.png');
+  background-position: center;
+  background-size: cover;
+ /* background: #010a13; */
 }
 
 .dropdown-wrapper {

@@ -4,9 +4,10 @@
 	display: inline-block;
 	position: relative;
 	width: 100%;
-	font-family: 'LoL Body';
+	font-family: 'Spiegel';
 	color: $lcu-text-dark;
 	letter-spacing: 0.025rem;
+	outline: none;
 
 	&, & div {
 		box-sizing: border-box;

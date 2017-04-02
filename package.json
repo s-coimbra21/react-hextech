@@ -5,10 +5,12 @@
   "main": "lib/index.js",
   "module": "src/index.js",
   "scripts": {
+    "prepublish": "npm run test && npm run build",
     "build": "webpack",
     "test": "jest --config jest.json",
     "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src/**/*.js",
-    "dev": "start-storybook -p 9001 -c .storybook"
+    "dev": "start-storybook -p 9001 -c .storybook",
+    "export": "build-storybook -c .storybook -o .out"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "https://github.com/hammerandchisel/react-storybook.git",
+    "@kadira/storybook-addon-options": "^1.0.2",
     "autoprefixer": "^6.7.7",
     "babel": "^6.23.0",
     "babel-core": "^6.24.0",
