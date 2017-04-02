@@ -79,3 +79,27 @@ $fill-active: linear-gradient(to right, #695625, #463714);
 		}
 	}
 }
+
+.sliderInput.disabled {
+	input[type="range"] {
+		outline: none;
+		width: 100%;
+		background: rgb(30, 35, 40);
+		height: 2px;
+		pointer-events: none;
+
+		&::thumb {
+			background-image: url('./disabled.svg');
+			pointer-events: none;
+		}
+	}
+
+	.fill {
+		display: none;
+	}
+
+	.tooltip {
+		display: none;
+	}
+}
+
