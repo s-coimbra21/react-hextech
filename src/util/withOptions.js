@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import deburr from 'lodash.deburr';
 import { createSelector } from 'reselect';
 
 const optionsSelector = props => props.options;
@@ -9,7 +10,8 @@ function normalizeOption (option) {
     ...option,
     {
       value: option.value || option,
-      label: option.label || option
+      label: option.label || option,
+      hextech__label: deburr(option.label || option).toLowerCase()
     }
   );
 }

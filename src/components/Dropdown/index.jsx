@@ -5,6 +5,8 @@ import withOptions from '../../util/withOptions';
 
 import style from './index.scss';
 
+import * as keyboardEventHandlers from './keyboardEvents';
+
 let instanceId = 1;
 
 /**
@@ -32,9 +34,9 @@ export default class Dropdown extends PureComponent {
     disabled: false,
     value: undefined,
     expanded: undefined,
-    onChange: () => false,
-    onBlur: () => false,
-    onToggle: undefined,
+    onChange: Function.prototype,
+    onBlur: Function.prototype,
+    onToggle: Function.prototype,
     options: []
   }
 
@@ -44,12 +46,17 @@ export default class Dropdown extends PureComponent {
     instanceId += 1;
     this.instanceId = instanceId;
 
+    this.searchString = '';
+
     this.state = {
       isOpen: false,
-      focusedOption: this.props.value || this.props.options[0]
+      focusedOption: undefined,
+      focusedIdx: -1
     };
 
-    this.handleArrowKeyNavigation = this.handleArrowKeyNavigation.bind(this);
+    Object.keys(keyboardEventHandlers).forEach(key => {
+      this[key] = keyboardEventHandlers[key].bind(this);
+    });
   }
 
   componentDidMount () {
@@ -73,6 +80,7 @@ export default class Dropdown extends PureComponent {
   }
 
   componentWillUnmount () {
+    clearTimeout(this.searchTimeout);
     document.removeEventListener('click', this.handleDocumentClick, false);
     document.removeEventListener('touchend', this.handleDocumentClick, false);
   }
@@ -123,58 +131,11 @@ export default class Dropdown extends PureComponent {
   }
 
   handleOptionFocus = option => {
-    this.setState({ focusedOption: option });
-  }
-
-  handleKeyDown = evt => {
     const { options } = this.props;
 
-    switch (evt.keyCode) {
-      // Tab
-      case 9:
-        return this.handleSelect(this.state.focusedOption);
-      // Enter
-      case 13:
-        this.handleSelect(this.state.focusedOption);
-        break;
-      // Space
-      case 32:
-        this.handleToggle(true);
-        break;
-      // Escape
-      case 27:
-        return this.handleSelect(this.state.focusedOption);
-      // Up & Down
-      case 38:
-      case 40:
-        this.handleArrowKeyNavigation(evt.keyCode === 40);
-        break;
-      // End
-      case 35:
-        this.navigateToOption(options.length);
-        break;
-      // Home
-      case 36:
-        this.navigateToOption(0);
-        break;
-      default:
-        return;
-    }
+    const idx = options.findIndex(o => o === option);
 
-    evt.preventDefault();
-  }
-
-  handleArrowKeyNavigation = next => {
-    const aux = next ? 1 : -1; // if it's next or previous
-
-    const { options } = this.props;
-    const { focusedOption } = this.state;
-
-    const currIdx = options.findIndex(o => o === focusedOption);
-
-    const nextIdx = currIdx + aux;
-
-    this.navigateToOption(nextIdx);
+    this.setState({ focusedOption: option, focusedIdx: idx });
   }
 
   navigateToOption = index => {
