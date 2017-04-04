@@ -14,6 +14,6 @@ storiesOf('Dropdown', module)
   .add('with scroll [TODO]', () => (
     <Dropdown hocClassName="dropdown-wrapper" onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={lotsOptions}>Hextech</Dropdown>
   ))
-  .add('disabled', () => (
+  .add('disabled [TODO]', () => (
     <Dropdown hocClassName="dropdown-wrapper" disabled onChange={action('dropdown-change')} onBlur={action('dropdown-blur')} options={options}>Try Me</Dropdown>
   ));

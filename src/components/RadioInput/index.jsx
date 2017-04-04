@@ -1,11 +1,13 @@
 import React, { PropTypes, PureComponent } from 'react';
 import cx from 'classnames';
 
-import normalizeOptions from '../../util/normalize-options';
+import withOptions from '../../util/withOptions';
 
 import Option from '../RadioOption';
 
 import style from './index.scss';
+
+let instanceId = 0;
 
 /**
  * RadioInput Component
@@ -14,6 +16,7 @@ import style from './index.scss';
  * @class RadioInput
  * @extends {PureComponent}
  */
+@withOptions
 export default class RadioInput extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
@@ -35,8 +38,11 @@ export default class RadioInput extends PureComponent {
     onBlur: () => false
   }
 
-  componentDidMount () {
-    this.uid = Math.round(Math.random() * 100);
+  constructor (props) {
+    super(props);
+
+    instanceId += 1;
+    this.instanceId = instanceId;
   }
 
   handleSelect = (nextValue, evt) => {
@@ -56,12 +62,12 @@ export default class RadioInput extends PureComponent {
 
   render () {
     const { options, className, disabled, value, label } = this.props;
-    const shouldRenderOptions = options.map && options.map.call;
+
     return (
       <div role="radiogroup" aria-labelledby={label} className={cx(style.radioInput, className)}>
-        {shouldRenderOptions && normalizeOptions(options).map((o, i) =>
+        {options.map((o, i) =>
           <Option
-            key={`${this.uid}${o.label}`}
+            key={`${this.instanceId}${o.label}`}
             checked={o.value === value}
             disabled={disabled || o.disabled}
             onChange={evt => this.handleSelect(o.value, evt)}

@@ -80,6 +80,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "element-resize-detector": "^1.1.11",
-    "lodash.debounce": "^4.0.8"
+    "lodash.debounce": "^4.0.8",
+    "reselect": "^3.0.0"
   }
 }
