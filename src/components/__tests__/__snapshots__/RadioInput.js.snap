@@ -1,51 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RadioInput /> should render correctly 1`] = `
-<div
-  aria-labelledby=""
-  className="radioInput"
-  role="radiogroup"
->
-  <RadioOption
-    checked={false}
-    disabled={false}
-    label="test0"
-    onBlur={[Function]}
-    onChange={[Function]}
-    tabIndex={0}
-    value={
+<RadioInput
+  className={undefined}
+  disabled={false}
+  label=""
+  onBlur={[Function]}
+  onChange={[Function]}
+  options={
+    Array [
       Object {
+        "hextech__label": "test0",
         "label": "test0",
-        "value": 0,
-      }
+        "value": Object {
+          "label": "test0",
+          "value": 0,
+        },
+      },
+      Object {
+        "hextech__label": "test1",
+        "label": "test1",
+        "value": 1,
+      },
+      Object {
+        "hextech__label": "test2",
+        "label": "test2",
+        "value": 2,
+      },
+      Object {
+        "hextech__label": "test3",
+        "label": "test3",
+        "value": 5,
+      },
+    ]
+  }
+  selectedOption={
+    Object {
+      "label": "test1",
+      "value": 1,
     }
-  />
-  <RadioOption
-    checked={true}
-    disabled={false}
-    label="test1"
-    onBlur={[Function]}
-    onChange={[Function]}
-    tabIndex={-1}
-    value={1}
-  />
-  <RadioOption
-    checked={false}
-    disabled={false}
-    label="test2"
-    onBlur={[Function]}
-    onChange={[Function]}
-    tabIndex={-1}
-    value={2}
-  />
-  <RadioOption
-    checked={false}
-    disabled={false}
-    label="test3"
-    onBlur={[Function]}
-    onChange={[Function]}
-    tabIndex={-1}
-    value={5}
-  />
-</div>
+  }
+  value={1}
+>
+  Hello
+</RadioInput>
 `;

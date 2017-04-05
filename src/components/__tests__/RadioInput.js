@@ -23,7 +23,7 @@ describe.only('<RadioInput />', () => {
   });
 
   it('should render as many children as the options it is provided', () => {
-    const wrapper = shallow(<RadioInput options={options} />);
+    const wrapper = mount(<RadioInput options={options} />);
     expect(wrapper.children().length).toBe(options.length);
   });
 
@@ -54,11 +54,14 @@ describe.only('<RadioInput />', () => {
   it('should mark the selected option, using strict equality against the value prop', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
-    const wrapper = shallow(<RadioInput options={options} value={value} />);
+
+    const wrapper = mount(<RadioInput options={options} value={value} />);
     const selected = wrapper.childAt(1);
+
     const unselectedNodes = wrapper.children()
       .map(child => child.props())
       .filter(child => !child.checked);
+
     expect(selected.props().checked).toBe(true);
     expect(unselectedNodes).toHaveLength(options.length - 1);
   });

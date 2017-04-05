@@ -34,8 +34,8 @@ export default class RadioInput extends PureComponent {
     value: undefined,
     label: '',
     options: [],
-    onChange: () => false,
-    onBlur: () => false
+    onChange: Function.prototype,
+    onBlur: Function.prototype
   }
 
   constructor (props) {
