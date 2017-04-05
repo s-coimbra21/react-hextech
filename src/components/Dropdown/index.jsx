@@ -4,6 +4,7 @@ import cx from 'classnames';
 import withOptions from '../../util/withOptions';
 
 import style from './index.scss';
+import Arrow from './Arrow.jsx';
 
 import * as keyboardEventHandlers from './keyboardEvents';
 
@@ -85,7 +86,7 @@ export default class Dropdown extends PureComponent {
     document.removeEventListener('touchend', this.handleDocumentClick, false);
   }
 
-  handleSelect = nextOption => {
+  handleChange = nextOption => {
     const { onChange, value } = this.props;
 
     if (nextOption.value !== value) {
@@ -101,7 +102,7 @@ export default class Dropdown extends PureComponent {
 
     if (focusedOption !== value) {
       // this should never happen
-      this.handleSelect(focusedOption);
+      this.handleChange(focusedOption);
     }
 
     onBlur && onBlur(evt);
@@ -148,7 +149,7 @@ export default class Dropdown extends PureComponent {
     if (nextIdx >= options.length) nextIdx = 0;
 
     if (!isOpen) {
-      this.handleSelect(options[nextIdx]);
+      this.handleChange(options[nextIdx]);
     } else if (!isOpen && (nextIdx !== index)) {
       return; // if the select is closed, don't loop over
     }
@@ -172,7 +173,7 @@ export default class Dropdown extends PureComponent {
         role="option"
         aria-selected={isSelected}
         className={cx(classnames)}
-        onClick={() => this.handleSelect(option)}
+        onClick={() => this.handleChange(option)}
         onMouseEnter={() => this.handleOptionFocus(option)}
       >
         {option.label}
@@ -181,26 +182,39 @@ export default class Dropdown extends PureComponent {
   }
 
   render () {
-    const { options, className, tabIndex, value, expanded } = this.props;
+    const { options, className, tabIndex, value, expanded, disabled } = this.props;
     const { isOpen: isOpenState, focusedOption } = this.state;
-    const isOpen = !!isOpenState || !!expanded;
+    const isOpen = disabled ? false : (!!isOpenState || !!expanded);
 
-    const selected = focusedOption || options.find(o => o.value === value);
+    let selected = focusedOption;
+
+    if (!selected || disabled) {
+      selected = options.find(o => o.value === value);
+    }
+
+    let eventHandlers = {
+      onClick: () => this.handleToggle(!isOpen),
+      onKeyDown: this.handleKeyDown,
+      onBlur: this.handleBlur
+    };
+
+    if (disabled) {
+      eventHandlers = {};
+    }
 
     return (
       <div
         ref={e => { this.root = e; }}
-        tabIndex={tabIndex}
+        tabIndex={disabled ? '-1' : tabIndex}
         role="combobox"
         aria-expanded={isOpen}
-        className={cx(style.dropdown, className)}
-        onClick={() => this.handleToggle(!isOpen)}
-        onKeyDown={this.handleKeyDown}
-        onBlur={this.handleBlur}
+        aria-disabled={disabled}
+        className={cx(style.dropdown, disabled && style.disabled, className)}
+        {...eventHandlers}
       >
         <div className={cx(style.control, isOpen && style.active)}>
           {selected ? selected.label : 'Select...'}
-          <span className={style.arrow} />
+          <Arrow className={style.arrow} />
         </div>
         <div
           ref={e => { this.menu = e; }}
@@ -208,7 +222,8 @@ export default class Dropdown extends PureComponent {
           aria-hidden={!isOpen}
           className={cx(style.options, { [style.hidden]: !isOpen })}
         >
-          {options.map(o => this.renderOption(o, value === o.value, focusedOption === o))}
+          {!disabled &&
+            options.map(o => this.renderOption(o, value === o.value, focusedOption === o))}
         </div>
       </div>
     );

@@ -87,15 +87,15 @@ export function handleKeyDown (evt) {
 
   switch (evt.key) {
     case 'Tab':
-      return this.handleSelect(this.state.focusedOption);
+      return this.handleChange(this.state.focusedOption);
     case 'Enter':
-      this.handleSelect(this.state.focusedOption);
+      this.handleChange(this.state.focusedOption);
       break;
     case ' ':
       this.handleToggle(true);
       break;
     case 'Escape':
-      return this.handleSelect(this.state.focusedOption);
+      return this.handleChange(this.state.focusedOption);
     case 'ArrowUp':
     case 'ArrowDown':
       this.handleArrowKeyNavigation(evt.key === 'ArrowDown');

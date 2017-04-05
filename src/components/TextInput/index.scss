@@ -12,13 +12,13 @@
     right: 7px;
 		bottom: 0;
 		margin: auto;
-    font-size: 1.3rem;
+    font-size: 1.3em;
     transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
     background-color: darken($lcu-text-light, 10%);
     cursor: pointer;
     mask-image: url('./close.svg');
-    height: 0.8rem;
-    width: 0.8rem;
+    height: 0.8em;
+    width: 0.8em;
     z-index: 10;
     opacity: 0;
     visibility: hidden;
@@ -39,19 +39,19 @@
 
   input[type='search'] {
     background-image: url('./search-icon.png');
-    background-size: 1.3rem;
+    background-size: 1.3em;
     background-position: 5px center;
     background-repeat: no-repeat;
-    padding-left: 1.8rem;
+    padding-left: 1.8em;
 
 		&:focus {
-			background: 5px center/1.3rem url("./search-icon.png"), linear-gradient(to bottom, rgba(7, 16, 25, 0.7), rgba(32, 39, 44, 0.7));
+			background: 5px center/1.3em url("./search-icon.png"), linear-gradient(to bottom, rgba(7, 16, 25, 0.7), rgba(32, 39, 44, 0.7));
   		background-repeat: no-repeat
 		}
   }
 
   .inputElement {
-    padding: 9px 21px;
+    padding: 10px 21px;
     color: $lcu-text-dark;
     display: block;
     box-sizing: border-box;
@@ -67,7 +67,7 @@
 		}
 
     &:placeholder-shown {
-      font-size: 1rem;
+      font-size: 1em;
     }
   }
 }

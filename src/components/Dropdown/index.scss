@@ -3,6 +3,7 @@
 .dropdown {
 	display: inline-block;
 	position: relative;
+	cursor: pointer;
 	width: 100%;
 	font-family: 'Spiegel';
 	color: $lcu-text-dark;
@@ -15,11 +16,10 @@
 	}
 
 	.control {
-		padding: 9px 14px;
+		padding: 10px 14px;
 		background-color: rgba(30,35,40,0.5);
 		border: 1px solid transparent;
 		border-image: linear-gradient(to top,#695625 0%,#A9852D 23%,#B88D35 93%,#C8AA6E 100%) 1;
-		cursor: pointer;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -31,12 +31,14 @@
 		}
 
 		.arrow {
+			fill: #C8AA6E;
 			position: absolute;
-			right: 0;
-			padding: 0 10px;
+			top: 0;
+			bottom: 0;
+			right: 9px;
+			margin: auto;
 			cursor: pointer;
-			background: url('./up-down-arrow.png') no-repeat;
-			height: 100%;
+			height: 1em;
 		}
 	}
 
@@ -73,7 +75,7 @@
 			color: rgb(80.4%, 74.5%, 56.9%);
 			cursor: pointer;
 			overflow-x: hidden;
-			padding: 9px 9px;
+			padding: 10px;
 			border-top: 1px solid rgb(12.2%, 12.9%, 13.7%);
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -88,16 +90,37 @@
 				background-color: rgba(30,35,40,0.5);
 			}
 
+			&.selected {
+				padding-right: 1.25em;
+				padding-right: calc(1.25em + 10px);
+			}
+
 			&.selected::after {
 				content: '';
-				background: url('./dropdown-check.png') center no-repeat;
-				width: 14px;
-				height: 11px;
 				position: absolute;
 				right: 10px;
-				top: 50%;
-				transform: translate(0,-50%);
+				top: 0;
+				bottom: 0;
+				background: url('./check.svg') center no-repeat;
+				width: 1.25em;
+				margin: auto;
 			}
+		}
+	}
+}
+
+.dropdown.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: $lcu-text-disabled;
+
+	.control {
+		border-image: none;
+		border-color: $lcu-text-disabled;
+		background-color: $lcu-bg-disabled;
+
+		.arrow {
+			fill: $lcu-text-disabled
 		}
 	}
 }
