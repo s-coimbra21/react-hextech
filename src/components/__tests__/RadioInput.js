@@ -15,10 +15,9 @@ describe.only('<RadioInput />', () => {
     const props = {
       onChange: jest.fn(),
       onBlur: jest.fn(),
-      selectedOption: options[1],
       value: options[1].value,
     };
-    const wrapper = shallow(<RadioInput options={options} {...props}>Hello</RadioInput>);
+    const wrapper = shallow(<RadioInput options={options} {...props} />);
     expect(wrapper.get(0)).toMatchSnapshot();
   });
 

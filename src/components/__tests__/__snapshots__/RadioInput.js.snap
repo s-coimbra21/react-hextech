@@ -34,14 +34,6 @@ exports[`<RadioInput /> should render correctly 1`] = `
       },
     ]
   }
-  selectedOption={
-    Object {
-      "label": "test1",
-      "value": 1,
-    }
-  }
   value={1}
->
-  Hello
-</RadioInput>
+/>
 `;
