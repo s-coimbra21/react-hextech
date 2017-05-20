@@ -6,6 +6,7 @@ import Frame from './components/Frame';
 import TextInput from './components/TextInput';
 import RadioInput from './components/RadioInput';
 import SliderInput from './components/SliderInput';
+import RuneBuilder from './components/RuneBuilder';
 import stateful from './components/stateful';
 
 export {
@@ -17,5 +18,6 @@ export {
   TextInput,
   RadioInput,
   SliderInput,
+  RuneBuilder,
   stateful
 };

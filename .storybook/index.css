@@ -14,6 +14,11 @@ html, body {
  /* background: #010a13; */
 }
 
+#rune-builder {
+  height: 90%;
+  margin: 0 auto;
+}
+
 .dropdown-wrapper {
   min-width: 350px;
 }

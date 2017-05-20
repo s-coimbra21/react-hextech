@@ -70,7 +70,7 @@ export function handleTextSearch (evt) {
 
   const lastTyped = String.fromCharCode(evt.keyCode).toLowerCase();
   const shouldTryNext = this.searchString.search(new RegExp(`^[${lastTyped}\\${lastTyped}]+$`)) !== -1;
-  console.log(shouldTryNext);
+
   this.searchString += lastTyped;
 
   this.executeStringSearch(shouldTryNext);
