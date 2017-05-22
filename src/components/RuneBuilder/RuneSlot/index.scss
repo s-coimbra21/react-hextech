@@ -1,24 +1,59 @@
-.rune {}
+.slot.quintessence {
+	&:hover {
+		.slotInner {
+			fill: url(#quintHighlightInner);
+		}
+		.slotMiddle {
+			fill: url(#quintHighlight);
+//      stroke: url(#quintHighlight);
+		}
+	}
+	&:active {
+		.slotOuter {
+			fill: url(#quintHover);
+		}
+	}
 
-.quintessence {
-
-  &:hover {
-		.st1 {
-      opacity: 0.8
-    }
-    .st2 {
-      fill: url(#quintSelect);
-//      stroke: url(#quintSelect);
-    }
+  .slotOuter {
+    fill: #010a13;
+    stroke: #6B5024;
   }
-
-  &:active {
-    .st0 {
-      fill: url(#quintSelectOuter);
-    }
+  .slotInner {
+    //  fill: #0E1116;
+    fill: url(#slotInner);
+  }
+  .slotMiddle {
+    fill: #211F22;
+    stroke: #15171B;
   }
 }
 
-.st0{fill:#0E1116;stroke:#6B5024;stroke-miterlimit:10;}
-.st1{fill:#0E1116;}
-.st2{fill:#211F22;stroke:#15171B;stroke-miterlimit:10;}
+.rune.quintessence {
+	.slotInner {
+		fill: #0e141e;
+	}
+
+	.slotMiddle {
+		fill: url(#quintMiddle);
+	}
+
+	.slotOuter {
+		fill: url(#quintOuter);
+		stroke: url(#quintOuterStroke);
+		stroke-width: 7px;
+	}
+}
+
+.slotInner {
+	stroke: #15171B;
+	stroke-width: 2px;
+}
+
+.slotOuter {
+	stroke-width: 2px;
+	stroke-miterlimit: 10;
+}
+
+.slotMiddle {
+	stroke-miterlimit: 10;
+}
