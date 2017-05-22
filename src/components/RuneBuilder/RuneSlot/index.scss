@@ -3,13 +3,12 @@
 .quintessence {
 
   &:hover {
-    .st1 {
-      fill: url(#quintSelect);
-      stroke: url(#quintSelect);
-    }
-
-    .st2 {
+		.st1 {
       opacity: 0.8
+    }
+    .st2 {
+      fill: url(#quintSelect);
+//      stroke: url(#quintSelect);
     }
   }
 
@@ -20,16 +19,6 @@
   }
 }
 
-.st0 {
-	fill: #0E1116;
-	stroke: #6B5024;
-	stroke-miterlimit: 10;
-}
-
-.st1 {
-	fill: #211F22;
-}
-
-.st2 {
-	fill: #0E1116;
-}
+.st0{fill:#0E1116;stroke:#6B5024;stroke-miterlimit:10;}
+.st1{fill:#0E1116;}
+.st2{fill:#211F22;stroke:#15171B;stroke-miterlimit:10;}
