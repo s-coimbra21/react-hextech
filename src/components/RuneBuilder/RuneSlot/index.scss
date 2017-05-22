@@ -1,0 +1,35 @@
+.rune {}
+
+.quintessence {
+
+  &:hover {
+    .st1 {
+      fill: url(#quintSelect);
+      stroke: url(#quintSelect);
+    }
+
+    .st2 {
+      opacity: 0.8
+    }
+  }
+
+  &:active {
+    .st0 {
+      fill: url(#quintSelectOuter);
+    }
+  }
+}
+
+.st0 {
+	fill: #0E1116;
+	stroke: #6B5024;
+	stroke-miterlimit: 10;
+}
+
+.st1 {
+	fill: #211F22;
+}
+
+.st2 {
+	fill: #0E1116;
+}
