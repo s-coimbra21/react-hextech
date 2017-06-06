@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 /* eslint-disable */
 import Ring from './Ring';
-import Rune from './RuneSlot';
+import Rune from './Rune';
 import gradients from './gradients';
 
 export default class RuneBuilder extends PureComponent {
