@@ -87,29 +87,31 @@ export default class Button extends PureComponent {
     ];
 
     return (
-      <div
-        ref={elem => { this.root = elem; }}
-        tabIndex={tabIndex}
-        role="button"
-        className={cx(
-          style.button, disabled ? style.disabled : classes, className
-        )}
-        onClick={this.handleClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-      >
-        <div className={style.buttonBg} />
-        <div className={style.borderIdle} />
-        <div className={style.borderTransition} />
-        <div className={style.flare} />
-        <div className={style.glow} />
-        <div className={style.sheenWrapper} >
-          <div className={style.sheen} />
-        </div>
-        <div className={style.content}>
-          {children || label}
+      <div className={className}>
+        <div
+          ref={elem => { this.root = elem; }}
+          tabIndex={tabIndex}
+          role="button"
+          className={cx(
+            style.button, disabled ? style.disabled : classes, className
+          )}
+          onClick={this.handleClick}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          onMouseDown={this.handleMouseDown}
+          onMouseUp={this.handleMouseUp}
+        >
+          <div className={style.buttonBg} />
+          <div className={style.borderIdle} />
+          <div className={style.borderTransition} />
+          <div className={style.flare} />
+          <div className={style.glow} />
+          <div className={style.sheenWrapper} >
+            <div className={style.sheen} />
+          </div>
+          <div className={style.content}>
+            {children || label}
+          </div>
         </div>
       </div>
     );

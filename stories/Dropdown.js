@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+import { storiesOf, action } from '@storybook/react';
 import { Dropdown as BaseDropdown, stateful } from '../src';
 
 const Dropdown = stateful(BaseDropdown);

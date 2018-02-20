@@ -1,8 +1,8 @@
-import { configure } from '@kadira/storybook';
+import { configure } from '@storybook/react';
 
 import './index.css';
 
-import { setOptions } from '@kadira/storybook-addon-options';
+import { setOptions } from '@storybook/addon-options';
 
 setOptions({
   name: 'React-Hextech',

@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .dropdown {
-	display: inline-block;
+	display: block;
 	position: relative;
 	cursor: pointer;
 	width: 100%;
@@ -9,6 +9,7 @@
 	color: $lcu-text-dark;
 	letter-spacing: 0.025rem;
 	outline: none;
+	// line-height: 1;
 
 	&, & div {
 		box-sizing: border-box;

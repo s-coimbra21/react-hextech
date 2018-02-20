@@ -11,9 +11,9 @@
 .button {
   display: inline-block;
   position: relative;
-  font-family: 'Beaufort', 'Times New Roman', serif;
+  font-family: 'Beaufort', 'Arial';
   text-transform: uppercase;
-  color: #CDBE91;
+  color: $lcu-gold-medium;
   font-weight: bold;
   letter-spacing: 1px;
   white-space: nowrap;
@@ -22,6 +22,10 @@
   box-shadow: 0 0 1px 1px #010A13, inset 0 0 1px 1px #010A13;
   background: #1E2328;
   border: 2px solid transparent;
+
+  * {
+    box-sizing: content-box;
+  }
 
   &, & > div {
     cursor: pointer;
