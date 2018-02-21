@@ -57,6 +57,8 @@ export default class Button extends PureComponent {
       return this.setState({ isClick: false }, this.playClickAnim);
     }
 
+    if (typeof window === 'undefined') return;
+
     // Don't block animation if user decides to spam
     window.requestAnimationFrame(() =>
       this.setState({ isClick: true }, () => {
