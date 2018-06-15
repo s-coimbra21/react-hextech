@@ -4,7 +4,7 @@
   "description": "League of Legends Hextect design components",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "npm run test && npm run build",
+    "prepublish": "npm run build",
     "build": "webpack",
     "test": "jest --config jest.json",
     "test:coverage": "jest --config jest.json --coverage",
