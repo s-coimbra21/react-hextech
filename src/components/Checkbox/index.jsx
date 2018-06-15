@@ -54,7 +54,7 @@ export default class Checkbox extends PureComponent {
   }
 
   render () {
-    const { className, tabIndex, value, label, children } = this.props;
+    const { className, value, label, children } = this.props;
     const { disabled } = this.props;
 
     let eventHandlers = {
@@ -79,9 +79,9 @@ export default class Checkbox extends PureComponent {
         role="checkbox"
         aria-checked={isChecked}
         className={cx(style.checkbox, classes)}
-        tabIndex={tabIndex}
         {...eventHandlers}
       >
+        <input type="checkbox" onChange={this.handleClick} />
         <div className={style.box}>
           <div className={style.border} />
           <i className={cx(style.check, style.iconCheck)} />

@@ -4,13 +4,14 @@ import cx from 'classnames';
 
 import style from './index.scss';
 
-const RadioOption = ({ children, value, label, checked, disabled, onChange, onBlur }) => (
+const RadioOption = ({ children, name, value, label, checked, disabled, onChange, onBlur }) => (
   <div
     className={cx(style.radioOption, checked && style.checked, disabled && style.disabled)}
   >
     <input
       type="radio"
       id={`opt__${value}`}
+      name={name}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
@@ -39,6 +40,7 @@ const RadioOption = ({ children, value, label, checked, disabled, onChange, onBl
 
 RadioOption.propTypes = {
   children: PropTypes.node,
+  name: PropTypes.string,
   value: PropTypes.any.isRequired,
   label: PropTypes.string,
   disabled: PropTypes.bool,
@@ -49,6 +51,7 @@ RadioOption.propTypes = {
 
 RadioOption.defaultProps = {
   children: undefined,
+  name: undefined,
   onBlur: undefined,
   onChange: () => false,
   label: undefined,

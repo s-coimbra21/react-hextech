@@ -69,6 +69,7 @@ export default class RadioInput extends PureComponent {
         {options.map((o, i) =>
           <Option
             key={`${this.instanceId}${o.label}`}
+            name={`group-${this.instanceId}-option`}
             checked={o.value === value}
             disabled={disabled || o.disabled}
             onChange={evt => this.handleSelect(o.value, evt)}
