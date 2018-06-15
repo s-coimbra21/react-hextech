@@ -5,7 +5,7 @@ import RadioOption from '../RadioOption';
 
 describe('<RadioOption />', () => {
   it('should render two children', () => {
-    const wrapper = mount(<RadioOption checked value />);
+    const wrapper = shallow(<RadioOption checked value />);
     expect(wrapper.children().length).toBe(2);
   });
 
@@ -35,7 +35,7 @@ describe('<RadioOption />', () => {
   });
 
   it('should have the class "checked" if it is checked', () => {
-    const wrapper = mount(<RadioOption checked value="1" label="1" />);
+    const wrapper = shallow(<RadioOption checked value="1" label="1" />);
     expect(wrapper.hasClass('checked')).toBe(true);
   });
 
@@ -45,7 +45,7 @@ describe('<RadioOption />', () => {
   });
 
   it('should have the class "disabled" if it is disabled', () => {
-    const wrapper = mount(<RadioOption checked={false} disabled value="1" label="1" />);
+    const wrapper = shallow(<RadioOption checked={false} disabled value="1" label="1" />);
     expect(wrapper.hasClass('disabled')).toBe(true);
   });
 });

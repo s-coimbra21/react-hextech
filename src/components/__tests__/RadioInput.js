@@ -21,8 +21,8 @@ describe.only('<RadioInput />', () => {
     expect(wrapper.get(0)).toMatchSnapshot();
   });
 
-  it('should render as many children as the options it is provided', () => {
-    const wrapper = mount(<RadioInput options={options} />);
+  it.only('should render as many children as the options it is provided', () => {
+    const wrapper = shallow(<RadioInput options={options} />);
     expect(wrapper.children().length).toBe(options.length);
   });
 
@@ -54,7 +54,7 @@ describe.only('<RadioInput />', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
 
-    const wrapper = mount(<RadioInput options={options} value={value} />);
+    const wrapper = shallow(<RadioInput options={options} value={value} />);
     const selected = wrapper.childAt(1);
 
     const unselectedNodes = wrapper.children()
