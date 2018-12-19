@@ -1,9 +1,17 @@
 {
-  "presets": ["react", ["es2015", {"modules": false}]],
-  "plugins": ["transform-decorators-legacy", "transform-class-properties"],
-	"env": {
-    "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
-    }
-  }
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "targets": {
+          "chrome": "58",
+          "ie": "11"
+        },
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }

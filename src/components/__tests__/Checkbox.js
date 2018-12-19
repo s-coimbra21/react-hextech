@@ -64,7 +64,12 @@ describe('<Checkbox />', () => {
     const handleClick = jest.fn();
 
     const wrapper = shallow(
-      <Checkbox onClick={handleClick} onChange={handleChange} value={false} label="test" />
+      <Checkbox
+        onClick={handleClick}
+        onChange={handleChange}
+        value={false}
+        label="test"
+      />
     );
 
     wrapper.simulate('click');
@@ -76,9 +81,7 @@ describe('<Checkbox />', () => {
     const label = 'test1';
     const text = 'hello';
 
-    const wrapper = shallow(
-      <Checkbox label={label}>{text}</Checkbox>
-    );
+    const wrapper = shallow(<Checkbox label={label}>{text}</Checkbox>);
 
     expect(wrapper.find('.label').text()).toBe(text);
   });
@@ -86,9 +89,7 @@ describe('<Checkbox />', () => {
   it('should have a className passed by props', () => {
     const className = 'test1';
 
-    const wrapper = shallow(
-      <Checkbox className={className}>Hello</Checkbox>
-    );
+    const wrapper = shallow(<Checkbox className={className}>Hello</Checkbox>);
 
     expect(wrapper.hasClass(className));
   });

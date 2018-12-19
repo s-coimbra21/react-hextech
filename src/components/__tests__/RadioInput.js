@@ -7,7 +7,7 @@ const options = [
   { value: 0, label: 'test0' },
   { value: 1, label: 'test1' },
   { value: 2, label: 'test2' },
-  { value: 5, label: 'test3' },
+  { value: 5, label: 'test3' }
 ];
 
 describe.only('<RadioInput />', () => {
@@ -15,7 +15,7 @@ describe.only('<RadioInput />', () => {
     const props = {
       onChange: jest.fn(),
       onBlur: jest.fn(),
-      value: options[1].value,
+      value: options[1].value
     };
     const wrapper = shallow(<RadioInput options={options} {...props} />);
     expect(wrapper.get(0)).toMatchSnapshot();
@@ -57,7 +57,8 @@ describe.only('<RadioInput />', () => {
     const wrapper = shallow(<RadioInput options={options} value={value} />);
     const selected = wrapper.childAt(1);
 
-    const unselectedNodes = wrapper.children()
+    const unselectedNodes = wrapper
+      .children()
       .map(child => child.props())
       .filter(child => !child.checked);
 
@@ -70,7 +71,9 @@ describe.only('<RadioInput />', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
 
-    const wrapper = mount(<RadioInput options={options} value={value} onChange={handleChange} />);
+    const wrapper = mount(
+      <RadioInput options={options} value={value} onChange={handleChange} />
+    );
 
     handleChange.mockImplementation(v => wrapper.setProps({ value: v }));
 
@@ -88,7 +91,9 @@ describe.only('<RadioInput />', () => {
     const selectedOption = options[1];
     const value = selectedOption.value;
 
-    const wrapper = mount(<RadioInput options={options} value={value} onChange={handleChange} />);
+    const wrapper = mount(
+      <RadioInput options={options} value={value} onChange={handleChange} />
+    );
 
     handleChange.mockImplementation(v => wrapper.setProps({ value: v }));
 

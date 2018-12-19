@@ -9,6 +9,9 @@ import SliderInput from './components/SliderInput';
 import RuneBuilder from './components/RuneBuilder';
 import stateful from './components/stateful';
 
+import './css/button.scss';
+import './css/input.scss';
+
 export {
   Button,
   ButtonGroup,

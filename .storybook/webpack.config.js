@@ -19,9 +19,8 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1,
-              localIdentName: 'hextech-[local]-[hash:base64:5]',
-              minimize: true
+              importLoaders: 2,
+              localIdentName: 'hextech-[local]-[hash:base64:5]'
             }
           },
           {

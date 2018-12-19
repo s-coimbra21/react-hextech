@@ -1,6 +1,6 @@
 module.exports = {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb-base", "plugin:react/recommended", "plugin:prettier/recommended", "prettier/react"],
   "env": {
     "browser": true,
     "node": true,
@@ -19,6 +19,7 @@ module.exports = {
     "consistent-return": "off",
     "comma-dangle": "off",
     "generator-star-spacing": "off",
+    "prefer-destructuring": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": ["error", { "ignore": ["electron"] }],
     "import/no-extraneous-dependencies": "off",
@@ -30,13 +31,20 @@ module.exports = {
     "promise/no-native": 0,
     "react/jsx-no-bind": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/prefer-stateless-function": "off",
     "react/forbid-prop-types": "off",
-    "space-before-function-paren": ["error", "always"],
-    "jsx-a11y/no-static-element-interactions": 0
+    "jsx-a11y/no-static-element-interactions": 0,
+    "prettier/prettier": ["error", {"singleQuote": true, "tabWidth": 2,}]
   },
   "plugins": [
     "promise",
-    "react"
-  ]
+    "react",
+    "import",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": "webpack",
+    "react": {
+      "version": "16.6.3"
+    }
+  }
 }

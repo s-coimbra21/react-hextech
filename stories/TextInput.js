@@ -1,5 +1,6 @@
 import React from 'react';
-import { storiesOf, action } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { TextInput as BaseTextInput, stateful } from '../src';
 
 const TextInput = stateful(BaseTextInput);
@@ -16,4 +17,10 @@ storiesOf('Text Input', module)
   ))
   .add('disabled', () => (
     <TextInput disabled placeholder="hextech..." />
+  ))
+  .add('native', () => (
+    <input placeholder="hextech..." />
+  ))
+  .add('native (with search)', () => (
+    <input placeholder="hextech..." />
   ));

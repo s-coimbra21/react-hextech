@@ -1,4 +1,5 @@
 @import '../../variables.scss';
+@import '../../css/_mixins.scss';
 
 .border {
 	position: absolute;
@@ -9,18 +10,8 @@
 }
 
 .button {
-  display: inline-block;
-  position: relative;
-  font-family: 'Beaufort', 'Arial';
-  text-transform: uppercase;
-  color: $lcu-gold-medium;
-  font-weight: bold;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  padding: 9px 21px;
-  cursor: pointer;
-  box-shadow: 0 0 1px 1px #010A13, inset 0 0 1px 1px #010A13;
-  background: #1E2328;
+  @include button;
+
   border: 2px solid transparent;
 
   * {

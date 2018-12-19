@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   devtool: 'source-map',
@@ -38,32 +40,29 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: 'hextech-[local]-[hash:base64:5]',
-                minimize: true
+        use: [
+          { loader: devMode ? 'style-loader' : ExtractTextPlugin.loader },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+              localIdentName: 'hextech-[local]-[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins () {
+                return [
+                  require('autoprefixer'), // eslint-disable-line
+                  require('postcss-input-style') // eslint-disable-line
+                ];
               }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins () {
-                  return [
-                    require('autoprefixer'), // eslint-disable-line
-                    require('postcss-input-style') // eslint-disable-line
-                  ];
-                }
-              }
-            },
-            { loader: 'sass-loader' }
-          ]
-        })
+            }
+          },
+          { loader: 'sass-loader' }
+        ]
       },
 
       { test: /\.otf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-otf' },
@@ -86,15 +85,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
 
-    // Minify without warning messages and IE8 support
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      },
-      sourceMap: 'source-map'
-
-    }),
     new ExtractTextPlugin({ filename: 'style.css', allChunks: true })
   ],
 

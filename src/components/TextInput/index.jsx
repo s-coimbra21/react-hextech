@@ -29,8 +29,8 @@ export default class TextInput extends PureComponent {
     placeholder: undefined,
     hideClear: false,
     children: undefined,
-    onBlur: () => false,
-    onChange: () => false
+    onBlur: () => {},
+    onChange: () => {}
   }
 
   handleChange = evt => {
@@ -59,7 +59,8 @@ export default class TextInput extends PureComponent {
     const {
       className,
       inputClassName,
-      tabIndex, disabled,
+      tabIndex,
+      disabled,
       value,
       type,
       placeholder,
@@ -67,7 +68,7 @@ export default class TextInput extends PureComponent {
       children
     } = this.props;
 
-    const showClear = hideClear ? false : value !== '';
+    const showClear = !hideClear && value !== '';
 
     return (
       <div className={cx(style.input, disabled && style.disabled, className)}>

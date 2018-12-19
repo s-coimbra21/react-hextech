@@ -3,22 +3,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import withOptions from '../../util/withOptions';
-
 import Option from '../RadioOption';
 
 import style from './index.scss';
 
 let instanceId = 0;
 
-/**
- * RadioInput Component
- *
- * @export
- * @class RadioInput
- * @extends {PureComponent}
- */
-@withOptions
-export default class RadioInput extends PureComponent {
+class RadioInput extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
     disabled: PropTypes.bool,
@@ -62,12 +53,13 @@ export default class RadioInput extends PureComponent {
   }
 
   render () {
-    const { options, className, disabled, value, label } = this.props;
+    const {
+      options, className, disabled, value, label
+    } = this.props;
 
     return (
       <div role="radiogroup" aria-labelledby={label} className={cx(style.radioInput, className)}>
-        {options.map((o, i) =>
-          <Option
+        {options.map((o, i) => <Option
             key={`${this.instanceId}${o.label}`}
             name={`group-${this.instanceId}-option`}
             checked={o.value === value}
@@ -82,3 +74,5 @@ export default class RadioInput extends PureComponent {
     );
   }
 }
+
+export default withOptions(RadioInput);

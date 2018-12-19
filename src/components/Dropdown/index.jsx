@@ -16,8 +16,7 @@ let instanceId = 1;
  * Receives options in a array of objects with value and label properties
  * value should be present in one of the options' value property
  */
-@withOptions
-export default class Dropdown extends PureComponent {
+class Dropdown extends PureComponent {
   static propTypes = {
     className: PropTypes.any,
     tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -230,3 +229,5 @@ export default class Dropdown extends PureComponent {
     );
   }
 }
+
+export default withOptions(Dropdown);

@@ -1,0 +1,16 @@
+@mixin button {
+  display: inline-block;
+  position: relative;
+  font-family: 'Beaufort', 'Arial';
+  text-transform: uppercase;
+  outline: none;
+  color: $lcu-gold-medium;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  padding: 9px 21px;
+  cursor: pointer;
+  line-height: 1;
+  box-shadow: 0 0 1px 1px #010A13, inset 0 0 1px 1px #010A13;
+  background: #1E2328;
+}
