@@ -13,5 +13,8 @@
       }
     ]
   ],
-  "plugins": ["@babel/plugin-proposal-class-properties"]
+  "plugins": [
+    ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ],
+    "@babel/plugin-proposal-class-properties"
+  ]
 }

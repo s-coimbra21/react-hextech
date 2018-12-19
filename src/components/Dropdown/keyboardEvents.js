@@ -1,12 +1,10 @@
 export function handleArrowKeyNavigation(next) {
-  const aux = next ? 1 : -1; // if it's next or previous
-
   const { options } = this.props;
   const { focusedOption } = this.state;
 
   const currIdx = options.findIndex(o => o === focusedOption);
 
-  const nextIdx = currIdx + aux;
+  const nextIdx = currIdx + next;
 
   this.navigateToOption(nextIdx);
 }
@@ -15,7 +13,9 @@ export function executeStringSearch(tryNext, start = 0) {
   clearTimeout(this.searchTimeout);
 
   const { options } = this.props;
-  const { focusedOption, focusedIdx } = this.state;
+  const { focusedOption } = this.state;
+
+  const focusedIdx = options.findIndex(o => o === focusedOption);
 
   let startIdx = start;
 
@@ -23,34 +23,30 @@ export function executeStringSearch(tryNext, start = 0) {
     startIdx = focusedIdx + 1;
   }
 
-  let nextFocused = focusedOption;
+  let nextFocusedIdx = focusedIdx;
 
   for (let i = startIdx; i < options.length; i += 1) {
     const label = options[i].hextech__label;
     if (tryNext && label.startsWith(this.searchString[0])) {
-      nextFocused = options[i];
+      nextFocusedIdx = i;
       break;
     } else if (label.startsWith(this.searchString)) {
-      nextFocused = options[i];
+      nextFocusedIdx = i;
       break;
     }
   }
 
-  if (focusedOption !== nextFocused) {
-    this.handleOptionFocus(nextFocused);
+  if (focusedOption !== options[nextFocusedIdx]) {
+    this.navigateToOption(nextFocusedIdx);
   } else if (tryNext) {
-    for (let i = 0; i < startIdx; i += 1) {
-      const label = options[i].hextech__label;
-      if (label.startsWith(this.searchString[0])) {
-        this.handleOptionFocus(options[i]);
-        break;
-      }
-    }
+    this.navigateToOption(
+      options.findIndex(o => o.hextech__label.startsWith(this.searchString[0]))
+    );
   }
 
   this.searchTimeout = setTimeout(() => {
     this.searchString = '';
-  }, 500);
+  }, 1000);
 }
 
 const shouldHandleKey = ({ keyCode, ctrlKey, metaKey, altKey }) => {
@@ -70,8 +66,7 @@ export function handleTextSearch(evt) {
 
   const lastTyped = String.fromCharCode(evt.keyCode).toLowerCase();
   const shouldTryNext =
-    this.searchString.search(new RegExp(`^[${lastTyped}\\${lastTyped}]+$`)) !==
-    -1;
+    this.searchString[this.searchString.length - 1] === lastTyped;
 
   this.searchString += lastTyped;
 
@@ -89,18 +84,17 @@ export function handleKeyDown(evt) {
 
   switch (evt.key) {
     case 'Tab':
-      return this.handleChange(this.state.focusedOption);
     case 'Enter':
-      this.handleChange(this.state.focusedOption);
-      break;
+      return this.handleChange(this.state.focusedOption);
     case ' ':
       this.handleToggle(true);
       break;
     case 'Escape':
-      return this.handleChange(this.state.focusedOption);
+      this.handleToggle(false);
+      break;
     case 'ArrowUp':
     case 'ArrowDown':
-      this.handleArrowKeyNavigation(evt.key === 'ArrowDown');
+      this.handleArrowKeyNavigation(evt.key === 'ArrowDown' ? 1 : -1);
       break;
     case 'End':
       this.navigateToOption(options.length);

@@ -4,12 +4,12 @@ import cx from 'classnames';
 
 import withOptions from '../../util/withOptions';
 
-import style from './index.scss';
-import Arrow from './Arrow.jsx';
+import Wrapper from './components/Wrapper';
+import Control from './components/Control';
+import Menu from './components/Menu';
+import Option from './components/Option';
 
 import * as keyboardEventHandlers from './keyboardEvents';
-
-let instanceId = 1;
 
 /**
  * LoL UIKit Dropdown
@@ -22,36 +22,31 @@ class Dropdown extends PureComponent {
     tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     disabled: PropTypes.bool,
     value: PropTypes.any,
-    expanded: PropTypes.bool,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onToggle: PropTypes.func,
     options: PropTypes.array
-  }
+  };
 
   static defaultProps = {
     className: undefined,
     tabIndex: '0',
     disabled: false,
     value: undefined,
-    expanded: undefined,
     onChange: Function.prototype,
     onBlur: Function.prototype,
     onToggle: Function.prototype,
     options: []
-  }
+  };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-
-    instanceId += 1;
-    this.instanceId = instanceId;
 
     this.searchString = '';
 
     this.state = {
       isOpen: false,
-      focusedOption: undefined,
+      focusedOption: props.value,
       focusedIdx: -1
     };
 
@@ -60,88 +55,89 @@ class Dropdown extends PureComponent {
     });
   }
 
-  componentDidMount () {
+  focused = React.createRef();
+
+  componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick, false);
     document.addEventListener('touchend', this.handleDocumentClick, false);
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    const { isOpen, focusedOption } = this.state;
-    const { menu, focused } = this; // DOM refs
-
-    if (focusedOption === prevState.focusedOption) return;
-
-    if (isOpen && (menu.scrollTop > focused.offsetTop)) {
-      menu.scrollTop = focused.offsetTop;
-    }
-
-    if (isOpen && (focused.getBoundingClientRect().bottom > menu.getBoundingClientRect().bottom)) {
-      menu.scrollTop = (focused.offsetTop + focused.offsetHeight) - menu.clientHeight;
-    }
-  }
-
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearTimeout(this.searchTimeout);
     document.removeEventListener('click', this.handleDocumentClick, false);
     document.removeEventListener('touchend', this.handleDocumentClick, false);
   }
 
+  componentDidUpdate(_, prevState) {
+    const { isOpen, focusedOption } = this.state;
+    const { menu, focused } = this; // DOM refs
+
+    // only update if necessary
+    if (focusedOption === prevState.focusedOption) {
+      if (isOpen === prevState.isOpen) return;
+    }
+    if (!focused.current) return;
+
+    if (isOpen && menu.scrollTop > focused.current.offsetTop) {
+      menu.scrollTop = focused.current.offsetTop;
+    }
+
+    if (
+      isOpen &&
+      focused.current.getBoundingClientRect().bottom >
+        menu.getBoundingClientRect().bottom
+    ) {
+      menu.scrollTop =
+        focused.current.offsetTop +
+        focused.current.offsetHeight -
+        menu.clientHeight;
+    }
+  }
+
   handleChange = nextOption => {
     const { onChange, value } = this.props;
 
-    if (nextOption.value !== value) {
-      onChange(nextOption.value);
+    this.handleOptionFocus(nextOption);
+    if (nextOption !== value) {
+      onChange(nextOption);
     }
 
     this.handleToggle(false);
-  }
+  };
 
-  handleBlur = evt => {
-    const { onBlur, value } = this.props;
-    const { focusedOption } = this.state;
+  handleBlur = () => {
+    const { onBlur } = this.props;
 
-    if (focusedOption !== value) {
-      // this should never happen
-      this.handleChange(focusedOption);
-    }
-
-    onBlur && onBlur(evt);
-  }
+    onBlur();
+  };
 
   handleDocumentClick = evt => {
-    if (!this.root.contains(evt.target) && this.state.isOpen === true) {
+    if (!this.root.contains(evt.target)) {
       this.handleToggle(false);
     }
-  }
+  };
 
-  handleToggle = toggled => {
-    const { onToggle, expanded } = this.props;
-    let nextOpen = toggled;
+  handleToggle = nextOpen => {
+    const { onToggle } = this.props;
 
     if (nextOpen === this.state.isOpen) return;
-
-    if (nextOpen !== false && nextOpen !== true) {
-      nextOpen = !this.state.isOpen || !expanded;
-    }
 
     this.setState({
       isOpen: nextOpen
     });
 
-    onToggle && onToggle(nextOpen);
-  }
+    onToggle(nextOpen);
+  };
 
   handleOptionFocus = option => {
-    const { options } = this.props;
-
-    const idx = options.findIndex(o => o === option);
-
-    this.setState({ focusedOption: option, focusedIdx: idx });
-  }
+    this.setState({ focusedOption: option });
+  };
 
   navigateToOption = index => {
     const { options } = this.props;
     const { isOpen } = this.state;
+
+    if (typeof index !== 'number') return;
 
     let nextIdx = index;
 
@@ -150,47 +146,38 @@ class Dropdown extends PureComponent {
 
     if (!isOpen) {
       this.handleChange(options[nextIdx]);
-    } else if (!isOpen && (nextIdx !== index)) {
-      return; // if the select is closed, don't loop over
+    } else if (nextIdx !== index) {
+      return; // if the select is open, don't loop over
     }
 
     this.handleOptionFocus(options[nextIdx]);
-  }
+  };
 
-  renderOption = (option, isSelected, isFocused = false) => {
+  renderOption = option => {
     const key = option.key || option.label;
-    const ref = isFocused ? e => { this.focused = e; } : undefined;
-    const classnames = [
-      style.option,
-      isSelected && style.selected,
-      isFocused && style.focused
-    ];
+    const isSelected = this.props.value === option;
+    const isFocused = this.state.focusedOption === option;
 
     return (
-      <div
-        ref={ref}
-        key={`${key}-${this.instanceId}`}
+      <Option
+        ref={isFocused ? this.focused : undefined}
+        key={key}
         role="option"
         aria-selected={isSelected}
-        className={cx(classnames)}
+        selected={isSelected}
+        focused={isFocused}
         onClick={() => this.handleChange(option)}
         onMouseEnter={() => this.handleOptionFocus(option)}
       >
         {option.label}
-      </div>
+      </Option>
     );
-  }
+  };
 
-  render () {
-    const { options, className, tabIndex, value, expanded, disabled } = this.props;
-    const { isOpen: isOpenState, focusedOption } = this.state;
-    const isOpen = disabled ? false : (!!isOpenState || !!expanded);
-
-    let selected = focusedOption;
-
-    if (!selected || disabled) {
-      selected = options.find(o => o.value === value);
-    }
+  render() {
+    const { options, className, tabIndex, value, disabled } = this.props;
+    const { isOpen: isOpenState } = this.state;
+    const isOpen = disabled ? false : !!isOpenState;
 
     let eventHandlers = {
       onClick: () => this.handleToggle(!isOpen),
@@ -203,29 +190,23 @@ class Dropdown extends PureComponent {
     }
 
     return (
-      <div
-        ref={e => { this.root = e; }}
-        tabIndex={disabled ? '-1' : tabIndex}
-        role="combobox"
-        aria-expanded={isOpen}
-        aria-disabled={disabled}
-        className={cx(style.dropdown, disabled && style.disabled, className)}
+      <Wrapper
+        ref={e => {
+          this.root = e;
+        }}
+        {...{ disabled, isOpen, className, tabIndex }}
         {...eventHandlers}
       >
-        <div className={cx(style.control, isOpen && style.active)}>
-          {selected ? selected.label : 'Select...'}
-          <Arrow className={style.arrow} />
-        </div>
-        <div
-          ref={e => { this.menu = e; }}
-          role="listbox"
-          aria-hidden={!isOpen}
-          className={cx(style.options, { [style.hidden]: !isOpen })}
+        <Control value={value} />
+        <Menu
+          ref={e => {
+            this.menu = e;
+          }}
+          hidden={!isOpen}
         >
-          {!disabled &&
-            options.map(o => this.renderOption(o, value === o.value, focusedOption === o))}
-        </div>
-      </div>
+          {options.map(this.renderOption)}
+        </Menu>
+      </Wrapper>
     );
   }
 }

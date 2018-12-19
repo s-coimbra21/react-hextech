@@ -16,9 +16,7 @@ module.exports = {
     }
   },
 
-  entry: [
-    './src/index.js'
-  ],
+  entry: ['./src/index.js'],
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss']
@@ -53,7 +51,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins () {
+              plugins() {
                 return [
                   require('autoprefixer'), // eslint-disable-line
                   require('postcss-input-style') // eslint-disable-line
@@ -65,10 +63,22 @@ module.exports = {
         ]
       },
 
-      { test: /\.otf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-otf' },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/octet-stream' },
+      {
+        test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?mimetype=application/font-otf'
+      },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?mimetype=application/font-woff'
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?mimetype=application/octet-stream'
+      },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'svg-url-loader' },
       { test: /\.png$/, loader: 'url-loader' },

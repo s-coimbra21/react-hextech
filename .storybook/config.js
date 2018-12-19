@@ -16,6 +16,7 @@ setOptions({
 });
 
 function loadStories() {
+  require('../stories/setup.js');
   require('../stories/Button.js');
   require('../stories/Checkbox.js');
   require('../stories/Dropdown.js');

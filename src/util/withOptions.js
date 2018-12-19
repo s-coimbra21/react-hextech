@@ -5,20 +5,25 @@ import { createSelector } from 'reselect';
 const optionsSelector = props => props.options;
 
 function normalizeOption(option) {
-  return Object.assign({}, ...option, {
-    value: option.value || option,
-    label: option.label || option,
-    hextech__label: deburr(option.label || option).toLowerCase()
-  });
+  return Object.assign(
+    {},
+    {
+      value: option.value || option,
+      label: option.label || option,
+      // used for searching
+      hextech__label: deburr(option.label || option).toLowerCase()
+    }
+  );
 }
 
-const normalizeOptions = createSelector(
-  optionsSelector,
-  options => {
-    if (!options || !options.map) return options;
-    return options.map(normalizeOption);
-  }
-);
+const createNormalizeOptions = () =>
+  createSelector(
+    optionsSelector,
+    options => {
+      if (!options || !options.map) return options;
+      return options.map(normalizeOption);
+    }
+  );
 
 export default Cmp =>
   class extends PureComponent {
@@ -28,7 +33,15 @@ export default Cmp =>
       options: []
     };
 
+    constructor(props) {
+      super(props);
+
+      this.normalizeOptions = createNormalizeOptions();
+    }
+
     render() {
-      return <Cmp {...this.props} options={normalizeOptions(this.props)} />;
+      return (
+        <Cmp {...this.props} options={this.normalizeOptions(this.props)} />
+      );
     }
   };
