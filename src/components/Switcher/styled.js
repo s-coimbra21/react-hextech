@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
+import { t } from '@theme';
+
 export const Bar = styled.div`
   height: 2px;
   margin-top: -2px;
   transition: transform 0.4s ease, width 0.2s ease;
-  background: #77592c;
+  background: ${t.inputBorder};
 
   transform: ${({ x = 0 }) => `translateX(${x}px)`};
   width: ${({ width = 0 }) => width}px;
@@ -23,12 +25,12 @@ export const Li = styled.li`
   list-style: none;
   text-transform: capitalize;
   padding: 20px 14px;
-  color: ${({ active }) => (active ? '#f0e6d3' : '#ccbd93')};
+  color: ${({ active }) => (active ? t.textLight : t.goldMedium)};
   transition: color 0.4s ease;
   letter-spacing: 0.2px;
 
   :hover {
-    color: #f0e6d3;
+    color: ${t.textLight};
   }
 `;
 
