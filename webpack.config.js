@@ -1,6 +1,15 @@
+require('@babel/register')({
+  only: [/theme\.js/],
+  babelrc: false,
+  configFile: false,
+  presets: ['@babel/preset-env'],
+});
+
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('mini-css-extract-plugin');
+
+const replacements = require('./src/theme').replacements;
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -20,6 +29,11 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
+    alias: {
+      '@utils': path.resolve(__dirname, 'src', 'utils'),
+      '@assets': path.resolve(__dirname, 'src', 'assets'),
+      '@theme': path.resolve(__dirname, 'src', 'theme.js'),
+    },
   },
 
   output: {
@@ -33,7 +47,13 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        use: [
+          'babel-loader',
+          {
+            loader: 'string-replace-loader',
+            options: { multiple: replacements },
+          },
+        ],
         exclude: /node_modules/,
       },
       {

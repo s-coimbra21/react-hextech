@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { v } from '@utils';
+
 import Control from './Control';
 import Arrow from './Arrow';
 
@@ -11,7 +13,7 @@ const disabled = css`
   ${Control} {
     border-image: none;
     border-color: ${({ theme }) => theme.hextech.textDisabled};
-    background-color: ${({ theme }) => theme.hextech.bgDisabled};
+    background-color: ${v('lightDark')};
 
     ${Arrow} {
       fill: ${({ theme }) => theme.hextech.textDisabled};

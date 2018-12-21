@@ -8,7 +8,7 @@ const Switcher = stateful(BaseSwitcher);
 
 const options = ['Jinx', 'Leona', 'Renekton', 'Quinn'].map(label => ({
   label,
-  value: label
+  value: label,
 }));
 
 storiesOf('Switcher', module).add('normal', () => (

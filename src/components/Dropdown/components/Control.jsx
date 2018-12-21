@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import Arrow from './Arrow';
 
 const background = css`
-  ${({ theme }) => theme.hextech.bgDark}
+  ${({ theme }) => theme.hextech.dark}
 `;
 
 const active = css`

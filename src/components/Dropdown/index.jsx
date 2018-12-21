@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import withOptions from '../../util/withOptions';
+import { withOptions } from '@utils';
 
 import Wrapper from './components/Wrapper';
 import Control from './components/Control';

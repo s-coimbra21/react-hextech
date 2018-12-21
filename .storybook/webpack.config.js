@@ -1,63 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
-  devtool: 'source-map',
+const config = require('../webpack.config');
 
-  resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss']
-  },
+delete config.externals;
+delete config.entry;
+delete config.output;
 
-  module: {
-    rules: [
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      {
-        test: /\.scss$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              localIdentName: 'hextech-[local]-[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins () {
-                return [
-                  require('autoprefixer'), // eslint-disable-line
-                  require('postcss-input-style') // eslint-disable-line
-                ];
-              }
-            }
-          },
-          { loader: 'sass-loader' }
-        ]
-      },
+const devMode = process.env.NODE_ENV !== 'production';
 
-      { test: /\.otf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-otf' },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'svg-url-loader' },
-      { test: /\.png$/, loader: 'url-loader' },
-      { test: /\.jpg$/, loader: 'url-loader' },
-      { test: /\.webm/, loader: 'file-loader' },
-      { test: /\.ogg/, loader: 'file-loader' }
-    ]
-  },
+const plugins = [
+  new webpack.optimize.OccurrenceOrderPlugin(),
 
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(
+      devMode ? 'development' : 'production'
+    ),
+  }),
+];
 
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    })
-  ],
+config.plugins = plugins;
 
-  target: 'web'
-};
+module.exports = config;

@@ -26,6 +26,10 @@ export const Li = styled.li`
   color: ${({ active }) => (active ? '#f0e6d3' : '#ccbd93')};
   transition: color 0.4s ease;
   letter-spacing: 0.2px;
+
+  :hover {
+    color: #f0e6d3;
+  }
 `;
 
 export const Wrapper = styled.div`

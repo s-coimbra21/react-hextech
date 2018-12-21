@@ -25,6 +25,7 @@ setOptions({
 function loadStories() {
   require('../stories/Button.js');
   require('../stories/Checkbox.js');
+  require('../stories/Card.js');
   require('../stories/Dropdown.js');
   require('../stories/Switcher.js');
   require('../stories/TextInput.js');
