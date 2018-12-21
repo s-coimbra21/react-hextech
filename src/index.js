@@ -24,5 +24,5 @@ export {
   RadioInput,
   SliderInput,
   RuneBuilder,
-  stateful
+  stateful,
 };

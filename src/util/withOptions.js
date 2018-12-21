@@ -11,26 +11,24 @@ function normalizeOption(option) {
       value: option.value || option,
       label: option.label || option,
       // used for searching
-      hextech__label: deburr(option.label || option).toLowerCase()
-    }
+      hextech__label: deburr(option.label || option).toLowerCase(),
+    },
   );
 }
 
-const createNormalizeOptions = () =>
-  createSelector(
-    optionsSelector,
-    options => {
-      if (!options || !options.map) return options;
-      return options.map(normalizeOption);
-    }
-  );
+const createNormalizeOptions = () => createSelector(
+  optionsSelector,
+  options => {
+    if (!options || !options.map) return options;
+    return options.map(normalizeOption);
+  },
+);
 
-export default Cmp =>
-  class extends PureComponent {
+export default Cmp => class extends PureComponent {
     static displayName = `withOptions(${Cmp.displayName})`;
 
     static defaultProps = {
-      options: []
+      options: [],
     };
 
     constructor(props) {
@@ -40,8 +38,6 @@ export default Cmp =>
     }
 
     render() {
-      return (
-        <Cmp {...this.props} options={this.normalizeOptions(this.props)} />
-      );
+      return <Cmp {...this.props} options={this.normalizeOptions(this.props)} />;
     }
-  };
+};

@@ -16,7 +16,7 @@ export default class TextInput extends PureComponent {
     hideClear: PropTypes.bool,
     children: PropTypes.node,
     onBlur: PropTypes.func,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -30,7 +30,7 @@ export default class TextInput extends PureComponent {
     hideClear: false,
     children: undefined,
     onBlur: () => {},
-    onChange: () => {}
+    onChange: () => {},
   };
 
   handleChange = evt => {
@@ -65,7 +65,7 @@ export default class TextInput extends PureComponent {
       type,
       placeholder,
       hideClear,
-      children
+      children,
     } = this.props;
 
     const showClear = !hideClear && value !== '';

@@ -11,9 +11,9 @@ const theme = {
   inputBorder: 'rgb(47.1%, 35.3%, 15.7%)',
 
   bgDark: 'rgb(17, 22, 29)',
-  bgDisabled: 'rgb(11.8%, 13.7%, 15.7%)'
+  bgDisabled: 'rgb(11.8%, 13.7%, 15.7%)',
 };
 
 export default {
-  hextech: theme
+  hextech: theme,
 };

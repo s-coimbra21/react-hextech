@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default props => (
+const Handle = props => (
   <svg
     {...props}
     version="1.1"
@@ -100,3 +100,5 @@ export default props => (
     </g>
   </svg>
 );
+
+export default Handle;

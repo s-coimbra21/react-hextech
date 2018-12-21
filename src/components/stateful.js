@@ -7,19 +7,19 @@ export default Cmp =>
 
     static propTypes = {
       hocClassName: PropTypes.any,
-      onChange: PropTypes.func
+      onChange: PropTypes.func,
     };
 
     static defaultProps = {
       hocClassName: undefined,
-      onChange: undefined
+      onChange: undefined,
     };
 
     constructor(props) {
       super(props);
 
       this.state = {
-        value: props.initialValue
+        value: props.initialValue,
       };
     }
 

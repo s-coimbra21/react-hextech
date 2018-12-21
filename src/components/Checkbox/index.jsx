@@ -55,9 +55,7 @@ export default class Checkbox extends PureComponent {
   };
 
   render() {
-    const {
-      className, value, label, children,
-    } = this.props;
+    const { className, value, label, children } = this.props;
     const { disabled } = this.props;
 
     let eventHandlers = {
@@ -70,7 +68,11 @@ export default class Checkbox extends PureComponent {
     }
 
     const isChecked = !!value;
-    const classes = [isChecked && style.checked, disabled && style.disabled, className];
+    const classes = [
+      isChecked && style.checked,
+      disabled && style.disabled,
+      className,
+    ];
 
     return (
       <div

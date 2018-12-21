@@ -25,7 +25,7 @@ const selected = css`
 
 const Option = styled.div.attrs(props => ({
   role: 'options',
-  'aria-selected': props.isSelected
+  'aria-selected': props.isSelected,
 }))`
   position: relative;
   cursor: pointer;

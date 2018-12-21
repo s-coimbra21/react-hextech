@@ -24,7 +24,7 @@ class Dropdown extends PureComponent {
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onToggle: PropTypes.func,
-    options: PropTypes.array
+    options: PropTypes.array,
   };
 
   static defaultProps = {
@@ -35,7 +35,7 @@ class Dropdown extends PureComponent {
     onChange: Function.prototype,
     onBlur: Function.prototype,
     onToggle: Function.prototype,
-    options: []
+    options: [],
   };
 
   constructor(props) {
@@ -46,7 +46,7 @@ class Dropdown extends PureComponent {
     this.state = {
       isOpen: false,
       focusedOption: props.value,
-      focusedIdx: -1
+      focusedIdx: -1,
     };
 
     Object.keys(keyboardEventHandlers).forEach(key => {
@@ -122,7 +122,7 @@ class Dropdown extends PureComponent {
     if (nextOpen === this.state.isOpen) return;
 
     this.setState({
-      isOpen: nextOpen
+      isOpen: nextOpen,
     });
 
     onToggle(nextOpen);
@@ -180,7 +180,7 @@ class Dropdown extends PureComponent {
       tabIndex,
       value,
       disabled,
-      transparent
+      transparent,
     } = this.props;
     const { isOpen: isOpenState } = this.state;
     const isOpen = disabled ? false : !!isOpenState;
@@ -188,7 +188,7 @@ class Dropdown extends PureComponent {
     let eventHandlers = {
       onClick: () => this.handleToggle(!isOpen),
       onKeyDown: this.handleKeyDown,
-      onBlur: this.props.onBlur
+      onBlur: this.props.onBlur,
     };
 
     if (disabled) {

@@ -2,9 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withPropsOnChange } from 'recompose';
 
-import List from './components/List';
-import Item from './components/Item';
-import Bar from './components/Bar';
+import { List, Bar } from './styled';
+import { Item } from './components';
 
 class Switcher extends PureComponent {
   static propTypes = {
@@ -13,13 +12,13 @@ class Switcher extends PureComponent {
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    getActiveItem: PropTypes.func
+    getActiveItem: PropTypes.func,
   };
 
   state = {
     x: 0,
     width: 0,
-    renderBar: false
+    renderBar: false,
   };
 
   list = React.createRef();
@@ -49,7 +48,7 @@ class Switcher extends PureComponent {
 
     this.setState({
       x: selectedElement.offsetLeft - list.offsetLeft,
-      width: selectedElement.clientWidth
+      width: selectedElement.clientWidth,
     });
   }
 
@@ -96,6 +95,6 @@ export { Item };
 export default withPropsOnChange(
   ['children', 'items'],
   ({ children, items }) => ({
-    items: items || React.Children.map(children, child => child.props)
+    items: items || React.Children.map(children, child => child.props),
   })
 )(Switcher);

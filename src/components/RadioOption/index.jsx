@@ -12,7 +12,7 @@ const RadioOption = ({
   checked,
   disabled,
   onChange,
-  onBlur
+  onBlur,
 }) => (
   <div
     className={cx(
@@ -64,7 +64,7 @@ RadioOption.propTypes = {
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 RadioOption.defaultProps = {
@@ -74,7 +74,7 @@ RadioOption.defaultProps = {
   onChange: () => false,
   label: undefined,
   checked: false,
-  disabled: false
+  disabled: false,
 };
 
 export default RadioOption;

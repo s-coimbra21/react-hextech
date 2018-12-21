@@ -22,7 +22,7 @@ const disabled = css`
 const Wrapper = styled.div.attrs(({ isDisabled, isOpen }) => ({
   role: 'combobox',
   'aria-expanded': isOpen,
-  'aria-disabled': isDisabled
+  'aria-disabled': isDisabled,
 }))`
   display: block;
   position: relative;

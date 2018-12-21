@@ -17,7 +17,7 @@ export default class Frame extends PureComponent {
     options: PropTypes.array,
     title: PropTypes.string,
     message: PropTypes.string,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   static defaultProps = {
@@ -27,12 +27,12 @@ export default class Frame extends PureComponent {
       top: true,
       bottom: true,
       left: false,
-      right: false
+      right: false,
     },
     options: undefined,
     title: undefined,
     message: undefined,
-    children: undefined
+    children: undefined,
   };
 
   render() {
@@ -43,7 +43,7 @@ export default class Frame extends PureComponent {
       options,
       title,
       message,
-      children
+      children,
     } = this.props;
     return (
       <div className={cx(style.frame, className)}>

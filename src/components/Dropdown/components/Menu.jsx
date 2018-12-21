@@ -8,7 +8,7 @@ const visible = css`
 
 const Menu = styled.div.attrs(({ isHidden }) => ({
   role: 'listbox',
-  'aria-hidden': isHidden
+  'aria-hidden': isHidden,
 }))`
   position: absolute;
   transition: max-height 0.4s ease, opacity 0.2s ease;

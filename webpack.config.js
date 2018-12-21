@@ -12,21 +12,21 @@ module.exports = {
       commonjs: 'react',
       commonjs2: 'react',
       amd: 'react',
-      root: 'React'
-    }
+      root: 'React',
+    },
   },
 
   entry: ['./src/index.js'],
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss'],
   },
 
   output: {
     path: path.join(__dirname, 'lib'),
     filename: 'index.js',
     library: 'reactHextech',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
 
   module: {
@@ -34,7 +34,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(css|scss)$/,
@@ -45,8 +45,8 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 2,
-              localIdentName: 'hextech-[local]-[hash:base64:5]'
-            }
+              localIdentName: 'hextech-[local]-[hash:base64:5]',
+            },
           },
           {
             loader: 'postcss-loader',
@@ -54,49 +54,49 @@ module.exports = {
               plugins() {
                 return [
                   require('autoprefixer'), // eslint-disable-line
-                  require('postcss-input-style') // eslint-disable-line
+                  require('postcss-input-style'), // eslint-disable-line
                 ];
-              }
-            }
+              },
+            },
           },
-          { loader: 'sass-loader' }
-        ]
+          { loader: 'sass-loader' },
+        ],
       },
 
       {
         test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?mimetype=application/font-otf'
+        loader: 'url-loader?mimetype=application/font-otf',
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?mimetype=application/font-woff'
+        loader: 'url-loader?mimetype=application/font-woff',
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?mimetype=application/font-woff'
+        loader: 'url-loader?mimetype=application/font-woff',
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?mimetype=application/octet-stream'
+        loader: 'url-loader?mimetype=application/octet-stream',
       },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'svg-url-loader' },
       { test: /\.png$/, loader: 'url-loader' },
       { test: /\.jpg$/, loader: 'url-loader' },
       { test: /\.webm/, loader: 'file-loader' },
-      { test: /\.ogg/, loader: 'file-loader' }
-    ]
+      { test: /\.ogg/, loader: 'file-loader' },
+    ],
   },
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
 
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 
-    new ExtractTextPlugin({ filename: 'style.css', allChunks: true })
+    new ExtractTextPlugin({ filename: 'style.css', allChunks: true }),
   ],
 
-  target: 'web'
+  target: 'web',
 };

@@ -15,7 +15,7 @@ export default class Button extends PureComponent {
     label: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.node,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -23,7 +23,7 @@ export default class Button extends PureComponent {
     tabIndex: '0',
     label: undefined,
     disabled: false,
-    children: undefined
+    children: undefined,
   };
 
   constructor(props) {
@@ -32,7 +32,7 @@ export default class Button extends PureComponent {
     this.state = {
       isHover: false,
       isMouseDown: false,
-      isClick: false
+      isClick: false,
     };
   }
 
@@ -88,7 +88,7 @@ export default class Button extends PureComponent {
     const classes = [
       isHover ? style.hover : style.idle,
       isMouseDown && style.down,
-      isClick && style.click
+      isClick && style.click,
     ];
 
     return (

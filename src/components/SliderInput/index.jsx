@@ -9,7 +9,7 @@ import Handle from './Handle';
 import style from './index.scss';
 
 const erd = elementResizeDetector({
-  strategy: 'scroll'
+  strategy: 'scroll',
 });
 
 export default class SliderInput extends PureComponent {
@@ -25,7 +25,7 @@ export default class SliderInput extends PureComponent {
     tooltip: PropTypes.bool,
     // Events
     onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
   };
 
   static defaultProps = {
@@ -37,7 +37,7 @@ export default class SliderInput extends PureComponent {
     disabled: false,
     tooltip: false,
     onChange: Function.prototype,
-    onBlur: undefined
+    onBlur: undefined,
   };
 
   constructor(props) {
@@ -45,7 +45,7 @@ export default class SliderInput extends PureComponent {
 
     this.state = {
       tooltip: false,
-      width: 0
+      width: 0,
     };
   }
 
@@ -87,7 +87,7 @@ export default class SliderInput extends PureComponent {
       step,
       disabled,
       tooltip,
-      onBlur
+      onBlur,
     } = this.props;
     const width = this.state.width;
 
@@ -122,16 +122,16 @@ export default class SliderInput extends PureComponent {
 
     const tooltipStyle = {
       top,
-      left: tooltipOffset
+      left: tooltipOffset,
     };
 
     const handleStyle = {
-      left: handleOffset
+      left: handleOffset,
     };
 
     const mouseEvents = {
       onMouseEnter: this.handleMouseEnter,
-      onMouseLeave: this.handleMouseLeave
+      onMouseLeave: this.handleMouseLeave,
     };
 
     return (

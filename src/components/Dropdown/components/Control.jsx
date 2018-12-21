@@ -40,7 +40,7 @@ const transparentStyles = css`
 
 const Control = styled.div.attrs(({ value, isDisabled, tabIndex }) => ({
   children: [value ? value.label : 'Select...', <Arrow key={'arrow'} />],
-  tabIndex: isDisabled ? '-1' : tabIndex
+  tabIndex: isDisabled ? '-1' : tabIndex,
 }))`
   user-select: none;
   outline: none;

@@ -17,7 +17,7 @@ class RadioInput extends PureComponent {
     label: PropTypes.string,
     options: PropTypes.array,
     onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
   };
 
   static defaultProps = {
@@ -27,7 +27,7 @@ class RadioInput extends PureComponent {
     label: '',
     options: [],
     onChange: Function.prototype,
-    onBlur: Function.prototype
+    onBlur: Function.prototype,
   };
 
   constructor(props) {

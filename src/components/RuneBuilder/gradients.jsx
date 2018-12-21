@@ -1,5 +1,7 @@
 import React from 'react';
 
+/* eslint-disable */
+
 export default [
   /* Rune Slot */
   <linearGradient id="slotInner" x1="0" y1="0" x2="0" y2="1">
@@ -58,5 +60,5 @@ export default [
   >
     <stop offset="0" stopColor="#00030F" />
     <stop offset="1" stopColor="#2F323F" />
-  </linearGradient>
+  </linearGradient>,
 ];
