@@ -2,6 +2,7 @@ import Button from './components/Button';
 import ButtonGroup from './components/ButtonGroup';
 import Checkbox from './components/Checkbox';
 import Dropdown from './components/Dropdown';
+import Switcher from './components/Switcher';
 import Frame from './components/Frame';
 import TextInput from './components/TextInput';
 import RadioInput from './components/RadioInput';
@@ -17,6 +18,7 @@ export {
   ButtonGroup,
   Checkbox,
   Dropdown,
+  Switcher,
   Frame,
   TextInput,
   RadioInput,

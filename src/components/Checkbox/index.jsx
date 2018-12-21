@@ -4,7 +4,6 @@ import cx from 'classnames';
 
 import style from './index.scss';
 
-
 /**
  * <Checkbox />
  *
@@ -26,7 +25,7 @@ export default class Checkbox extends PureComponent {
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     onBlur: PropTypes.func,
-    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
@@ -38,28 +37,32 @@ export default class Checkbox extends PureComponent {
     onClick: () => false,
     onBlur: () => false,
     tabIndex: '0',
-    children: undefined
+    children: undefined,
   };
+
+  root = React.createRef();
 
   handleClick = evt => {
     const { value, onClick, onChange } = this.props;
     onClick(evt);
     onChange(!value);
-    this.test && this.test.blur(); // TODO: Investigate if this is too hacky
-  }
+    this.root.current && this.root.current.blur(); // TODO: Investigate if this is too hacky
+  };
 
   handleBlur = evt => {
     const { onBlur } = this.props;
     onBlur(evt);
-  }
+  };
 
-  render () {
-    const { className, value, label, children } = this.props;
+  render() {
+    const {
+      className, value, label, children,
+    } = this.props;
     const { disabled } = this.props;
 
     let eventHandlers = {
       onClick: this.handleClick,
-      onBlur: this.handleBlur
+      onBlur: this.handleBlur,
     };
 
     if (disabled) {
@@ -67,15 +70,11 @@ export default class Checkbox extends PureComponent {
     }
 
     const isChecked = !!value;
-    const classes = [
-      isChecked && style.checked,
-      disabled && style.disabled,
-      className
-    ];
+    const classes = [isChecked && style.checked, disabled && style.disabled, className];
 
     return (
       <div
-        ref={elem => { this.test = elem; }}
+        ref={this.root}
         role="checkbox"
         aria-checked={isChecked}
         className={cx(style.checkbox, classes)}

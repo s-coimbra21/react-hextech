@@ -17,7 +17,7 @@ export default class TextInput extends PureComponent {
     children: PropTypes.node,
     onBlur: PropTypes.func,
     onChange: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     className: undefined,
@@ -31,7 +31,7 @@ export default class TextInput extends PureComponent {
     children: undefined,
     onBlur: () => {},
     onChange: () => {}
-  }
+  };
 
   handleChange = evt => {
     evt.preventDefault();
@@ -39,23 +39,23 @@ export default class TextInput extends PureComponent {
     if (!disabled && onChange && onChange.call) {
       onChange(evt.target.value);
     }
-  }
+  };
 
   handleBlur = evt => {
     const { disabled, onBlur } = this.props;
     if (!disabled && onBlur && onBlur.call) {
       onBlur(evt);
     }
-  }
+  };
 
   handleClear = () => {
     const { onChange } = this.props;
     if (onChange && onChange.call) {
       onChange('');
     }
-  }
+  };
 
-  render () {
+  render() {
     const {
       className,
       inputClassName,

@@ -8,8 +8,9 @@
     "build": "webpack -p",
     "test": "jest --config jest.json",
     "test:coverage": "jest --config jest.json --coverage",
-    "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src/**/*.js",
+    "lint": "eslint --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src/**/*.js src/**/*.jsx",
     "dev": "start-storybook -p 9001 -c .storybook",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "export": "build-storybook -c .storybook -o docs"
   },
   "repository": {
@@ -44,7 +45,7 @@
     "@storybook/react": "^4.1.2",
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.0",
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.10.0",
@@ -89,6 +90,7 @@
     "element-resize-detector": "^1.1.11",
     "lodash.debounce": "^4.0.8",
     "lodash.deburr": "^4.1.0",
+    "recompose": "^0.30.0",
     "reselect": "^4.0.0"
   }
 }

@@ -8,7 +8,6 @@ import Button from '../Button';
 import style from './index.scss';
 
 export default class Frame extends PureComponent {
-
   static propTypes = {
     // Visual
     className: PropTypes.string,
@@ -36,8 +35,16 @@ export default class Frame extends PureComponent {
     children: undefined
   };
 
-  render () {
-    const { className, contentClassName, borders, options, title, message, children } = this.props;
+  render() {
+    const {
+      className,
+      contentClassName,
+      borders,
+      options,
+      title,
+      message,
+      children
+    } = this.props;
     return (
       <div className={cx(style.frame, className)}>
         <div className={style.contentWrapper}>
@@ -46,15 +53,19 @@ export default class Frame extends PureComponent {
             {!children && <p>{message}</p>}
             {children}
           </div>
-          {options && <ButtonGroup className={style.buttonGroup}>
-            {options.map(o => <Button key={`button_${o.label}`} {...o} />)}
-          </ButtonGroup>}
+          {options && (
+            <ButtonGroup className={style.buttonGroup}>
+              {options.map(o => (
+                <Button key={`button_${o.label}`} {...o} />
+              ))}
+            </ButtonGroup>
+          )}
         </div>
         <div
-          className={
-            cx(style.border,
-          ...Object.entries(borders).map(([s, v]) => v && style[s]))
-          }
+          className={cx(
+            style.border,
+            ...Object.entries(borders).map(([s, v]) => v && style[s])
+          )}
         />
       </div>
     );

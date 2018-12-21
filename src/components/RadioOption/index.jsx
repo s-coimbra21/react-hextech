@@ -4,9 +4,22 @@ import cx from 'classnames';
 
 import style from './index.scss';
 
-const RadioOption = ({ children, name, value, label, checked, disabled, onChange, onBlur }) => (
+const RadioOption = ({
+  children,
+  name,
+  value,
+  label,
+  checked,
+  disabled,
+  onChange,
+  onBlur
+}) => (
   <div
-    className={cx(style.radioOption, checked && style.checked, disabled && style.disabled)}
+    className={cx(
+      style.radioOption,
+      checked && style.checked,
+      disabled && style.disabled
+    )}
   >
     <input
       type="radio"
@@ -25,7 +38,12 @@ const RadioOption = ({ children, name, value, label, checked, disabled, onChange
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <linearGradient id="hextech-option-active" x1="100%" y1="100%" x2="0%">
+          <linearGradient
+            id="hextech-option-active"
+            x1="100%"
+            y1="100%"
+            x2="0%"
+          >
             <stop stopColor="#684e23" />
             <stop offset=".8" stopColor="#493915" />
           </linearGradient>

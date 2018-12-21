@@ -3,18 +3,49 @@ import styled, { css } from 'styled-components';
 
 import Arrow from './Arrow';
 
-const active = css`
-  background: rgba(30, 35, 40, 0.5);
-  color: #463714;
-  border: 1px solid #463714;
+const background = css`
+  ${({ theme }) => theme.hextech.bgDark}
 `;
 
-const Control = styled.div.attrs(({ value }) => ({
+const active = css`
+  color: #463714;
+  border: 1px solid #463714;
+  border-image: none;
+`;
+
+const focus = css`
+  background: linear-gradient(
+    to top,
+    rgba(88, 83, 66, 0.5),
+    rgba(30, 35, 40, 0.5)
+  );
+  border: 1px solid transparent;
+  border-image: linear-gradient(to top, #c89b3c, #f0e6d2) 1;
+`;
+
+const transparentStyles = css`
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  transition: all 0.2s ease;
+
+  ${props =>
+    props.isOpen &&
+    css`
+      border: 1px solid #453617;
+      border-bottom: none;
+      background: #010a13;
+    `}
+`;
+
+const Control = styled.div.attrs(({ value, isDisabled, tabIndex }) => ({
   children: [value ? value.label : 'Select...', <Arrow key={'arrow'} />],
-  disabled: true
+  tabIndex: isDisabled ? '-1' : tabIndex
 }))`
+  user-select: none;
+  outline: none;
+  background: ${background};
   padding: 10px 14px;
-  background-color: rgba(30, 35, 40, 0.5);
   border: 1px solid transparent;
   border-image: linear-gradient(
       to top,
@@ -28,10 +59,18 @@ const Control = styled.div.attrs(({ value }) => ({
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  ${props => props.active && active}
-  :active {
-    ${active}
+  :hover,
+  :focus {
+    ${({ isOpen, transparent }) => !isOpen && !transparent && focus}
+    ${({ isOpen, transparent }) => !isOpen && !transparent && focus}
   }
+
+  :active {
+    ${({ transparent }) => !transparent && active}
+  }
+
+  ${({ isOpen, transparent }) => isOpen && !transparent && active}
+  ${props => props.transparent && transparentStyles}
 `;
 
 export default Control;

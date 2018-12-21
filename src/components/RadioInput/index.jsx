@@ -18,7 +18,7 @@ class RadioInput extends PureComponent {
     options: PropTypes.array,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     className: undefined,
@@ -28,9 +28,9 @@ class RadioInput extends PureComponent {
     options: [],
     onChange: Function.prototype,
     onBlur: Function.prototype
-  }
+  };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     instanceId += 1;
@@ -43,23 +43,26 @@ class RadioInput extends PureComponent {
     if (nextValue !== value) {
       onChange(nextValue);
     }
-  }
+  };
 
   handleBlur = evt => {
     const { disabled, onBlur } = this.props;
     if (!disabled) {
       onBlur(evt);
     }
-  }
+  };
 
-  render () {
-    const {
-      options, className, disabled, value, label
-    } = this.props;
+  render() {
+    const { options, className, disabled, value, label } = this.props;
 
     return (
-      <div role="radiogroup" aria-labelledby={label} className={cx(style.radioInput, className)}>
-        {options.map((o, i) => <Option
+      <div
+        role="radiogroup"
+        aria-labelledby={label}
+        className={cx(style.radioInput, className)}
+      >
+        {options.map((o, i) => (
+          <Option
             key={`${this.instanceId}${o.label}`}
             name={`group-${this.instanceId}-option`}
             checked={o.value === value}
@@ -69,7 +72,8 @@ class RadioInput extends PureComponent {
             label={o.label}
             value={o.value}
             tabIndex={i > 0 ? -1 : 0}
-          />)}
+          />
+        ))}
       </div>
     );
   }

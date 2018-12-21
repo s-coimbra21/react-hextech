@@ -16,7 +16,7 @@ export default class Button extends PureComponent {
     disabled: PropTypes.bool,
     children: PropTypes.node,
     onClick: PropTypes.func.isRequired
-  }
+  };
 
   static defaultProps = {
     className: undefined,
@@ -24,9 +24,9 @@ export default class Button extends PureComponent {
     label: undefined,
     disabled: false,
     children: undefined
-  }
+  };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -36,11 +36,11 @@ export default class Button extends PureComponent {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener('mouseup', this.handleMouseUp, false);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener('mouseup', this.handleMouseUp, false);
   }
 
@@ -50,7 +50,7 @@ export default class Button extends PureComponent {
       this.playClickAnim();
       onClick && onClick.call && onClick(evt);
     }
-  }
+  };
 
   playClickAnim = () => {
     if (this.state.isClick) {
@@ -68,19 +68,21 @@ export default class Button extends PureComponent {
         }, 300);
       })
     );
-  }
+  };
 
   // TODO: might want to turn this into an actual state machine instead of this spaghetti
   handleMouseDown = () => this.setState({ isMouseDown: true });
+
   handleMouseUp = evt => {
     const mouseIsOnButton = this.root && this.root.contains(evt.target);
     this.setState({ isMouseDown: false, isHover: mouseIsOnButton });
-  }
+  };
 
   handleMouseEnter = () => this.setState({ isHover: true });
+
   handleMouseLeave = () => this.setState({ isHover: this.state.isMouseDown });
 
-  render () {
+  render() {
     const { className, tabIndex, children, label, disabled } = this.props;
     const { isHover, isMouseDown, isClick } = this.state;
     const classes = [
@@ -92,11 +94,15 @@ export default class Button extends PureComponent {
     return (
       <div className={className}>
         <div
-          ref={elem => { this.root = elem; }}
+          ref={elem => {
+            this.root = elem;
+          }}
           tabIndex={tabIndex}
           role="button"
           className={cx(
-            style.button, disabled ? style.disabled : classes, className
+            style.button,
+            disabled ? style.disabled : classes,
+            className
           )}
           onClick={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
@@ -109,12 +115,10 @@ export default class Button extends PureComponent {
           <div className={style.borderTransition} />
           <div className={style.flare} />
           <div className={style.glow} />
-          <div className={style.sheenWrapper} >
+          <div className={style.sheenWrapper}>
             <div className={style.sheen} />
           </div>
-          <div className={style.content}>
-            {children || label}
-          </div>
+          <div className={style.content}>{children || label}</div>
         </div>
       </div>
     );

@@ -26,7 +26,7 @@ export default class SliderInput extends PureComponent {
     // Events
     onChange: PropTypes.func,
     onBlur: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     className: undefined,
@@ -38,9 +38,9 @@ export default class SliderInput extends PureComponent {
     tooltip: false,
     onChange: Function.prototype,
     onBlur: undefined
-  }
+  };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -49,12 +49,14 @@ export default class SliderInput extends PureComponent {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Intentionally discarding first render, don't think there's a better way
-    erd.listenTo(this.root, ({ offsetWidth }) => this.handleResize(offsetWidth));
+    erd.listenTo(this.root, ({ offsetWidth }) =>
+      this.handleResize(offsetWidth)
+    );
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     erd.removeAllListeners(this.root);
   }
 
@@ -62,22 +64,38 @@ export default class SliderInput extends PureComponent {
     const { onChange } = this.props;
     const nextValue = evt.target.value;
     onChange(nextValue);
-  }
+  };
 
-  handleMouseEnter = () => { this.props.tooltip && this.setState({ tooltip: true }); }
-  handleMouseLeave = () => { this.props.tooltip && this.setState({ tooltip: false }); }
+  handleMouseEnter = () => {
+    this.props.tooltip && this.setState({ tooltip: true });
+  };
+
+  handleMouseLeave = () => {
+    this.props.tooltip && this.setState({ tooltip: false });
+  };
 
   handleResize = width => {
     this.setState({ width });
-  }
+  };
 
-  render () {
-    const { className, value, min, max, step, disabled, tooltip, onBlur } = this.props;
+  render() {
+    const {
+      className,
+      value,
+      min,
+      max,
+      step,
+      disabled,
+      tooltip,
+      onBlur
+    } = this.props;
     const width = this.state.width;
 
     let finalValue = parseInt(value, 10);
-    finalValue = (finalValue >= min) && (finalValue <= max)
-      ? finalValue : ((min + (max - min)) / 2);
+    finalValue =
+      finalValue >= min && finalValue <= max
+        ? finalValue
+        : (min + (max - min)) / 2;
 
     const fillPercentage = (finalValue / max) * 100;
 
@@ -85,21 +103,21 @@ export default class SliderInput extends PureComponent {
 
     const left = `${fillPercentage}%`;
     let tooltipOffset = left;
+    // defaults for first render
     let handleOffset = `calc(${left} - 15px)`;
     let top = -30;
 
     if (tooltip && width && this.tooltipElem) {
       // Find your center...
       tooltipOffset =
-        ((width - 30) * (fillPercentage / 100))
-        - ((this.tooltipElem.clientWidth - 30) / 2);
+        (width - 30) * (fillPercentage / 100) -
+        (this.tooltipElem.clientWidth - 30) / 2;
 
-      top = -45 - (this.tooltipElem.clientHeight / 2);
+      top = -45 - this.tooltipElem.clientHeight / 2;
     }
 
     if (width) {
-      handleOffset =
-        (width - 30) * (fillPercentage / 100);
+      handleOffset = (width - 30) * (fillPercentage / 100);
     }
 
     const tooltipStyle = {
@@ -118,7 +136,9 @@ export default class SliderInput extends PureComponent {
 
     return (
       <div
-        ref={elem => { this.root = elem; }}
+        ref={elem => {
+          this.root = elem;
+        }}
         className={cx(style.sliderInput, disabled && style.disabled, className)}
       >
         <input
@@ -133,17 +153,24 @@ export default class SliderInput extends PureComponent {
           {...mouseEvents}
         />
         <div className={style.control}>
-          <div className={style.fill} style={{ width: `${fillPercentage > 0 ? fillPercentage - 1 : 0}%` }} />
+          <div
+            className={style.fill}
+            style={{ width: `${fillPercentage > 0 ? fillPercentage - 1 : 0}%` }}
+          />
           <div className={style.track} />
           <Handle className={style.handle} style={handleStyle} />
         </div>
-        {tooltip && <div
-          ref={elem => { this.tooltipElem = elem; }}
-          style={tooltipStyle}
-          className={cx(style.tooltip, showTooltip && style.show)}
-        >
-          <Frame borders={{ bottom: 1 }}>{finalValue}</Frame>
-        </div>}
+        {tooltip && (
+          <div
+            ref={elem => {
+              this.tooltipElem = elem;
+            }}
+            style={tooltipStyle}
+            className={cx(style.tooltip, showTooltip && style.show)}
+          >
+            <Frame borders={{ bottom: 1 }}>{finalValue}</Frame>
+          </div>
+        )}
       </div>
     );
   }

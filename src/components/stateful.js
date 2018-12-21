@@ -19,7 +19,7 @@ export default Cmp =>
       super(props);
 
       this.state = {
-        value: undefined
+        value: props.initialValue
       };
     }
 

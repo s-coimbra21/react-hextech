@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 
 import withOptions from '../../util/withOptions';
 
@@ -55,6 +54,8 @@ class Dropdown extends PureComponent {
     });
   }
 
+  menu = React.createRef();
+
   focused = React.createRef();
 
   componentDidMount() {
@@ -72,25 +73,28 @@ class Dropdown extends PureComponent {
     const { isOpen, focusedOption } = this.state;
     const { menu, focused } = this; // DOM refs
 
+    if (!focused.current) return;
+
     // only update if necessary
     if (focusedOption === prevState.focusedOption) {
       if (isOpen === prevState.isOpen) return;
     }
-    if (!focused.current) return;
 
-    if (isOpen && menu.scrollTop > focused.current.offsetTop) {
-      menu.scrollTop = focused.current.offsetTop;
+    if (isOpen && menu.current.scrollTop >= focused.current.offsetTop) {
+      menu.current.scrollTop = focused.current.offsetTop;
+
+      return;
     }
 
     if (
       isOpen &&
       focused.current.getBoundingClientRect().bottom >
-        menu.getBoundingClientRect().bottom
+        menu.current.getBoundingClientRect().bottom
     ) {
-      menu.scrollTop =
+      menu.current.scrollTop =
         focused.current.offsetTop +
-        focused.current.offsetHeight -
-        menu.clientHeight;
+        focused.current.clientHeight -
+        menu.current.clientHeight;
     }
   }
 
@@ -98,17 +102,12 @@ class Dropdown extends PureComponent {
     const { onChange, value } = this.props;
 
     this.handleOptionFocus(nextOption);
+
     if (nextOption !== value) {
       onChange(nextOption);
     }
 
     this.handleToggle(false);
-  };
-
-  handleBlur = () => {
-    const { onBlur } = this.props;
-
-    onBlur();
   };
 
   handleDocumentClick = evt => {
@@ -175,14 +174,21 @@ class Dropdown extends PureComponent {
   };
 
   render() {
-    const { options, className, tabIndex, value, disabled } = this.props;
+    const {
+      options,
+      className,
+      tabIndex,
+      value,
+      disabled,
+      transparent
+    } = this.props;
     const { isOpen: isOpenState } = this.state;
     const isOpen = disabled ? false : !!isOpenState;
 
     let eventHandlers = {
       onClick: () => this.handleToggle(!isOpen),
       onKeyDown: this.handleKeyDown,
-      onBlur: this.handleBlur
+      onBlur: this.props.onBlur
     };
 
     if (disabled) {
@@ -194,16 +200,15 @@ class Dropdown extends PureComponent {
         ref={e => {
           this.root = e;
         }}
-        {...{ disabled, isOpen, className, tabIndex }}
+        {...{ isDisabled: disabled, isOpen, className }}
         {...eventHandlers}
       >
-        <Control value={value} />
-        <Menu
-          ref={e => {
-            this.menu = e;
-          }}
-          hidden={!isOpen}
-        >
+        <Control
+          value={value}
+          isDisabled={disabled}
+          {...{ isOpen, tabIndex, transparent }}
+        />
+        <Menu ref={this.menu} isHidden={!isOpen}>
           {options.map(this.renderOption)}
         </Menu>
       </Wrapper>

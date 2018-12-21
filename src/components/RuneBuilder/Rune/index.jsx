@@ -5,7 +5,7 @@ import Slot from './Slot';
 import Body from './Body';
 
 class Rune extends PureComponent {
-  render () {
+  render() {
     const { slot } = this.props;
     return (
       <Slot slot={slot}>

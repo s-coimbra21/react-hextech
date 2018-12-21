@@ -32,7 +32,9 @@ app/node_modules
 
 # App packaged
 release
-lib/
+docs
+docs/static
+lib
 
 # Visual studio code
 .vscode/

@@ -10,7 +10,7 @@ const theme = {
   border: 'rgba(155, 125, 35, 0.5)',
   inputBorder: 'rgb(47.1%, 35.3%, 15.7%)',
 
-  bgDark: 'hsl(210, 95, 7)',
+  bgDark: 'rgb(17, 22, 29)',
   bgDisabled: 'rgb(11.8%, 13.7%, 15.7%)'
 };
 

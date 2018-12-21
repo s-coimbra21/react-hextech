@@ -28,10 +28,11 @@ const Option = styled.div.attrs(props => ({
   'aria-selected': props.isSelected
 }))`
   position: relative;
-  color: rgb(80.4%, 74.5%, 56.9%);
   cursor: pointer;
   overflow-x: hidden;
-  padding: 10px;
+  padding: 10px 14px;
+  padding-right: 0;
+  height: 40px;
   border-top: 1px solid rgb(12.2%, 12.9%, 13.7%);
   text-overflow: ellipsis;
   white-space: nowrap;
