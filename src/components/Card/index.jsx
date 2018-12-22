@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Badge from '../Badge';
+
 import * as S from './styled';
 
-const Card = () => (
+const Card = ({ badge = {} }) => (
   <S.Wrapper>
     <a>
       <S.Background />
@@ -19,7 +21,11 @@ const Card = () => (
           </p>
         </S.Description>
       </S.Labels>
-      <S.Attributes>Test</S.Attributes>
+      <S.Attributes>
+        <Badge type="story" {...badge}>
+          Story
+        </Badge>
+      </S.Attributes>
     </a>
   </S.Wrapper>
 );

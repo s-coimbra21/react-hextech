@@ -5,6 +5,7 @@ import { t } from '@theme';
 
 import overlay from '@assets/card-overlay.png';
 import flare from '@assets/card-flare.png';
+import { hidden } from 'ansi-colors';
 
 export const Background = styled.div`
   position: absolute;
@@ -140,6 +141,7 @@ export const Wrapper = styled.li`
   user-select: none;
   list-style: none;
   cursor: pointer;
+  overflow: hidden;
   /* width: 100%; */
   width: 25%;
   height: 370px;

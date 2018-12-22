@@ -23,6 +23,7 @@ setOptions({
 });
 
 function loadStories() {
+  require('../stories/Badge.js');
   require('../stories/Button.js');
   require('../stories/Checkbox.js');
   require('../stories/Card.js');

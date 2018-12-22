@@ -17,8 +17,9 @@ export const t = {
 
 export const replacements = Object.keys(t).map(key => ({
   // eslint-disable-next-line no-useless-escape
-  search: `t\.${key}`,
+  search: `\W?t\.${key}\W?$`,
   replace: `'${t[key]}'`,
+  flags: '',
 }));
 
 export default {
