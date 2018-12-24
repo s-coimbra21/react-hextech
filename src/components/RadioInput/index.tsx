@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { withOptions } from '@utils';
+
 import RadioOption from '../RadioOption';
 
 const style = require('./index.scss');
-
-let instanceId = 0;
 
 class RadioInput extends PureComponent {
   static propTypes = {
@@ -29,13 +28,6 @@ class RadioInput extends PureComponent {
     onChange: Function.prototype,
     onBlur: Function.prototype,
   };
-
-  constructor(props) {
-    super(props);
-
-    instanceId += 1;
-    this.instanceId = instanceId;
-  }
 
   handleSelect = (nextValue, evt) => {
     evt.preventDefault();
@@ -62,9 +54,9 @@ class RadioInput extends PureComponent {
         className={cx(style.radioInput, className)}
       >
         {options.map((o, i) => (
-          <Option
-            key={`${this.instanceId}${o.label}`}
-            name={`group-${this.instanceId}-option`}
+          <RadioOption
+            key={`${o.label}`}
+            name={`group-option`}
             checked={o.value === value}
             disabled={disabled || o.disabled}
             onChange={evt => this.handleSelect(o.value, evt)}

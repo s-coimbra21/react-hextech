@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 const style = require('./index.scss');
 
-const RadioOption = ({
+const RadioOption: React.SFC<React.HTMLProps<HTMLDivElement>> = ({
   children,
   name,
   value,

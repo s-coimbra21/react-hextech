@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 
-interface StatefulProps<T> {
-  initialValue: any;
-  hocClassName?: any;
-  onChange?: (nextValue: T) => void;
-}
+function stateful<P>(Cmp: React.ComponentType<P>) {
+  interface StatefulProps<T = any> {
+    initialValue: any;
+    hocClassName?: any;
+    onChange?: (nextValue: T) => void;
+  }
 
-export default Cmp =>
-  class extends Component<StatetulProps<T>> {
-    static displayName = `stateful(${Cmp.displayName})`;
+  return class extends PureComponent<P & StatefulProps> {
+    static displayName = `stateful(${Cmp.displayName || Cmp.name})`;
 
     state = {
       value: undefined,
@@ -24,12 +23,12 @@ export default Cmp =>
     };
 
     render() {
-      const { hocClassName, initialValue } = this.props;
+      const { hocClassName, initialValue, ...rest } = this.props;
 
       return (
         <div className={hocClassName}>
           <Cmp
-            {...Object.assign({}, this.props, { hocClassName: undefined })}
+            {...rest as P}
             value={this.state.value || initialValue}
             onChange={this.handleChange}
           />
@@ -37,3 +36,6 @@ export default Cmp =>
       );
     }
   };
+}
+
+export default stateful;

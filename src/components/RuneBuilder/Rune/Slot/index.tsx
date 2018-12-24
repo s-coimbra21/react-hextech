@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-import slotsJs from './slots.js';
+import slots from './slots';
 const style = require('./index.scss');
 
 const RuneSlot = ({ slot, children }) => {
