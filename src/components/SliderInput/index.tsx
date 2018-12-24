@@ -6,7 +6,7 @@ import elementResizeDetector from 'element-resize-detector';
 import Frame from '../Frame';
 import Handle from './Handle';
 
-import style from './index.scss';
+const style = require('./index.scss');
 
 const erd = elementResizeDetector({
   strategy: 'scroll',

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import style from './index.scss';
+const style = require('./index.scss');
 
 export default class TextInput extends PureComponent {
   static propTypes = {

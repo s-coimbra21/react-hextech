@@ -1,23 +1,20 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import style from './index.scss';
+const style = require('./index.scss');
 
+interface ButtonProps {
+  className?: string;
+  tabIndex?: string | number;
+  label?: string;
+  disabled?: boolean;
+  onClick: React.MouseEventHandler;
+}
 /**
  * Button that looks exactly like the golden border buttons on
  * the League Client
  */
-export default class Button extends PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    label: PropTypes.string,
-    disabled: PropTypes.bool,
-    children: PropTypes.node,
-    onClick: PropTypes.func.isRequired,
-  };
-
+export default class Button extends PureComponent<ButtonProps> {
   static defaultProps = {
     className: undefined,
     tabIndex: '0',
@@ -26,29 +23,33 @@ export default class Button extends PureComponent {
     children: undefined,
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    isHover: false,
+    isMouseDown: false,
+    isClick: false,
+  };
 
-    this.state = {
-      isHover: false,
-      isMouseDown: false,
-      isClick: false,
-    };
-  }
+  root = React.createRef<HTMLDivElement>();
+
+  /* Click end timeout */
+  clickEnd = undefined;
 
   componentDidMount() {
-    document.addEventListener('mouseup', this.handleMouseUp, false);
+    document.addEventListener('mouseup', this.handleMouseUp as any, false);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mouseup', this.handleMouseUp, false);
+    document.removeEventListener('mouseup', this.handleMouseUp as any, false);
   }
 
-  handleClick = evt => {
+  handleClick: React.MouseEventHandler = evt => {
     const { onClick, disabled } = this.props;
+
     if (!disabled) {
       this.playClickAnim();
-      onClick && onClick.call && onClick(evt);
+      if (onClick) {
+        onClick(evt);
+      }
     }
   };
 
@@ -58,7 +59,9 @@ export default class Button extends PureComponent {
       return this.setState({ isClick: false }, this.playClickAnim);
     }
 
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {
+      return;
+    }
 
     // Don't block animation if user decides to spam
     window.requestAnimationFrame(() =>
@@ -73,8 +76,9 @@ export default class Button extends PureComponent {
   // TODO: might want to turn this into an actual state machine instead of this spaghetti
   handleMouseDown = () => this.setState({ isMouseDown: true });
 
-  handleMouseUp = evt => {
-    const mouseIsOnButton = this.root && this.root.contains(evt.target);
+  handleMouseUp = (evt: React.MouseEvent) => {
+    const mouseIsOnButton =
+      this.root.current && this.root.current.contains(evt.target as Node);
     this.setState({ isMouseDown: false, isHover: mouseIsOnButton });
   };
 
@@ -94,10 +98,8 @@ export default class Button extends PureComponent {
     return (
       <div className={className}>
         <div
-          ref={elem => {
-            this.root = elem;
-          }}
-          tabIndex={tabIndex}
+          ref={this.root}
+          tabIndex={+tabIndex}
           role="button"
           className={cx(
             style.button,

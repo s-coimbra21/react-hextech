@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { withOptions } from '@utils';
-import Option from '../RadioOption';
+import RadioOption from '../RadioOption';
 
-import style from './index.scss';
+const style = require('./index.scss');
 
 let instanceId = 0;
 

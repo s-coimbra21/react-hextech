@@ -40,7 +40,7 @@ class Switcher extends PureComponent {
     const { items, value } = this.props;
     const selectedIdx = items.findIndex(item => item === value);
 
-    if (selectedIdx === -1) return this.setState({ x: 0, width: 0 });
+    if (selectedIdx === -1) { return this.setState({ x: 0, width: 0 }); }
 
     const list = this.list.current;
 
@@ -55,7 +55,7 @@ class Switcher extends PureComponent {
   getActiveItem = () => {
     const { value, getActiveItem } = this.props;
 
-    if (getActiveItem) return getActiveItem(this.props);
+    if (getActiveItem) { return getActiveItem(this.props); }
 
     return value;
   };

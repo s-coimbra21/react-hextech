@@ -25,14 +25,14 @@ module.exports = {
     },
   },
 
-  entry: ['./src/index.js'],
+  entry: ['./src/index.ts'],
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.scss'],
     alias: {
       '@utils': path.resolve(__dirname, 'src', 'utils'),
       '@assets': path.resolve(__dirname, 'src', 'assets'),
-      '@theme': path.resolve(__dirname, 'src', 'theme.js'),
+      '@theme': path.resolve(__dirname, 'src', 'theme'),
     },
   },
 
@@ -46,7 +46,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(t|j)sx?$/,
         use: [
           'babel-loader',
           {

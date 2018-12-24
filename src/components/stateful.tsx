@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+interface StatefulProps<T> {
+  initialValue: any;
+  hocClassName?: any;
+  onChange?: (nextValue: T) => void;
+}
+
 export default Cmp =>
-  class extends Component {
+  class extends Component<StatetulProps<T>> {
     static displayName = `stateful(${Cmp.displayName})`;
 
-    static propTypes = {
-      hocClassName: PropTypes.any,
-      onChange: PropTypes.func,
+    state = {
+      value: undefined,
     };
-
-    static defaultProps = {
-      hocClassName: undefined,
-      onChange: undefined,
-    };
-
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        value: props.initialValue,
-      };
-    }
 
     handleChange = value => {
       const { onChange } = this.props;
@@ -32,12 +24,13 @@ export default Cmp =>
     };
 
     render() {
-      const { hocClassName } = this.props;
+      const { hocClassName, initialValue } = this.props;
+
       return (
         <div className={hocClassName}>
           <Cmp
             {...Object.assign({}, this.props, { hocClassName: undefined })}
-            value={this.state.value}
+            value={this.state.value || initialValue}
             onChange={this.handleChange}
           />
         </div>

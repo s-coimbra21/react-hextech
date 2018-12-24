@@ -1,25 +1,24 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import ButtonGroup from '../ButtonGroup';
 import Button from '../Button';
+import { Option } from '../option';
 
-import style from './index.scss';
+const style = require('./index.scss');
 
-export default class Frame extends PureComponent {
-  static propTypes = {
-    // Visual
-    className: PropTypes.string,
-    contentClassName: PropTypes.string,
-    borders: PropTypes.object,
-    // State
-    options: PropTypes.array,
-    title: PropTypes.string,
-    message: PropTypes.string,
-    children: PropTypes.node,
-  };
+interface FrameProps<T = any> {
+  // Visual
+  className: string;
+  contentClassName: string;
+  borders: object;
+  // State
+  options: Option<T>;
+  title: string;
+  message: string;
+}
 
+export default class Frame extends PureComponent<FrameProps> {
   static defaultProps = {
     className: undefined,
     contentClassName: undefined,
@@ -32,7 +31,6 @@ export default class Frame extends PureComponent {
     options: undefined,
     title: undefined,
     message: undefined,
-    children: undefined,
   };
 
   render() {
@@ -45,6 +43,7 @@ export default class Frame extends PureComponent {
       message,
       children,
     } = this.props;
+
     return (
       <div className={cx(style.frame, className)}>
         <div className={style.contentWrapper}>

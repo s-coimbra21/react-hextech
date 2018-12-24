@@ -1,8 +1,21 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import style from './index.scss';
+const style = require('./index.scss');
+
+interface CheckboxProps<T = any> {
+  // Visual
+  className: any;
+  label: string;
+  // State
+  value: boolean;
+  disabled: boolean;
+  // Events
+  onChange: (nextValue: T) => void;
+  onClick: React.MouseEventHandler;
+  onBlur: React.EventHandler<any>;
+  tabIndex: number;
+}
 
 /**
  * <Checkbox />
@@ -12,22 +25,7 @@ import style from './index.scss';
  * onChange is called with next value
  *
  */
-export default class Checkbox extends PureComponent {
-  static propTypes = {
-    // Visual
-    className: PropTypes.any,
-    label: PropTypes.string,
-    children: PropTypes.node,
-    // State
-    value: PropTypes.bool,
-    disabled: PropTypes.bool,
-    // Events
-    onChange: PropTypes.func,
-    onClick: PropTypes.func,
-    onBlur: PropTypes.func,
-    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  };
-
+export default class Checkbox extends PureComponent<CheckboxProps> {
   static defaultProps = {
     className: undefined,
     label: '',
@@ -40,7 +38,7 @@ export default class Checkbox extends PureComponent {
     children: undefined,
   };
 
-  root = React.createRef();
+  root = React.createRef<HTMLDivElement>();
 
   handleClick = evt => {
     const { value, onClick, onChange } = this.props;
@@ -64,7 +62,7 @@ export default class Checkbox extends PureComponent {
     };
 
     if (disabled) {
-      eventHandlers = {};
+      eventHandlers = {} as any;
     }
 
     const isChecked = !!value;

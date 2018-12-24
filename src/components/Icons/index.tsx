@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import story from '@assets/icons/story.png';
-import media from '@assets/icons/media.png';
-import comic from '@assets/icons/comic.png';
-
 import * as S from './styled';
+
+const storyPng = require('@assets/icons/story.png');
+const mediaPng = require('@assets/icons/media.png');
+const comicPng = require('@assets/icons/comic.png');
 
 export const icons = {
   story: {
-    imageSrc: story,
+    imageSrc: storyPng,
     color: 'rgb(30, 130, 90)',
   },
   media: {
-    imageSrc: media,
+    imageSrc: mediaPng,
     color: 'rgb(190, 30, 55)',
   },
   comic: {
-    imageSrc: comic,
+    imageSrc: comicPng,
     color: 'rgb(119, 10, 89)',
   },
 };

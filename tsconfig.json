@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "checkJs": true,
+    "rootDir": ".",
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@theme": ["src/theme.ts"],
+      "@utils": ["src/utils/index.ts"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib", "src/components/__tests__", "src/theme.js"]
+}
