@@ -12,7 +12,7 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@theme": ["src/theme.ts"],
+      "@theme": ["src/theme.js"],
       "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"]

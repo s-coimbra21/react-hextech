@@ -5,7 +5,7 @@ import { t } from '@theme';
 import Icon from '../Icons';
 
 export const Text = styled.h6`
-  background-color: ${t.lightDark};
+  background-color: ${t.gunmetal};
   border: 2px solid #3c3c41;
   border-left: none;
   overflow: hidden;

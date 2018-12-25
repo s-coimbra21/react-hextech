@@ -11,9 +11,10 @@ interface CheckboxProps<T = any> {
   value: boolean;
   disabled: boolean;
   // Events
+  onFocus: React.FormEventHandler;
   onChange: (nextValue: T) => void;
   onClick: React.MouseEventHandler;
-  onBlur: React.EventHandler<any>;
+  onBlur: React.FormEventHandler;
   tabIndex: number;
 }
 
@@ -38,32 +39,23 @@ export default class Checkbox extends PureComponent<CheckboxProps> {
     children: undefined,
   };
 
-  root = React.createRef<HTMLDivElement>();
+  input = React.createRef<HTMLInputElement>();
 
   handleClick = evt => {
     const { value, onClick, onChange } = this.props;
-    onClick(evt);
-    onChange(!value);
-    this.root.current && this.root.current.blur(); // TODO: Investigate if this is too hacky
-  };
 
-  handleBlur = evt => {
-    const { onBlur } = this.props;
-    onBlur(evt);
+    if (evt.target !== this.input.current) {
+      this.input.current.focus();
+
+      onClick(evt);
+    }
+
+    onChange(!value);
   };
 
   render() {
-    const { className, value, label, children } = this.props;
+    const { className, value, label, onBlur, onFocus, children } = this.props;
     const { disabled } = this.props;
-
-    let eventHandlers = {
-      onClick: this.handleClick,
-      onBlur: this.handleBlur,
-    };
-
-    if (disabled) {
-      eventHandlers = {} as any;
-    }
 
     const isChecked = !!value;
     const classes = [
@@ -74,18 +66,24 @@ export default class Checkbox extends PureComponent<CheckboxProps> {
 
     return (
       <div
-        ref={this.root}
         role="checkbox"
         aria-checked={isChecked}
         className={cx(style.checkbox, classes)}
-        {...eventHandlers}
+        onClick={this.handleClick}
       >
-        <input type="checkbox" onChange={this.handleClick} />
-        <div className={style.box}>
-          <div className={style.border} />
-          <i className={cx(style.check, style.iconCheck)} />
+        <input
+          ref={this.input}
+          type="checkbox"
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        <div className={style.visible}>
+          <div className={style.box}>
+            <div className={style.border} />
+            <i className={cx(style.check, style.iconCheck)} />
+          </div>
+          <span className={style.label}>{children || label}</span>
         </div>
-        <span className={style.label}>{children || label}</span>
       </div>
     );
   }

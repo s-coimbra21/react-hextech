@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import Slot from './Slot';
 import Body from './Body';
 
-class Rune extends PureComponent {
-  static propTypes = {
-    slot: PropTypes.any,
-  };
+interface RuneProps {
+  slot: any;
+}
 
+class Rune extends PureComponent<RuneProps> {
   render() {
     const { slot } = this.props;
     return (

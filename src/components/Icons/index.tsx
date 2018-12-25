@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import * as S from './styled';
 
@@ -22,18 +21,26 @@ export const icons = {
   },
 };
 
-const Icon = ({ name, ...iconProps }) => {
-  const icon = name ? icons[name] : iconProps;
+type Icons = keyof typeof icons;
 
-  return <S.Icon {...icon} />;
+type IconProps =
+  | {
+      name: Icons;
+    }
+  | {
+      name?: void;
+      imageSrc: string;
+      color?: string;
+    };
+
+type IconType = React.FC<IconProps> & { styled: typeof S.Icon };
+
+const Icon: IconType = ({ name, ...iconProps }) => {
+  const icon = name ? icons[name] : (iconProps as any);
+
+  return <S.Icon role="presentation" {...icon} />;
 };
 
 Icon.styled = S.Icon;
-
-Icon.propTypes = {
-  name: PropTypes.string,
-  imageSrc: PropTypes.string,
-  color: PropTypes.string,
-};
 
 export default Icon;

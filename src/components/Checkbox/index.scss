@@ -1,11 +1,25 @@
 @import '../../variables.scss';
 
-.checkbox {
-	display: flex;
-	position: relative;
-	align-items: center;
-	cursor: pointer;
+@mixin focusStyles {
+	.box {
+		.border {
+			backface-visibility: hidden;
+			border-color: transparent;
+			border-image: linear-gradient(
+				to bottom,
+				$lcu-gold-border-color 50%,
+				lighten($lcu-gold-border-color, 15%) 100%
+			);
+			border-image-slice: 1;
+		}
+	}
 
+	.label {
+		color: lighten($lcu-text-dark, 20%);
+	}
+}
+
+.checkbox {
 	input {
 		position: absolute;
 		top: 2px;
@@ -13,26 +27,12 @@
 		opacity: 0;
 	}
 
-	&:hover,
-	&:focus {
+	.visible {
+		display: flex;
+		position: relative;
+		align-items: center;
+		cursor: pointer;
 		outline: none;
-
-		.box {
-			.border {
-				backface-visibility: hidden;
-				border-color: transparent;
-				border-image: linear-gradient(
-					to bottom,
-					$lcu-gold-border-color 50%,
-					lighten($lcu-gold-border-color, 15%) 100%
-				);
-				border-image-slice: 1;
-			}
-		}
-
-		.label {
-			color: lighten($lcu-text-dark, 20%);
-		}
 	}
 
 	.box {
@@ -71,6 +71,11 @@
 		margin-left: 9px;
 		user-select: none;
 	}
+
+	&:hover,
+	input:focus + .visible {
+		@include focusStyles();
+	}
 }
 
 .checkbox.checked {
@@ -86,15 +91,12 @@
 }
 
 .checkbox.disabled {
-	&,
-	& div,
-	span,
-	i {
+	* {
 		cursor: default;
 	}
 
 	&:hover,
-	&:focus {
+	input:focus + .visible {
 		.box {
 			.border {
 				border-image: none;

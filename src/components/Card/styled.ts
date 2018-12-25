@@ -3,9 +3,8 @@ import { transparentize } from 'polished';
 
 import { t } from '@theme';
 
-import overlay from '@assets/card-overlay.png';
-import flare from '@assets/card-flare.png';
-import { hidden } from 'ansi-colors';
+const overlay = require('@assets/card-overlay.png');
+const flare = require('@assets/card-flare.png');
 
 export const Background = styled.div`
   position: absolute;
@@ -145,7 +144,7 @@ export const Wrapper = styled.li`
   /* width: 100%; */
   width: 25%;
   height: 370px;
-  border: 1px solid ${transparentize(0.2, t.lightDark)};
+  border: 1px solid ${transparentize(0.2, t.gunmetal)};
   box-shadow: 0 0 40px 0 #000;
   transition: border-color 0.4s ease;
 
@@ -163,14 +162,14 @@ export const Wrapper = styled.li`
   }
 
   &:active {
-    border-color: ${t.darkBorder};
+    border-color: ${t.borderDark};
 
     ${Border} {
       opacity: 0;
     }
 
     ${Labels} h3 {
-      color: ${t.inputBorder};
+      color: ${t.borderInput};
     }
   }
 `;

@@ -1,4 +1,6 @@
-export function handleArrowKeyNavigation(next) {
+/* WARNING: Spaghetti */
+
+export function handleArrowKeyNavigation(next: number) {
   const { options } = this.props;
   const { focusedOption } = this.state;
 
@@ -9,7 +11,7 @@ export function handleArrowKeyNavigation(next) {
   this.navigateToOption(nextIdx);
 }
 
-export function executeStringSearch(tryNext, start = 0) {
+export function executeStringSearch(tryNext: boolean, start: number = 0) {
   clearTimeout(this.searchTimeout);
 
   const { options } = this.props;
@@ -49,7 +51,12 @@ export function executeStringSearch(tryNext, start = 0) {
   }, 1000);
 }
 
-const shouldHandleKey = ({ keyCode, ctrlKey, metaKey, altKey }) => {
+const shouldHandleKey = ({
+  keyCode,
+  ctrlKey,
+  metaKey,
+  altKey,
+}: KeyboardEvent) => {
   if ((keyCode >= 65 && keyCode <= 90) || keyCode === 32) {
     if (!ctrlKey && !metaKey && !altKey) {
       return true;
@@ -58,7 +65,7 @@ const shouldHandleKey = ({ keyCode, ctrlKey, metaKey, altKey }) => {
   return false;
 };
 
-export function handleTextSearch(evt) {
+export function handleTextSearch(evt: KeyboardEvent) {
   if (!shouldHandleKey(evt)) return;
   if (evt.keyCode === 32 && this.searchString === '') return;
 
@@ -73,7 +80,7 @@ export function handleTextSearch(evt) {
   this.executeStringSearch(shouldTryNext);
 }
 
-export function handleKeyDown(evt) {
+export function handleKeyDown(evt: KeyboardEvent) {
   this.handleTextSearch(evt);
 
   if (evt.defaultPrevented) {

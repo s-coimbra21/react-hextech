@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 import { t } from '@theme';
 
-export const Bar = styled.div`
+export const Bar = styled.div<{ x: number; width: number }>`
   height: 2px;
   margin-top: -2px;
   transition: transform 0.4s ease, width 0.2s ease;
-  background: ${t.inputBorder};
+  background: ${t.borderInput};
 
   transform: ${({ x = 0 }) => `translateX(${x}px)`};
   width: ${({ width = 0 }) => width}px;
@@ -20,7 +20,7 @@ export const List = styled.ul`
   padding: 0;
 `;
 
-export const Li = styled.li`
+export const Li = styled.li<{ active: boolean }>`
   position: relative;
   list-style: none;
   text-transform: capitalize;

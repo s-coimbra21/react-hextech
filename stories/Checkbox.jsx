@@ -9,6 +9,7 @@ const Checkbox = stateful(BaseCheckbox);
 storiesOf('Checkbox', module)
   .add('with text', () => (
     <Checkbox
+      onFocus={action('checkbox-focus')}
       onClick={action('checkbox-click')}
       onChange={action('checkbox-change')}
       onBlur={action('checkbox-blur')}

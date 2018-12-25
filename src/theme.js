@@ -1,18 +1,22 @@
-export const t = {
-  gold: 'rgb(94.1%, 90.2%, 82.4%)',
-  goldMedium: 'rgb(80.4%, 74.5%, 56.9%)',
-  goldDark: 'rgb(78.4%, 60.8%, 23.5%)',
+export const palette = {
+  gold: 'rgb(240, ​230, ​210)',
+  goldMedium: 'rgb(205, ​190, 145)',
+  goldDark: 'rgb(200, 155, 60)',
 
-  textLight: 'rgb(94.1%, 90.2%, 82.4%)',
-  textDark: 'rgb(62.7%, 60.8%, 54.9%)',
-  textDisabled: 'rgb(36.1%, 35.7%, 34.1%)',
+  black: 'rgb(17, 22, 29)',
+  gunmetal: 'rgb(30, 35, 40)',
+};
+
+export const t = {
+  ...palette,
+
+  textLight: palette.gold,
+  textDark: 'rgb(160, 155, 140)',
+  textDisabled: 'rgb(92, 91, 87)',
 
   border: 'rgba(155, 125, 35, 0.5)',
-  darkBorder: '#453619',
-  inputBorder: 'rgb(47.1%, 35.3%, 15.7%)',
-
-  dark: 'rgb(17, 22, 29)',
-  lightDark: '#1E2328',
+  borderDark: 'rgb(​69, ​54, ​25)',
+  borderInput: 'rgb(120, 90, 40)',
 };
 
 export const replacements = Object.keys(t).map(key => ({

@@ -1,56 +1,41 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const style = require('./index.scss');
 
-export default class TextInput extends PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    inputClassName: PropTypes.string,
-    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    value: PropTypes.string,
-    type: PropTypes.string,
-    disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
-    hideClear: PropTypes.bool,
-    children: PropTypes.node,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
-  };
+interface TextInputProps {
+  className: string;
+  inputClassName: string;
+  tabIndex: number;
+  value: string;
+  type: string;
+  disabled: boolean;
+  placeholder: string;
+  hideClear: boolean;
+  onBlur: () => void;
+  onChange: (nextValue: string) => void;
+}
 
+class TextInput extends PureComponent<TextInputProps> {
   static defaultProps = {
-    className: undefined,
-    inputClassName: undefined,
-    tabIndex: undefined,
     value: '',
     type: 'text',
     disabled: false,
-    placeholder: undefined,
     hideClear: false,
-    children: undefined,
-    onBlur: () => {},
-    onChange: () => {},
   };
 
   handleChange = evt => {
     evt.preventDefault();
-    const { disabled, onChange } = this.props;
-    if (!disabled && onChange && onChange.call) {
-      onChange(evt.target.value);
-    }
-  };
 
-  handleBlur = evt => {
-    const { disabled, onBlur } = this.props;
-    if (!disabled && onBlur && onBlur.call) {
-      onBlur(evt);
+    const { disabled, onChange } = this.props;
+    if (!disabled && onChange) {
+      onChange(evt.target.value);
     }
   };
 
   handleClear = () => {
     const { onChange } = this.props;
-    if (onChange && onChange.call) {
+    if (onChange) {
       onChange('');
     }
   };
@@ -59,13 +44,11 @@ export default class TextInput extends PureComponent {
     const {
       className,
       inputClassName,
-      tabIndex,
       disabled,
       value,
-      type,
-      placeholder,
       hideClear,
       children,
+      ...inputProps
     } = this.props;
 
     const showClear = !hideClear && value !== '';
@@ -77,17 +60,16 @@ export default class TextInput extends PureComponent {
           onClick={this.handleClear}
         />
         <input
-          type={type}
-          tabIndex={tabIndex}
+          {...inputProps}
           className={cx(style.inputElement, inputClassName)}
           disabled={disabled}
           value={value}
-          placeholder={placeholder}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}
         />
         {children}
       </div>
     );
   }
 }
+
+export default TextInput;

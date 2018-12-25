@@ -7,7 +7,7 @@ interface ButtonGroupProps {
   className?: any;
 }
 
-const ButtonGroup: React.SFC<ButtonGroupProps> = ({ className, children }) => (
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ className, children }) => (
   <div className={cx(style.buttonGroup, className)}>
     <div className={style.content}>{children}</div>
   </div>

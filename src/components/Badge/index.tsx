@@ -1,22 +1,32 @@
-import React from "react";
-import Icons from "../Icons";
-import * as S from "./styled";
-interface BadgeProps {
-  type?: string;
-  imageSrc?: string;
-  color?: string;
+import React from 'react';
+
+import Icon, { icons } from '../Icons';
+import * as S from './styled';
+
+type IconProps =
+  | {
+      type: keyof typeof icons;
+    }
+  | {
+      type: void;
+      imageSrc?: string;
+      color?: string;
+    };
+
+type BadgeProps = {
   text?: string;
-}
-const Badge: React.SFC<BadgeProps> = ({
+} & IconProps;
+
+const Badge: React.FC<BadgeProps> = ({
   type,
-  imageSrc,
-  color,
   text,
-  children
+  children,
+  ...iconProps
 }) => (
   <S.Wrapper>
-    <Icon name={type} imageSrc={imageSrc} color={color} />
+    <Icon name={type as any} {...iconProps} />
     {(text || children) && <S.Text>{text || children}</S.Text>}
   </S.Wrapper>
 );
+
 export default Badge;

@@ -2,11 +2,14 @@ import styled from 'styled-components';
 
 import { t } from '@theme';
 
-export const Icon = styled.div.attrs(() => ({
-  role: 'presentation',
-}))`
-  background-color: ${({ color = t.lightDark }) => color};
-  background-image: url(${({ imageSrc }) => imageSrc});
+interface IconProps {
+  color?: string;
+  imageSrc: string;
+}
+
+export const Icon = styled.div<IconProps>`
+  background-color: ${({ color = t.gunmetal }) => color};
+  background-image: url(${({ imageSrc = '' }) => imageSrc});
   background-position: 50%;
   background-size: 60%;
   background-repeat: no-repeat;
