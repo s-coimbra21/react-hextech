@@ -11,7 +11,6 @@ const Menu = styled.div.attrs(({ hidden }) => ({
   'aria-hidden': hidden,
 }))`
   position: absolute;
-  transition: max-height 0.4s ease, opacity 0.2s ease;
   top: 100%;
   width: 100%;
   max-height: 0px;
@@ -22,6 +21,7 @@ const Menu = styled.div.attrs(({ hidden }) => ({
   border: 1px solid #453617;
   border-top: none;
   z-index: 10;
+  transition: all 0.4s ease;
 
   ${({ hidden }) => !hidden && visible}
 `;

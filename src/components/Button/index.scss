@@ -10,276 +10,310 @@
 }
 
 .button {
-  @include button;
+	@include button;
 
-  border: 2px solid transparent;
+	border: 2px solid transparent;
 
-  * {
-    box-sizing: content-box;
-  }
+	* {
+		box-sizing: content-box;
+	}
 
-  &, & > div {
-    cursor: pointer;
+	&,
+	& > div {
+		cursor: pointer;
 		user-select: none;
 		outline: none;
 	}
 
-  .content {
-    position: relative;
-  }
+	.content {
+		position: relative;
+	}
 
-  .buttonBg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: opacity 400ms cubic-bezier(0, 0, 0.33, 1);
-    opacity: 0;
-    backface-visibility: hidden;
-    background-image: linear-gradient(to bottom, #1E232A 0%, #1E232A 40%, rgba(118,97,51,0.8) 140%);
-  }
+	.buttonBg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transition: opacity 400ms cubic-bezier(0, 0, 0.33, 1);
+		opacity: 0;
+		backface-visibility: hidden;
+		background-image: linear-gradient(
+			to bottom,
+			#1e232a 0%,
+			#1e232a 40%,
+			rgba(118, 97, 51, 0.8) 140%
+		);
+	}
 
-  .borderIdle {
+	.borderIdle {
 		@extend .border;
-    pointer-events: none;
-    opacity: 1;
-    border: 2px solid transparent;
-    border-image: linear-gradient(to top, #785B28 0%, #C89C3C 55%, #C8A355 71%, #C8AA6E 100%);
-    border-image-slice: 1;
-    transition: opacity 300ms linear;
-  }
+		pointer-events: none;
+		opacity: 1;
+		border: 2px solid transparent;
+		border-image: linear-gradient(
+			to top,
+			#785b28 0%,
+			#c89c3c 55%,
+			#c8a355 71%,
+			#c8aa6e 100%
+		);
+		border-image-slice: 1;
+		transition: opacity 300ms linear;
+	}
 
-  .borderTransition {
-    @extend .border;
-    pointer-events: none;
-    opacity: 0;
-    border: 2px solid transparent;
+	.borderTransition {
+		@extend .border;
+		pointer-events: none;
+		opacity: 0;
+		border: 2px solid transparent;
 		transition: border-color 300ms linear, opacity 300ms linear;
-  }
+	}
 
-  /* SFX */
-  .glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    filter: blur(4px);
-  }
+	/* SFX */
+	.glow {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		filter: blur(4px);
+	}
 
-  .flare {
-    &::before {
-      content: '';
-      position: absolute;
-      top: -25px;
-      left: -25px;
-      width: 48px;
-      height: 48px;
-      opacity: 0;
-      background: transparent url('./sheen.png') top center no-repeat;
-      pointer-events: none;
-    }
+	.flare {
+		&::before {
+			content: '';
+			position: absolute;
+			top: -25px;
+			left: -25px;
+			width: 48px;
+			height: 48px;
+			opacity: 0;
+			background: transparent url('./sheen.png') top center no-repeat;
+			pointer-events: none;
+		}
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -25px;
-      right: -25px;
-      width: 48px;
-      height: 48px;
-      opacity: 0;
-      background: transparent url('./sheen.png') top center no-repeat;
-      pointer-events: none;
-    }
-  }
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -25px;
+			right: -25px;
+			width: 48px;
+			height: 48px;
+			opacity: 0;
+			background: transparent url('./sheen.png') top center no-repeat;
+			pointer-events: none;
+		}
+	}
 
-  .sheenWrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+	.sheenWrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 
-    .sheen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      width: 100%;
-      height: 150%;
-      transform: translateY(-100%);
-      pointer-events: none;
-      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 92%, rgba(255,255,255,0) 100%);
-      filter: blur(2px);
-    }
-  }
+		.sheen {
+			position: absolute;
+			top: 0;
+			left: 0;
+			overflow: hidden;
+			width: 100%;
+			height: 150%;
+			transform: translateY(-100%);
+			pointer-events: none;
+			background: linear-gradient(
+				to bottom,
+				rgba(255, 255, 255, 0) 0%,
+				rgba(255, 255, 255, 0.15) 92%,
+				rgba(255, 255, 255, 0) 100%
+			);
+			filter: blur(2px);
+		}
+	}
 }
 
 /* hover state */
 .button.hover {
-  color: #F0E6D2;
-  animation: hoverTextShadow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
+	color: #f0e6d2;
+	animation: hoverTextShadow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
 
-  .borderTransition {
-    opacity: 1;
-    border-image:
-			linear-gradient(to top,
+	.borderTransition {
+		opacity: 1;
+		border-image: linear-gradient(
+			to top,
 			rgb(78.4%, 61.2%, 23.5%) 0%,
 			rgb(86.3%, 75.7%, 53.3%) 50%,
 			rgb(88.2%, 78.8%, 59.6%) 71%,
 			rgb(94.1%, 90.2%, 84.7%) 100%
-			);
-    border-image-slice: 1;
-  }
+		);
+		border-image-slice: 1;
+	}
 
-  .glow {
-    animation: hoverGlow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
-  }
+	.glow {
+		animation: hoverGlow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
+	}
 
-  .buttonBg {
-    opacity: 1;
-  }
+	.buttonBg {
+		opacity: 1;
+	}
 }
 
 /* down state */
 .button.down {
-  color: #5C5B57;
-  transition: color 100ms linear;
-  animation: none;
+	color: #5c5b57;
+	transition: color 100ms linear;
+	animation: none;
 
-  .buttonBg {
-    opacity: 1;
-  }
+	.buttonBg {
+		opacity: 1;
+	}
 }
 
 /* click state */
 .button.click {
-  color: #E4E1D8;
-  border-image: linear-gradient(to top, #FFFFFF 0%, #FFFFFF 33%, #FFFFFF 66%, #FFFFFF 100%);
-  border-image-slice: 1;
-  animation: clickScale 130ms linear 1, hoverTextShadow 400ms linear 1;
+	color: #e4e1d8;
+	border-image: linear-gradient(
+		to top,
+		#ffffff 0%,
+		#ffffff 33%,
+		#ffffff 66%,
+		#ffffff 100%
+	);
+	border-image-slice: 1;
+	animation: clickScale 130ms linear 1, hoverTextShadow 400ms linear 1;
 
+	.borderTransition {
+		border-image: linear-gradient(
+			to top,
+			#c89c3c 0%,
+			#dcc188 50%,
+			#e1c998 71%,
+			#f0e6d8 100%
+		);
+		border-image-slice: 1;
+		transition: opacity 400ms linear;
+		opacity: 1;
+	}
 
-  .borderTransition {
-    border-image: linear-gradient(to top, #C89C3C 0%, #DCC188 50%, #E1C998 71%, #F0E6D8 100%);
-    border-image-slice: 1;
-    transition: opacity 400ms linear;
-    opacity: 1;
-  }
+	.glow {
+		animation: hoverGlow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
+	}
 
-  .glow {
-    animation: hoverGlow 600ms cubic-bezier(0, 0, 0.33, 1) 1;
-  }
+	.sheen {
+		animation: clickSheen 330ms 1 linear;
+	}
 
-  .sheen {
-    animation: clickSheen 330ms 1 linear;
-  }
+	.buttonbg {
+		opacity: 1;
+	}
 
-  .buttonbg {
-    opacity: 1;
-  }
+	.flare {
+		&::before {
+			animation: clickFlare 400ms cubic-bezier(0, 0, 0.33, 1) 0ms 1;
+		}
 
-  .flare {
-    &::before {
-      animation: clickFlare 400ms cubic-bezier(0, 0, 0.33, 1) 0ms 1;
-    }
-
-    &::after {
-      animation: clickFlare 400ms cubic-bezier(0, 0, 0.33, 1) 30ms 1;
-    }
-  }
+		&::after {
+			animation: clickFlare 400ms cubic-bezier(0, 0, 0.33, 1) 30ms 1;
+		}
+	}
 }
 
 .button.disabled {
-  cursor: default;
-  color: $lcu-text-disabled;
-  background-color: $lcu-bg-disabled;
-  border-image: initial;
+	cursor: default;
+	color: $text-disabled;
+	background-color: $gunmetal;
+	border-image: initial;
 
-  * {
+	* {
 		cursor: default;
-    animation: none;
-  }
+		animation: none;
+	}
 
-  .flare, .glow, .sheenWrapper, .buttonBg {
-    display: none;
-  }
+	.flare,
+	.glow,
+	.sheenWrapper,
+	.buttonBg {
+		display: none;
+	}
 
-  .borderTransition {
-		border-color: #5C5B57;
-    opacity: 1;
-  }
+	.borderTransition {
+		border-color: #5c5b57;
+		opacity: 1;
+	}
 
-  .borderIdle {
+	.borderIdle {
 		opacity: 0;
-  }
+	}
 }
 
 @keyframes hoverTextShadow {
-  0% {
-    text-shadow: 0 0 4px #F0E6D8;
-  }
+	0% {
+		text-shadow: 0 0 4px #f0e6d8;
+	}
 
-  50% {
-    text-shadow: 0 0 4px rgba(240,230,216,0.5);
-  }
+	50% {
+		text-shadow: 0 0 4px rgba(240, 230, 216, 0.5);
+	}
 
-  100% {
-    text-shadow: 0 0 4px rgba(240,230,216,0);
-  }
+	100% {
+		text-shadow: 0 0 4px rgba(240, 230, 216, 0);
+	}
 }
 @keyframes hoverGlow {
-  0% {
-    box-shadow: 0 0 5px 4px rgba(240,230,216,0.5),0 0 2px 1px rgba(240,230,216,0.5) inset;
-  }
+	0% {
+		box-shadow: 0 0 5px 4px rgba(240, 230, 216, 0.5),
+			0 0 2px 1px rgba(240, 230, 216, 0.5) inset;
+	}
 
-  50% {
-    box-shadow: 0 0 5px 4px rgba(240,230,216,0.3),0 0 2px 1px rgba(240,230,216,0.3) inset;
-  }
+	50% {
+		box-shadow: 0 0 5px 4px rgba(240, 230, 216, 0.3),
+			0 0 2px 1px rgba(240, 230, 216, 0.3) inset;
+	}
 
-  100% {
-    box-shadow: 0 0 5px 4px rgba(240,230,216,0),0 0 2px 1px rgba(240,230,216,0) inset;
-  }
+	100% {
+		box-shadow: 0 0 5px 4px rgba(240, 230, 216, 0),
+			0 0 2px 1px rgba(240, 230, 216, 0) inset;
+	}
 }
 @keyframes clickFlare {
-  0% {
-    opacity: 0;
-  }
+	0% {
+		opacity: 0;
+	}
 
-  25% {
-    opacity: 0.6;
-  }
+	25% {
+		opacity: 0.6;
+	}
 
-  50% {
-    opacity: 0.3;
-  }
+	50% {
+		opacity: 0.3;
+	}
 
-  100% {
-    opacity: 0;
-  }
+	100% {
+		opacity: 0;
+	}
 }
 @keyframes clickScale {
-  from {
-    transform: scale(0.94);
-  }
+	from {
+		transform: scale(0.94);
+	}
 
-  to {
-    transform: scale(1);
-  }
+	to {
+		transform: scale(1);
+	}
 }
 @keyframes clickSheen {
-  from {
-    transform: translateY(-100%) rotate(0deg);
-  }
+	from {
+		transform: translateY(-100%) rotate(0deg);
+	}
 
-  10% {
-    transform: translateY(-80%) rotate(-5deg);
-  }
+	10% {
+		transform: translateY(-80%) rotate(-5deg);
+	}
 
-  to {
-    transform: translateY(100%) rotate(0deg);
-  }
+	to {
+		transform: translateY(100%) rotate(0deg);
+	}
 }

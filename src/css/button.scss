@@ -2,90 +2,111 @@
 @import './mixins.scss';
 
 :global {
-  button {
-    @include button;
+	button {
+		@include button;
 
-    border: 2px solid #C89C3C;
-    border-radius: 2px;
-    border-image: linear-gradient(to top, #785B28 0%, #C89C3C 55%, #C8A355 71%, #C8AA6E 100%);
-    border-image-slice: 1;
+		border: 2px solid #c89c3c;
+		border-radius: 2px;
+		border-image: linear-gradient(
+			to top,
+			#785b28 0%,
+			#c89c3c 55%,
+			#c8a355 71%,
+			#c8aa6e 100%
+		);
+		border-image-slice: 1;
 
-    &:hover, &:focus {
-      backface-visibility: hidden;
-      border-image:
-      linear-gradient(to top,
-      rgb(78.4%, 61.2%, 23.5%) 0%,
-      rgb(86.3%, 75.7%, 53.3%) 50%,
-      rgb(88.2%, 78.8%, 59.6%) 71%,
-      rgb(94.1%, 90.2%, 84.7%) 100%
-      );
-    }
+		&:hover,
+		&:focus {
+			backface-visibility: hidden;
+			border-image: linear-gradient(
+				to top,
+				rgb(78.4%, 61.2%, 23.5%) 0%,
+				rgb(86.3%, 75.7%, 53.3%) 50%,
+				rgb(88.2%, 78.8%, 59.6%) 71%,
+				rgb(94.1%, 90.2%, 84.7%) 100%
+			);
+		}
 
-    &:active {
-      background-image: linear-gradient(to bottom, #1E232A 0%, #1E232A 40%, rgba(118,97,51,0.8) 140%);
-      color: #5C5B57;
-      transition: color 100ms linear;
-    }
-  }
+		&:active {
+			background-image: linear-gradient(
+				to bottom,
+				#1e232a 0%,
+				#1e232a 40%,
+				rgba(118, 97, 51, 0.8) 140%
+			);
+			color: #5c5b57;
+			transition: color 100ms linear;
+		}
+	}
 
-  button.alternate {
-    color: #cdfafa;
-    border-color: #0596aa;
-    border-image: linear-gradient(to bottom,#0596aa 0,#005a82 100%);
-    box-shadow: 0 0 25px rgba(0,0,0,.11);
-    background-color: #111;
+	button.alternate {
+		color: #cdfafa;
+		border-color: #0596aa;
+		border-image: linear-gradient(to bottom, #0596aa 0, #005a82 100%);
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.11);
+		background-color: #111;
 
-    &:hover, &:active {
-      background-image: linear-gradient(to bottom, #111 0, fade-out(lighten(#111, 0.75), 0.1), 47%, fade-out(#0596aa, 0.85), 75%, fade-out(#005a82, 0.85) 100%);
-    }
+		&:hover,
+		&:active {
+			background-image: linear-gradient(
+				to bottom,
+				#111 0,
+				fade-out(lighten(#111, 0.75), 0.1),
+				47%,
+				fade-out(#0596aa, 0.85),
+				75%,
+				fade-out(#005a82, 0.85) 100%
+			);
+		}
 
-    &:active {
-      color: darken(#cdfafa, 75%);
-    }
+		&:active {
+			color: darken(#cdfafa, 75%);
+		}
 
-    &.magic {
-      &::after {
-        content: '';
-        display: block;
-        background: url('../assets/button-bg-pattern.png') repeat-x top left;
-        background-size: auto 100%;
-        background-position: 0 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: .3;
-        animation: buttonBg 500s linear infinite;
-        animation-play-state: paused;
-        will-change: background-position;
-        transition: .4s ease;
-      }
+		&.magic {
+			&::after {
+				content: '';
+				display: block;
+				background: url('../assets/button-bg-pattern.png') repeat-x top left;
+				background-size: auto 100%;
+				background-position: 0 0;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0.3;
+				animation: buttonBg 500s linear infinite;
+				animation-play-state: paused;
+				will-change: background-position;
+				transition: 0.4s ease;
+			}
 
-      &:disabled::after {
-        content: none;
-      }
-    }
+			&:disabled::after {
+				content: none;
+			}
+		}
 
-    &:hover::after {
-      animation-play-state: running;
-      opacity: 0.6;
-    }
-  }
+		&:hover::after {
+			animation-play-state: running;
+			opacity: 0.6;
+		}
+	}
 
-  button:disabled {
-    background-color: $lcu-bg-disabled;
-    border-image: initial;
-    border-color: #5C5B57;
-  }
+	button:disabled {
+		background-color: $gunmetal;
+		border-image: initial;
+		border-color: #5c5b57;
+	}
 
-  @keyframes :global(buttonBg) {
-    from {
-        background-position: 0 0
-    }
-  
-    to {
-        background-position: 10000px 0
-    }
-  }
+	@keyframes :global(buttonBg) {
+		from {
+			background-position: 0 0;
+		}
+
+		to {
+			background-position: 10000px 0;
+		}
+	}
 }

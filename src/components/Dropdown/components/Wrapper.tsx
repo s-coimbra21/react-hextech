@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 import { t } from '@theme';
 
-import Control from './Control';
 import Arrow from './Arrow';
 
 const disabledStyles = css`
@@ -10,7 +9,7 @@ const disabledStyles = css`
   cursor: default;
   color: ${t.textDisabled};
 
-  ${Control} {
+  .control {
     border-image: none;
     border-color: ${t.textDisabled};
     background-color: ${t.gunmetal};

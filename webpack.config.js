@@ -33,6 +33,7 @@ module.exports = {
       '@utils': path.resolve(__dirname, 'src', 'utils'),
       '@assets': path.resolve(__dirname, 'src', 'assets'),
       '@theme': path.resolve(__dirname, 'src', 'theme'),
+      '@css': path.resolve(__dirname, 'src', 'css'),
     },
   },
 
@@ -59,6 +60,7 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
+          { loader: 'classnames-loader' },
           { loader: devMode ? 'style-loader' : ExtractTextPlugin.loader },
           {
             loader: 'css-loader',

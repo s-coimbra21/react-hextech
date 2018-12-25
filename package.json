@@ -57,6 +57,7 @@
     "babel-plugin-polished": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.0",
     "babel-plugin-typescript-to-proptypes": "^0.15.0",
+    "classnames-loader": "^2.0.0",
     "css-loader": "^2.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

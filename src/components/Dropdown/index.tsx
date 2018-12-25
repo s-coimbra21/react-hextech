@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react';
+
 import { withOptions } from '@utils';
 
 import { Option as OptionType } from '../option';
 
 import Wrapper from './components/Wrapper';
-import Control from './components/Control';
-import Menu from './components/Menu';
+import Arrow from './components/Arrow';
 import Option from './components/Option';
+
 import * as keyboardEventHandlers from './keyboardEvents';
+
+const cx = require('./index.scss');
 
 interface DropdownProps<T = any> {
   className?: any;
@@ -172,7 +175,6 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
       <Option
         ref={isFocused ? this.focused : undefined}
         key={key}
-        role="option"
         aria-selected={isSelected}
         selected={isSelected}
         focused={isFocused}
@@ -212,10 +214,18 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
         {...{ open, className, disabled }}
         {...eventHandlers}
       >
-        <Control {...{ open, disabled, tabIndex, transparent, value }} />
-        <Menu ref={this.menu} hidden={!open}>
+        <h4 className={cx('control', { open, transparent })}>
+          <span>{value ? value.label : 'Select...'}</span>
+          <Arrow key={'arrow'} />
+        </h4>
+        <div
+          role="listbox"
+          aria-hidden={!open}
+          ref={this.menu}
+          className={cx('menu', { open })}
+        >
           {options.map(this.renderOption)}
-        </Menu>
+        </div>
       </Wrapper>
     );
   }

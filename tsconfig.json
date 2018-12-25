@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noEmit": true,
+    "outDir": "lib",
     "target": "esnext",
     "module": "esnext",
     "allowSyntheticDefaultImports": true,
@@ -8,7 +10,7 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "checkJs": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
@@ -19,5 +21,5 @@
     }
   },
   "include": ["src"],
-  "exclude": ["node_modules", "lib", "src/components/__tests__", "src/theme.js"]
+  "exclude": ["src/components/__tests__", "src/theme.js"]
 }

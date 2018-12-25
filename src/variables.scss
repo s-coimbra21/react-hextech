@@ -1,13 +1,17 @@
-$lcu-gold: rgb(94.1%, 90.2%, 82.4%);
-$lcu-gold-medium: rgb(80.4%, 74.5%, 56.9%);
-$lcu-gold-dark: rgb(78.4%, 60.8%, 23.5%);
+$gold: rgb(240, 230, 210);
+$gold-medium: rgb(205, 190, 145);
+$gold-dark: rgb(200, 155, 60);
 
-$lcu-text-light: $lcu-gold;
-$lcu-text-dark: rgb(62.7%, 60.8%, 54.9%);
-$lcu-text-disabled: rgb(36.1%, 35.7%, 34.1%);
+$black: rgb(17, 22, 29);
+$rich-black: rgb(1, 11, 19);
+$gunmetal: rgb(30, 35, 40);
 
-$lcu-gold-border-color: #453617;
-$lcu-gold-input-border-color: rgb(47.1%, 35.3%, 15.7%);
+$text-light: $gold;
+$text-dark: rgb(160, 155, 140);
+$text-disabled: rgb(92, 91, 87);
 
-$lcu-bg-dark: rgb(1, 18, 35);
-$lcu-bg-disabled: rgb(11.8%, 13.7%, 15.7%);
+$border: rgba(155, 125, 35, 0.5);
+$border-dark: rgb(70, 55, 20);
+$border-input: rgb(120, 90, 40);
+
+$bg-dark: rgb(1, 18, 35);

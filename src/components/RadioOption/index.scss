@@ -1,29 +1,43 @@
 @import '../../variables.scss';
 
-$radio-border: linear-gradient(to bottom, rgb(62.7%, 48.2%, 18%) 0%, rgb(43.5%, 32.5%, 14.5%) 80%);
-$radio-border-hover: linear-gradient(-45deg, rgb(78.8%, 61.6%, 24.7%) 0%, rgb(92.9%, 87.8%, 78%) 80%);
-$radio-border-active: linear-gradient(-45deg, rgb(40.8%, 30.6%, 13.7%) 0%, rgb(28.6%, 22.4%, 8.2%) 80%);
+$radio-border: linear-gradient(
+	to bottom,
+	rgb(62.7%, 48.2%, 18%) 0%,
+	rgb(43.5%, 32.5%, 14.5%) 80%
+);
+$radio-border-hover: linear-gradient(
+	-45deg,
+	rgb(78.8%, 61.6%, 24.7%) 0%,
+	rgb(92.9%, 87.8%, 78%) 80%
+);
+$radio-border-active: linear-gradient(
+	-45deg,
+	rgb(40.8%, 30.6%, 13.7%) 0%,
+	rgb(28.6%, 22.4%, 8.2%) 80%
+);
 $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 
 .radioOption {
 	font-family: 'Spiegel';
-	color: $lcu-gold-medium;
+	color: $gold-medium;
 	cursor: pointer;
 	margin: 0.5rem 0;
 	outline: none;
 
-	input[type="radio"] {
+	input[type='radio'] {
 		opacity: 0;
 		position: absolute;
 
-		&:focus + .label, & + .label:hover, .label:focus {
+		&:focus + .label,
+		& + .label:hover,
+		.label:focus {
 			.control {
 				border-image: $radio-border-hover;
 				border-image-slice: 1;
 			}
 		}
 
-    & + .label:active {
+		& + .label:active {
 			.control {
 				border-image: $radio-border-active;
 				border-image-slice: 1;
@@ -39,7 +53,7 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 
 		.labelText {
 			font-weight: normal;
-    	letter-spacing: .05rem;
+			letter-spacing: 0.05rem;
 			margin-left: 0.8rem;
 		}
 
@@ -62,24 +76,22 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 			}
 		}
 	}
-
-
 }
 
 .radioOption.checked {
 	.label {
-		color: $lcu-gold;
+		color: $gold;
 
 		.control {
-			fill: $lcu-gold-medium;
+			fill: $gold-medium;
 		}
 	}
 
-  input[type="radio"] + .label:active {
-    .control {
-      fill: url('#hextech-option-active');
-    }
-  }
+	input[type='radio'] + .label:active {
+		.control {
+			fill: url('#hextech-option-active');
+		}
+	}
 }
 
 .radioOption.disabled {
@@ -94,11 +106,13 @@ $radio-border-disabled: rgb(23.5%, 21.6%, 19.6%);
 		}
 	}
 
-	input[type="radio"] {
+	input[type='radio'] {
 		opacity: 0;
 		position: absolute;
 
-		&:focus + .label, & + .label:hover, .label:focus {
+		&:focus + .label,
+		& + .label:hover,
+		.label:focus {
 			.control {
 				border-image: none;
 			}

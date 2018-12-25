@@ -7,15 +7,15 @@
 			border-color: transparent;
 			border-image: linear-gradient(
 				to bottom,
-				$lcu-gold-border-color 50%,
-				lighten($lcu-gold-border-color, 15%) 100%
+				$border-dark 50%,
+				lighten($border-dark, 15%) 100%
 			);
 			border-image-slice: 1;
 		}
 	}
 
 	.label {
-		color: lighten($lcu-text-dark, 20%);
+		color: lighten($text-dark, 20%);
 	}
 }
 
@@ -50,7 +50,7 @@
 			left: 0;
 			right: 0;
 			border: 0.15rem solid transparent;
-			border-color: $lcu-gold-border-color;
+			border-color: $border-dark;
 		}
 
 		.check {
@@ -65,7 +65,7 @@
 	}
 
 	.label {
-		color: $lcu-text-dark;
+		color: $text-dark;
 		font-weight: normal;
 		letter-spacing: 0.025rem;
 		margin-left: 9px;
@@ -85,7 +85,7 @@
 
 	&:hover {
 		.check {
-			color: $lcu-gold;
+			color: $gold;
 		}
 	}
 }
@@ -106,12 +106,12 @@
 
 	.box {
 		.border {
-			border-color: $lcu-text-disabled;
+			border-color: $text-disabled;
 		}
 	}
 
 	.label {
-		color: $lcu-text-disabled;
+		color: $text-disabled;
 	}
 }
 
