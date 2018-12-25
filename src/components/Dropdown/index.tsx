@@ -77,19 +77,23 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
   componentDidUpdate(_: any, prevState: DropdownState) {
     const { isOpen, focusedOption } = this.state;
     const { menu, focused } = this; // DOM refs
+
     if (!focused.current) {
       return;
     }
+
     // only update if necessary
     if (focusedOption === prevState.focusedOption) {
       if (isOpen === prevState.isOpen) {
         return;
       }
     }
+
     if (isOpen && menu.current.scrollTop >= focused.current.offsetTop) {
       menu.current.scrollTop = focused.current.offsetTop;
       return;
     }
+
     if (
       isOpen &&
       focused.current.getBoundingClientRect().bottom >
@@ -104,10 +108,13 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
 
   handleChange = nextOption => {
     const { onChange, value } = this.props;
+
     this.handleOptionFocus(nextOption);
+
     if (nextOption !== value) {
       onChange(nextOption);
     }
+
     this.handleToggle(false);
   };
 
@@ -128,7 +135,7 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
       isOpen: nextOpen,
     });
 
-    onToggle(nextOpen);
+    if (onToggle) onToggle(nextOpen);
   };
 
   handleOptionFocus = option => {

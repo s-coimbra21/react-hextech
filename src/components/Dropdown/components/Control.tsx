@@ -1,11 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Arrow from './Arrow';
+import { t } from '@theme';
 
-const background = css`
-  ${({ theme }) => theme.hextech.dark}
-`;
+import Arrow from './Arrow';
 
 const activeStyles = css`
   color: #463714;
@@ -29,12 +27,16 @@ const transparentStyles = css`
   border-bottom: none;
   transition: all 0.2s ease;
 
+  :active {
+    background: ${t.richBlack};
+  }
+
   ${props =>
     props.open &&
     css`
-      border: 1px solid #453617;
+      border: 1px solid ${t.borderDark};
       border-bottom: none;
-      background: #010a13;
+      background: ${t.richBlack};
     `}
 `;
 
@@ -44,7 +46,7 @@ const Control = styled.div.attrs(({ value, disabled, tabIndex }) => ({
 }))`
   user-select: none;
   outline: none;
-  background: ${background};
+  background: ${t.black};
   padding: 10px 14px;
   border: 1px solid transparent;
   border-image: linear-gradient(
@@ -65,7 +67,7 @@ const Control = styled.div.attrs(({ value, disabled, tabIndex }) => ({
   }
 
   :active {
-    ${({ transparent }) => !transparent && activeStyles}
+    ${({ transparent }) => !transparent && activeStyles};
   }
 
   ${({ open, transparent }) => open && !transparent && activeStyles}
