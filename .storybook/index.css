@@ -10,10 +10,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./backdrop.png');
-    background-position: center;
-    background-size: cover;
-    /* background: #010a13; */
   }
 
   #rune-builder {

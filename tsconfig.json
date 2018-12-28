@@ -18,7 +18,16 @@
       "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "customMatcher": "\\.m\\.scss$",
+          "camelCase": "dashes"
+        }
+      }
+    ]
   },
   "include": ["src"],
   "exclude": ["src/components/__tests__", "src/theme.js"]

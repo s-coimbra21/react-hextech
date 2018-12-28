@@ -1,7 +1,10 @@
 import React from 'react';
+import classnames from 'classnames/bind';
 import styled from 'styled-components';
 
-import * as S from '../styled';
+import style from '../index.m.scss';
+
+const cx = classnames.bind(style);
 
 const DefaultLink = styled.a`
   position: absolute;
@@ -12,8 +15,8 @@ const DefaultLink = styled.a`
 `;
 
 export const Item = ({ item, active, onClick }) => (
-  <S.Li active={active}>
+  <li className={cx('item', { active })}>
     <span>{item.label}</span>
     <DefaultLink href={item.to} {...item} onClick={() => onClick(item)} />
-  </S.Li>
+  </li>
 );

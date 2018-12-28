@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
+import classnames from 'classnames/bind';
 
 import { withOptions } from '@utils';
 
-import { Option as OptionType } from '../option';
+import { Option as OptionType } from '../../utils/option';
 
 import Wrapper from './components/Wrapper';
 import Arrow from './components/Arrow';
@@ -10,15 +11,18 @@ import Option from './components/Option';
 
 import * as keyboardEventHandlers from './keyboardEvents';
 
-const cx = require('./index.scss');
+import style from './index.m.scss';
+
+const cx = classnames.bind(style);
 
 interface DropdownProps<T = any> {
   className?: any;
-  tabIndex?: string | number;
+  tabIndex?: number;
   disabled?: boolean;
   value?: any;
   onChange?: (nextValue: OptionType<T>) => void;
-  onBlur?: () => void;
+  onBlur?: React.FocusEventHandler<HTMLDivElement>;
+  onFocus?: React.FocusEventHandler<HTMLDivElement>;
   onToggle?: (nextOpen: boolean) => void;
   options?: OptionType<T>[];
   transparent?: boolean;
@@ -122,13 +126,23 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
   };
 
   handleDocumentClick = evt => {
-    if (!this.root.current.contains(evt.target)) {
+    if (this.state.isOpen && !this.root.current.contains(evt.target)) {
       this.handleToggle(false);
     }
   };
 
-  handleToggle = nextOpen => {
-    const { onToggle } = this.props;
+  // Prevent dropdown from losing focus before option is selected
+  handleOptionMouseDown = (evt: React.MouseEvent<HTMLDivElement>) => {
+    evt.preventDefault();
+  };
+
+  handleToggle = forceNextOpen => {
+    const { onToggle, disabled } = this.props;
+    const { isOpen } = this.state;
+
+    if (disabled) return;
+
+    const nextOpen = forceNextOpen.target ? !isOpen : forceNextOpen;
 
     if (nextOpen === this.state.isOpen) {
       return;
@@ -168,21 +182,22 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
 
   renderOption = option => {
     const key = option.key || option.label;
-    const isSelected = this.props.value === option;
-    const isFocused = this.state.focusedOption === option;
+    const selected = this.props.value === option;
+    const focused = this.state.focusedOption === option;
 
     return (
-      <Option
-        ref={isFocused ? this.focused : undefined}
+      <div
         key={key}
-        aria-selected={isSelected}
-        selected={isSelected}
-        focused={isFocused}
+        className={cx('option', { selected, focused })}
+        role="option"
+        aria-selected={selected}
+        ref={focused ? this.focused : undefined}
+        onMouseDown={this.handleOptionMouseDown}
         onClick={() => this.handleChange(option)}
         onMouseEnter={() => this.handleOptionFocus(option)}
       >
         {option.label}
-      </Option>
+      </div>
     );
   };
 
@@ -194,27 +209,26 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
       value,
       disabled,
       transparent,
+      onFocus,
       onBlur,
     } = this.props;
 
-    const { isOpen: isOpenState } = this.state;
-    const open = disabled ? false : !!isOpenState;
-
-    const eventHandlers = disabled
-      ? {}
-      : {
-          onClick: () => this.handleToggle(!open),
-          onKeyDown: this.handleKeyDown,
-          onBlur,
-        };
+    const { isOpen } = this.state;
+    const open = disabled ? false : !!isOpen;
 
     return (
       <Wrapper
         ref={this.root}
+        onKeyDown={this.handleKeyDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
         {...{ open, className, disabled }}
-        {...eventHandlers}
       >
-        <h4 className={cx('control', { open, transparent })}>
+        <h4
+          tabIndex={disabled ? -1 : tabIndex}
+          className={cx('control', { open, transparent })}
+          onClick={this.handleToggle}
+        >
           <span>{value ? value.label : 'Select...'}</span>
           <Arrow key={'arrow'} />
         </h4>

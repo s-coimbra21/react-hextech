@@ -1,7 +1,9 @@
 import deburr from 'lodash.deburr';
 import { withPropsOnChange } from 'recompose';
 
-function normalizeOption(option) {
+import { Option } from './option';
+
+function normalizeOption(option: Option) {
   return Object.assign(
     {},
     {

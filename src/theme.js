@@ -1,6 +1,6 @@
 export const palette = {
-  gold: 'rgb(240, ​230, ​210)',
-  goldMedium: 'rgb(205, ​190, 145)',
+  gold: 'rgb(240, 230, 210)',
+  goldMedium: 'rgb(205, 190, 145)',
   goldDark: 'rgb(200, 155, 60)',
 
   black: 'rgb(17, 22, 29)',

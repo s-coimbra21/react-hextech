@@ -10,7 +10,7 @@ import TextInput from './components/TextInput';
 import RadioInput from './components/RadioInput';
 import SliderInput from './components/SliderInput';
 import RuneBuilder from './components/RuneBuilder';
-import stateful from './components/stateful';
+import stateful from './utils/stateful';
 
 import './css/global.scss';
 

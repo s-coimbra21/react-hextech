@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { withOptions } from '@utils';
 
 import RadioOption from '../RadioOption';
-import { Option } from '../option';
+import { Option } from '../../utils/option';
 
 const style = require('./index.scss');
 

@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import ButtonGroup from '../ButtonGroup';
 import Button from '../Button';
-import { Option } from '../option';
+import { Option } from '../../utils/option';
 
 const style = require('./index.scss');
 

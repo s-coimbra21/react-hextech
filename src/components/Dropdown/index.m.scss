@@ -1,0 +1,112 @@
+@import '../../variables.scss';
+
+$control-background: $black;
+
+.control {
+	user-select: none;
+	outline: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	color: $gold-medium;
+	background: $control-background;
+	padding: 10px 14px;
+	border: 1px solid transparent;
+
+	&:not(.transparent) {
+		border-image: linear-gradient(
+				to top,
+				#695625 0%,
+				#a9852d 23%,
+				#b88d35 93%,
+				#c8aa6e 100%
+			)
+			1;
+
+		&:hover:not(.open),
+		&:focus:not(.open) {
+			background: linear-gradient(
+				to top,
+				rgba(88, 83, 66, 0.5),
+				rgba(30, 35, 40, 0.5)
+			);
+			border: 1px solid transparent;
+			border-image: linear-gradient(to top, #c89b3c, #f0e6d2) 1;
+		}
+
+		&.open,
+		&:active {
+			color: $border-dark;
+			border: 1px solid $border-dark;
+			border-image: none;
+		}
+	}
+
+	&.transparent {
+		background: transparent;
+		border-bottom: none;
+		transition: all 0.4s ease;
+
+		&:active,
+		&:focus {
+			background: $rich-black;
+		}
+
+		&.open {
+			border: 1px solid $border-dark;
+			border-bottom: none;
+			background: $rich-black;
+		}
+	}
+}
+
+.menu {
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	max-height: 0px;
+	user-select: none;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	background: $rich-black;
+	opacity: 0;
+	border: 1px solid $border-dark;
+	border-top: none;
+	z-index: 10;
+	transition: all 0.4s ease;
+
+	&.open {
+		max-height: 240px;
+		opacity: 1;
+		overflow-y: auto;
+	}
+
+	.option {
+		position: relative;
+		overflow-x: hidden;
+		padding: 10px 14px;
+		padding-right: 0;
+		height: 40px;
+		border-top: 1px solid $gunmetal;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		&.focused {
+			color: $gold;
+			background-color: $gunmetal;
+		}
+
+		&.selected {
+			padding-right: 1.25em;
+			padding-right: calc(1.25em + 10px);
+			background-color: $control-background;
+			color: $gold;
+		}
+
+		:active {
+			color: $border-dark;
+			background-color: transparentize($color: $gunmetal, $amount: 0.5);
+		}
+	}
+}

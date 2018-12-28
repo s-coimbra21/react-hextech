@@ -81,6 +81,8 @@ export function handleTextSearch(evt: KeyboardEvent) {
 }
 
 export function handleKeyDown(evt: KeyboardEvent) {
+  if (this.props.disabled) return;
+
   this.handleTextSearch(evt);
 
   if (evt.defaultPrevented) {

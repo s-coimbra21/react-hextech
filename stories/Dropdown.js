@@ -16,7 +16,7 @@ const lotsOptions = [
   'Tryndamere',
   'Yasuo',
   'Poppy',
-  'Diana'
+  'Diana',
 ];
 
 storiesOf('Dropdown', module)
@@ -25,6 +25,7 @@ storiesOf('Dropdown', module)
       hocClassName="dropdown-wrapper"
       onChange={action('dropdown-change')}
       onBlur={action('dropdown-blur')}
+      onFocus={action('dropdown-focus')}
       options={options}
     />
   ))
@@ -32,6 +33,7 @@ storiesOf('Dropdown', module)
     <Dropdown
       onChange={action('dropdown-change')}
       onBlur={action('dropdown-blur')}
+      onFocus={action('dropdown-focus')}
       options={options}
       transparent
     />

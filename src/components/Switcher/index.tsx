@@ -1,34 +1,44 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { withPropsOnChange } from 'recompose';
 
-import { List, Bar } from './styled';
 import { Item } from './components';
 
-class Switcher extends PureComponent {
-  static propTypes = {
-    items: PropTypes.array,
-    value: PropTypes.any,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    getActiveItem: PropTypes.func,
-  };
+import style from './index.m.scss';
 
+export interface SwitcherItem {
+  key?: string;
+  label: string;
+  value?: string;
+  to?: string;
+  [key: string]: any;
+}
+
+interface SwitcherProps {
+  items: SwitcherItem[];
+  value?: SwitcherItem;
+
+  onChange: (nextValue: SwitcherItem) => void;
+  onFocus: React.FocusEventHandler<HTMLDivElement>;
+  onBlur: React.FocusEventHandler<HTMLDivElement>;
+
+  getActiveItem: (props: SwitcherProps) => SwitcherItem | void;
+}
+
+class Switcher extends PureComponent<SwitcherProps> {
   state = {
     x: 0,
     width: 0,
     renderBar: false,
   };
 
-  list = React.createRef();
+  list = React.createRef<HTMLUListElement>();
 
   componentDidMount() {
     this.syncBar();
     this.setState({ renderBar: true });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SwitcherProps) {
     const { items, value } = this.props;
 
     if (items !== prevProps.items || value !== prevProps.value) {
@@ -40,11 +50,13 @@ class Switcher extends PureComponent {
     const { items, value } = this.props;
     const selectedIdx = items.findIndex(item => item === value);
 
-    if (selectedIdx === -1) { return this.setState({ x: 0, width: 0 }); }
+    if (selectedIdx === -1) {
+      return this.setState({ x: 0, width: 0 });
+    }
 
     const list = this.list.current;
 
-    const selectedElement = list.children[selectedIdx];
+    const selectedElement = list.children[selectedIdx] as HTMLLIElement;
 
     this.setState({
       x: selectedElement.offsetLeft - list.offsetLeft,
@@ -55,7 +67,9 @@ class Switcher extends PureComponent {
   getActiveItem = () => {
     const { value, getActiveItem } = this.props;
 
-    if (getActiveItem) { return getActiveItem(this.props); }
+    if (getActiveItem) {
+      return getActiveItem(this.props);
+    }
 
     return value;
   };
@@ -74,7 +88,7 @@ class Switcher extends PureComponent {
 
     return (
       <div onFocus={onFocus} onBlur={onBlur}>
-        <List ref={this.list}>
+        <ul className={style.list} ref={this.list}>
           {items.map(item => (
             <Item
               key={item.key || item.label}
@@ -83,8 +97,13 @@ class Switcher extends PureComponent {
               onClick={this.handleItemClick}
             />
           ))}
-        </List>
-        {renderBar && <Bar x={x} width={width} />}
+        </ul>
+        {renderBar && (
+          <div
+            className={style.bar}
+            style={{ width, transform: `translateX(${x}px)` }}
+          />
+        )}
       </div>
     );
   }
