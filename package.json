@@ -13,6 +13,9 @@
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "export": "build-storybook -c .storybook -o docs"
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leaguedevelopers/react-hextech.git"
