@@ -8,6 +8,7 @@ require('@babel/register')({
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const replacements = require('./src/theme').replacements;
 
@@ -116,6 +117,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
+
+    new CopyWebpackPlugin([
+      {
+        from: './src/variables.scss',
+        to: 'theme.scss',
+      },
+    ]),
 
     new ExtractTextPlugin({ filename: 'style.css', allChunks: true }),
   ],
