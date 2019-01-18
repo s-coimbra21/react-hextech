@@ -12,9 +12,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const replacements = require('./src/theme').replacements;
 
-const devMode = process.env.NODE_ENV !== 'production';
-
-module.exports = {
+module.exports = dev => ({
   devtool: 'source-map',
 
   externals: {
@@ -62,7 +60,7 @@ module.exports = {
         test: /\.(css|scss)$/,
         use: [
           { loader: 'classnames-loader' },
-          { loader: devMode ? 'style-loader' : ExtractTextPlugin.loader },
+          { loader: dev ? 'style-loader' : ExtractTextPlugin.loader },
           {
             loader: 'css-loader',
             options: {
@@ -129,4 +127,4 @@ module.exports = {
   ],
 
   target: 'web',
-};
+});
