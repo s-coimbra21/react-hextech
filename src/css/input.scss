@@ -1,41 +1,48 @@
 @import '../variables.scss';
 
-input {
-	font-family: 'Spiegel';
-	padding: 10px 21px;
-	color: $text-dark;
-	display: block;
-	box-sizing: border-box;
-	border: 1px solid #785a28;
-	background-color: rgba(0, 0, 0, 0.7);
-	appearance: none;
-	outline: none;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 0 0 1px rgba(0, 0, 0, 0.25);
-
-	&:focus {
-		background: linear-gradient(
-			to bottom,
-			rgba(7, 16, 25, 0.7),
-			rgba(32, 39, 44, 0.7)
-		);
-		border-image: linear-gradient(to bottom, #785a28, #c8aa6e) 1 stretch;
-	}
-
-	&:placeholder-shown {
-		font-size: 1em;
-	}
-
-	&[type='search'] {
-		background-image: url('../assets/search-icon.png');
-		background-size: 1.3em;
-		background-position: 5px center;
-		background-repeat: no-repeat;
-		padding-left: 1.8em;
+:global {
+	input.hextech {
+		font-family: 'Spiegel';
+		padding: 10px 21px;
+		color: $text-dark;
+		display: block;
+		box-sizing: border-box;
+		border: 1px solid #785a28;
+		background-color: rgba(0, 0, 0, 0.7);
+		appearance: none;
+		outline: none;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset,
+			0 0 0 1px rgba(0, 0, 0, 0.25);
 
 		&:focus {
-			background: 5px center/1.3em url('../assets/search-icon.png'),
-				linear-gradient(to bottom, rgba(7, 16, 25, 0.7), rgba(32, 39, 44, 0.7));
+			background: linear-gradient(
+				to bottom,
+				rgba(7, 16, 25, 0.7),
+				rgba(32, 39, 44, 0.7)
+			);
+			border-image: linear-gradient(to bottom, #785a28, #c8aa6e) 1 stretch;
+		}
+
+		&:placeholder-shown {
+			font-size: 1em;
+		}
+
+		&[type='search'] {
+			background-image: url('../assets/search-icon.png');
+			background-size: 1.3em;
+			background-position: 5px center;
 			background-repeat: no-repeat;
+			padding-left: 1.8em;
+
+			&:focus {
+				background: 5px center/1.3em url('../assets/search-icon.png'),
+					linear-gradient(
+						to bottom,
+						rgba(7, 16, 25, 0.7),
+						rgba(32, 39, 44, 0.7)
+					);
+				background-repeat: no-repeat;
+			}
 		}
 	}
 }

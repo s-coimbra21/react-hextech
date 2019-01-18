@@ -2,7 +2,7 @@
 @import './mixins.scss';
 
 :global {
-	button {
+	button.hextech {
 		@include button;
 
 		border: 2px solid #c89c3c;

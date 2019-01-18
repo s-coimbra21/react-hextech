@@ -183,7 +183,9 @@
 		#ffffff 100%
 	);
 	border-image-slice: 1;
-	animation: clickScale 130ms linear 1, hoverTextShadow 400ms linear 1;
+	animation: clickScale 130ms, hoverTextShadow 400ms;
+	animation-iteration-count: 1, 1;
+	animation-timing-function: linear, linear;
 
 	.borderTransition {
 		border-image: linear-gradient(
