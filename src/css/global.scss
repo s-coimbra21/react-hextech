@@ -95,3 +95,31 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+html,
+body {
+	font-family: 'Spiegel', sans-serif;
+	font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Beaufort', Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 200%;
+}
+
+h2 {
+	font-size: 150%;
+}
+
+h3 {
+	font-size: 117%;
+}

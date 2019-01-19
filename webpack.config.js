@@ -12,7 +12,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const replacements = require('./src/theme').replacements;
 
-module.exports = dev => ({
+const dev = true;
+module.exports = {
   devtool: 'source-map',
 
   externals: {
@@ -127,4 +128,4 @@ module.exports = dev => ({
   ],
 
   target: 'web',
-});
+};
