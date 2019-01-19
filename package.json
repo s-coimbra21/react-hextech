@@ -1,6 +1,6 @@
 {
   "name": "react-hextech",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "League of Legends Hextect design components",
   "main": "lib/index.js",
   "scripts": {
