@@ -72,7 +72,6 @@ $control-background: $black;
 	background: $rich-black;
 	opacity: 0;
 	border: 1px solid $border-dark;
-	border-top: none;
 	z-index: 10;
 	transition: all 0.4s ease;
 
@@ -82,10 +81,16 @@ $control-background: $black;
 		overflow-y: auto;
 	}
 
+	&:not(.noPlaceholder) {
+		border-top: none;
+	}
+
 	.option {
 		position: relative;
+		display: flex;
+		align-items: center;
 		overflow-x: hidden;
-		padding: 10px 14px;
+		padding: 0 14px;
 		padding-right: 0;
 		height: 40px;
 		border-top: 1px solid $gunmetal;

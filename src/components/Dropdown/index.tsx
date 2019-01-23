@@ -7,7 +7,6 @@ import { Option as OptionType } from '../../utils/option';
 
 import Wrapper from './components/Wrapper';
 import Arrow from './components/Arrow';
-import Option from './components/Option';
 
 import * as keyboardEventHandlers from './keyboardEvents';
 
@@ -17,6 +16,8 @@ const cx = classnames.bind(style);
 
 interface DropdownProps<T = any> {
   className?: any;
+  placeholder?: string | false;
+  hideIcon?: boolean;
   tabIndex?: number;
   disabled?: boolean;
   value?: any;
@@ -26,6 +27,7 @@ interface DropdownProps<T = any> {
   onToggle?: (nextOpen: boolean) => void;
   options?: OptionType<T>[];
   transparent?: boolean;
+  isOpen?: boolean;
 }
 
 interface DropdownState {
@@ -71,6 +73,8 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
   }
 
   componentDidMount() {
+    if (this.props.isOpen) this.setState({ isOpen: true });
+
     document.addEventListener('click', this.handleDocumentClick, false);
     document.addEventListener('touchend', this.handleDocumentClick, false);
   }
@@ -211,10 +215,14 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
       transparent,
       onFocus,
       onBlur,
+      placeholder = 'Select...',
+      hideIcon,
     } = this.props;
 
     const { isOpen } = this.state;
     const open = disabled ? false : !!isOpen;
+
+    const noPlaceholder = placeholder === false;
 
     return (
       <Wrapper
@@ -224,19 +232,21 @@ class Dropdown extends PureComponent<DropdownProps, DropdownState> {
         onBlur={onBlur}
         {...{ open, className, disabled }}
       >
-        <h4
-          tabIndex={disabled ? -1 : tabIndex}
-          className={cx('control', { open, transparent })}
-          onClick={this.handleToggle}
-        >
-          <span>{value ? value.label : 'Select...'}</span>
-          <Arrow key={'arrow'} />
-        </h4>
+        {!noPlaceholder && (
+          <h4
+            tabIndex={disabled ? -1 : tabIndex}
+            className={cx('control', { open, transparent })}
+            onClick={this.handleToggle}
+          >
+            <span>{value ? value.label : placeholder}</span>
+            {!hideIcon && <Arrow key={'arrow'} />}
+          </h4>
+        )}
         <div
           role="listbox"
           aria-hidden={!open}
           ref={this.menu}
-          className={cx('menu', { open })}
+          className={cx('menu', { open, noPlaceholder })}
         >
           {options.map(this.renderOption)}
         </div>

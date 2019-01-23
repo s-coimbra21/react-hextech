@@ -8,7 +8,7 @@ function normalizeOption(option: Option) {
     {},
     {
       value: option.value || option,
-      label: option.label || option,
+      label: option.label || option.value,
       // used for searching
       hextech__label: deburr(option.label || option).toLowerCase(),
     }
