@@ -4,7 +4,6 @@
 	display: inline-block;
 	min-width: 200px;
 	position: relative;
-	font-family: 'Spiegel';
 
 	.clear {
 		position: absolute;
@@ -54,7 +53,9 @@
 
 	.inputElement {
 		width: 100%;
-		padding: 7px 21px;
+		font-family: 'Spiegel';
+		font-size: 1em;
+		padding: 8px 21px;
 		color: $text-dark;
 		display: block;
 		box-sizing: border-box;
@@ -72,10 +73,6 @@
 				rgba(32, 39, 44, 0.7)
 			);
 			border-image: linear-gradient(to bottom, #785a28, #c8aa6e) 1 stretch;
-		}
-
-		&:placeholder-shown {
-			font-size: 1em;
 		}
 
 		&::-webkit-search-decoration,
