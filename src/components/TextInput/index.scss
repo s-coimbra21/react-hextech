@@ -2,7 +2,7 @@
 
 .input {
 	display: inline-block;
-	width: 100%;
+	min-width: 200px;
 	position: relative;
 	font-family: 'Spiegel';
 
@@ -53,6 +53,7 @@
 	}
 
 	.inputElement {
+		width: 100%;
 		padding: 10px 21px;
 		color: $text-dark;
 		display: block;

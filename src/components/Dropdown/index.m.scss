@@ -109,7 +109,7 @@ $control-background: $black;
 			color: $gold;
 		}
 
-		:active {
+		&:active {
 			color: $border-dark;
 			background-color: transparentize($color: $gunmetal, $amount: 0.5);
 		}
