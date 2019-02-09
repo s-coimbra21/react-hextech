@@ -20,26 +20,25 @@
 }
 
 .checkbox {
+	&,
+	* {
+		cursor: pointer;
+	}
+
 	input {
-		position: absolute;
-		top: 2px;
-		left: 1px;
-		opacity: 0;
+		display: none;
 	}
 
 	.visible {
-		display: flex;
-		position: relative;
-		align-items: center;
-		cursor: pointer;
 		outline: none;
 	}
 
 	.box {
 		position: relative;
+		vertical-align: middle;
 		display: inline-block;
-		height: 1rem;
-		width: 1rem;
+		height: 1em;
+		width: 1em;
 		min-width: 12px;
 		min-height: 12px;
 
@@ -49,7 +48,7 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			border: 0.15rem solid transparent;
+			border: 0.15em solid transparent;
 			border-color: $border-dark;
 		}
 
@@ -60,16 +59,17 @@
 			left: 0;
 			display: none;
 			color: lighten(rgb(56.1%, 45.1%, 20%), 10%);
-			font-size: 0.9rem;
+			font-size: 1em;
 		}
 	}
 
 	.label {
 		color: $text-dark;
 		font-weight: normal;
-		letter-spacing: 0.025rem;
+		letter-spacing: 0.025em;
 		margin-left: 9px;
 		user-select: none;
+		vertical-align: middle;
 	}
 
 	&:hover,
@@ -134,5 +134,5 @@
 	text-align: center;
 	font-variant: normal;
 	text-transform: none;
-	margin-left: 0.2rem;
+	margin-left: 0.2em;
 }
